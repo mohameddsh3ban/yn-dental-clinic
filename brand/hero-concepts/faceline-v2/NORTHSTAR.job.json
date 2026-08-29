@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-08-28T17:25:02.25272Z",
+  "display_name": "GPT Image 2",
+  "id": "7cecb429-9480-47f5-adc9-f4d9b0b79027",
+  "job_type": "gpt_image_2",
+  "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_172502_7cecb429-9480-47f5-adc9-f4d9b0b79027_min.webp",
+  "params": {
+    "aspect_ratio": "auto",
+    "height": 2048,
+    "medias": [
+      {
+        "data": {
+          "id": "3a3c7333-fc71-4ad0-bb55-c9625c1305c6",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/3a3c7333-fc71-4ad0-bb55-c9625c1305c6.png"
+        },
+        "role": "image"
+      }
+    ],
+    "model": "videotape-alpha",
+    "prompt": "i want the image identical but with higher quality ",
+    "quality": "high",
+    "reference_elements": [],
+    "remove_bg": false,
+    "resolution": "2k",
+    "width": 1360
+  },
+  "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_172502_7cecb429-9480-47f5-adc9-f4d9b0b79027.png",
+  "status": "completed"
+}

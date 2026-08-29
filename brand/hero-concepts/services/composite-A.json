@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-29T16:37:07.997875Z",
+    "display_name": "GPT Image 2",
+    "id": "3c0b937f-0309-4055-baf5-e141aa3e7e6d",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_163707_3c0b937f-0309-4055-baf5-e141aa3e7e6d_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise dental illustration of a single upper central incisor tooth standing upright, shown mid-restoration: the left half is the natural warm ivory tooth, the right half is built up in three stacked layers of composite material, each layer boundary traced by a fine gold line, the outer surface polished to match the natural half. Warm ivory dentine and glossy white enamel, with warm gold as the only other colour, on a pure white seamless background. Soft even studio light, a gentle contact shadow beneath the object, fine natural surface texture, medical-museum quality, photoreal render. No gums, no jawbone, no lips, no skin, no instruments, no hands, no packaging. No text, no labels, no leader lines, no annotations, no arrows, no measurements, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 3504
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_163707_3c0b937f-0309-4055-baf5-e141aa3e7e6d.png",
+    "status": "completed"
+  }
+]

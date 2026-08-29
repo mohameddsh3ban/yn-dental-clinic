@@ -1,96 +1,114 @@
-import type { ComponentType } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Globe, Instagram, MapPin } from 'lucide-react'
-import implant from '@/assets/implant.png'
-import { flat } from '@/lib/anim'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowRight, Globe, Instagram, MapPin, Phone } from 'lucide-react'
+import { flat, snap } from '@/lib/anim'
 import { BrandLockup } from '@/components/BrandLogo'
 import { navLinks } from '@/lib/nav'
 import { WhatsAppIcon } from '@/components/icons'
-import { site } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
+import { site, whatsappUrl } from '@/lib/site'
+import faceLine from '@/assets/hero/face-line.webp'
+import portrait620 from '@/assets/doctor-surgeon-620.webp'
+import portrait1200 from '@/assets/doctor-surgeon-1200.webp'
 
 const ease = [0.22, 1, 0.36, 1] as const
-
-const today = new Date().toLocaleDateString('en-US', {
-  month: 'long',
-  day: '2-digit',
-  year: 'numeric',
-})
-
-const socials: { label: string; href: string; Icon: ComponentType<{ className?: string }> }[] = [
-  { label: 'Instagram', href: site.instagram, Icon: Instagram },
-  { label: 'WhatsApp', href: site.whatsapp, Icon: WhatsAppIcon },
-  { label: 'Google Maps', href: site.maps.link, Icon: MapPin },
-]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease, delay: 0.15 + i * 0.12 },
+    transition: { duration: 0.8, ease, delay: 0.15 + i * 0.1 },
   }),
 }
 
-function Chip({
-  title,
-  className,
-  delay,
-}: {
-  title: string
-  className: string
-  delay: number
-}) {
-  return (
-    <motion.div
-      initial={typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('snap') ? false : { opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: [0, -10, 0] }}
-      transition={{
-        opacity: { delay, duration: 0.7, ease },
-        y: { delay, duration: 5.5, repeat: Infinity, ease: 'easeInOut' },
-      }}
-      className={`glass-chip pointer-events-none absolute z-30 hidden items-center gap-2.5 rounded-full py-2.5 pl-3.5 pr-5 sm:flex ${className}`}
-    >
-      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#C0A578]" />
-      <span className="whitespace-nowrap text-[11px] font-medium text-[#2B2723]">{title}</span>
-    </motion.div>
-  )
-}
+/** What the practice operates on — the answer to "do you do my operation?". */
+const SCOPE = [
+  ['Orthognathic Surgery', 'Corrective jaw alignment'],
+  ['Facial Trauma & Reconstruction', 'Mandible, orbit and zygoma'],
+  ['Temporomandibular Joint', 'TMJ pain, clicking and locking'],
+  ['Impacted Third Molars', 'Surgical wisdom-tooth removal'],
+  ['Cysts & Benign Lesions', 'Excision and biopsy'],
+  ['Bone Grafting & Sinus Lift', 'Preparing the site for implants'],
+  ['Dental Implants', 'Single unit to full arch'],
+] as const
+
+const RAIL = [
+  'Consultation',
+  'Imaging & measurement',
+  'Written surgical plan',
+  'Surgery & follow-up',
+] as const
+
+/**
+ * The face line sits where the cephalometric tracing did — pushed left out of
+ * the portrait column so it bleeds behind the middle of the card, and cropped
+ * by the card's rounded edge.
+ */
+const FACE_LINE_PLACEMENT =
+  'pointer-events-none absolute left-[-30%] top-1/2 hidden h-[430px] w-auto -translate-y-1/2 md:block lg:left-[-28%] lg:h-[500px] xl:left-[-32%] xl:h-[560px] 2xl:left-[-30%] 2xl:h-[640px]'
+
+/** Softens the crop at the base of the cut-out portrait into the card. */
+const PORTRAIT_MASK =
+  'linear-gradient(to bottom, #000 56%, rgba(0,0,0,0.55) 76%, rgba(0,0,0,0.12) 92%, transparent 100%)'
 
 export default function Hero() {
-  const snap =
-    typeof window !== 'undefined' &&
-    new URLSearchParams(window.location.search).has('snap')
-  const init = snap ? false : 'hidden'
+  // Superseded by HeroFacial, kept for reference and not routed to. It reads
+  // the clinic's name, address and hours from the dictionary so it stays
+  // consistent with the live site, but its own prose is still English only —
+  // there is no point translating a hero no visitor reaches. Translate it here
+  // if it is ever brought back.
+  const { c } = useI18n()
+  const whatsapp = whatsappUrl(c.site.whatsappMessage)
+  const reduced = useReducedMotion()
+  const still = snap || reduced
+  const init = still ? false : 'hidden'
 
   return (
-    <div className={flat ? 'bg-[#CFC8BC] p-3 sm:p-4 xl:p-6' : 'min-h-screen bg-[#CFC8BC] p-3 sm:p-4 xl:p-6'}>
-      <div className={flat ? 'hero-gradient relative flex flex-col overflow-hidden rounded-[1.75rem] xl:rounded-[2.25rem]' : 'hero-gradient relative flex min-h-[calc(100vh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[calc(100vh-2rem)] xl:min-h-[max(calc(100vh-3rem),820px)] xl:rounded-[2.25rem]'}>
-        {/* Watermark */}
+    <section
+      id="hero"
+      aria-labelledby="hero-h1"
+      className={flat ? 'bg-[#CFC8BC] p-3 sm:p-4 xl:p-6' : 'min-h-screen bg-[#CFC8BC] p-3 sm:p-4 xl:p-6'}
+    >
+      <div
+        className={`hero-gradient relative flex flex-col overflow-hidden rounded-[1.75rem] xl:rounded-[2.25rem] ${
+          flat
+            ? ''
+            : 'min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] xl:min-h-[max(calc(100vh-3rem),820px)] 2xl:min-h-[max(calc(100vh-3rem),880px)]'
+        }`}
+      >
+        {/* Light pooled where the eye should land, not in the corner */}
+        <motion.div
+          aria-hidden
+          initial={still ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: still ? 0 : 1.4, delay: still ? 0 : 0.1, ease }}
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(56%_52%_at_70%_46%,rgba(255,255,255,0.84),rgba(255,255,255,0)_70%)]"
+        />
+
+        {/* Twelve hairlines on the content grid — Swiss structure, almost free */}
         <div
           aria-hidden
-          className="font-display pointer-events-none absolute -bottom-[7vw] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap text-[26vw] font-semibold leading-none tracking-tighter text-white/20 xl:text-[24vw]"
+          className="pointer-events-none absolute inset-0 z-0 hidden grid-cols-12 px-14 xl:grid 2xl:px-20"
         >
-          {site.short}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <span key={i} className="border-l border-white/30 last:border-r" />
+          ))}
         </div>
-
-        {/* Soft glow behind implant */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[55%] w-[70%] -translate-x-1/2 -translate-y-1/3 rounded-full bg-white/40 blur-3xl md:w-[45%]" />
 
         {/* Nav */}
         <motion.header
           variants={fadeUp}
           initial={init}
           animate="show"
-          className="relative z-40 flex items-center justify-between px-5 pt-6 sm:px-8 xl:px-14 xl:pt-9 2xl:px-16"
+          className="relative z-40 flex items-center justify-between px-5 pt-6 sm:px-8 xl:px-14 xl:pt-9 2xl:px-20"
         >
           <BrandLockup />
-          <nav aria-label="Main" className="hidden items-center gap-8 text-[13px] font-medium text-[#3a352f] md:flex">
-            {navLinks.map(([item, href]) => (
-              <a
-                key={item}
-                href={href}
-                className="transition-colors hover:text-[#14120F]"
-              >
+          <nav
+            aria-label="Main"
+            className="hidden items-center gap-8 text-[13px] font-medium text-[#3a352f] lg:flex"
+          >
+            {navLinks(c).map(([item, href]) => (
+              <a key={item} href={href} className="transition-colors hover:text-[#14120F]">
                 {item}
               </a>
             ))}
@@ -100,7 +118,7 @@ export default function Hero() {
               <Globe className="h-3.5 w-3.5" /> EN
             </button>
             <a
-              href={site.whatsapp}
+              href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[#14120F] px-5 py-2.5 text-[12px] font-medium text-white transition-transform hover:scale-[1.03]"
@@ -111,177 +129,299 @@ export default function Hero() {
           </div>
         </motion.header>
 
-        {/* Content: stacked on mobile (implant after CTA), 2-col grid on tablet, absolute on desktop */}
-        <div className="relative z-10 flex flex-1 flex-col gap-14 px-5 pb-16 pt-12 sm:px-8 md:grid md:grid-cols-2 md:gap-x-8 md:pt-14 xl:contents">
-          {/* Left: badge + headline + copy + CTA */}
-          <div className="order-1 md:col-start-1 md:row-start-1 xl:absolute xl:left-14 xl:top-[140px] xl:z-30 xl:max-w-[520px] 2xl:left-20">
-              <motion.div
-                variants={fadeUp}
-                initial={init}
-                animate="show"
-                custom={1}
-                className="inline-flex items-center gap-2.5 rounded-full bg-white/70 py-2 pl-3 pr-4 shadow-sm backdrop-blur"
-              >
-                <span className="h-2 w-2 rounded-full bg-[#C0A578]" />
-                <span className="text-[12px] font-medium text-[#3a352f]">Trusted Dental Care</span>
-              </motion.div>
+        <div className="relative z-10 mx-auto flex w-full max-w-[1760px] flex-1 flex-col px-5 pb-8 sm:px-8 xl:px-14 xl:pb-8 2xl:px-20">
+          <div className="grid flex-1 gap-y-8 pt-8 md:grid-cols-2 md:gap-x-8 xl:grid-cols-12 xl:grid-rows-[auto_1fr] xl:items-start xl:gap-x-8 xl:gap-y-6 xl:pt-10">
+            {/* Headline block */}
+            <motion.div
+              variants={fadeUp}
+              initial={init}
+              animate="show"
+              custom={1}
+              className="order-1 md:col-start-1 md:row-start-1 xl:col-span-4 xl:col-start-1 xl:row-start-1 xl:self-end"
+            >
+              <p className="flex items-center text-[11px] font-medium uppercase tracking-[0.18em] text-[#5f584d]">
+                <span aria-hidden className="mr-3 inline-block h-px w-5 bg-[#C0A578]" />
+                Oral &amp; Maxillofacial Surgery
+              </p>
 
-              <motion.h1
-                variants={fadeUp}
-                initial={init}
-                animate="show"
-                custom={2}
-                className="font-display mt-6 text-[clamp(2.75rem,6vw,5.4rem)] font-medium leading-[1.02] tracking-tight text-[#14120F]"
+              <h1
+                id="hero-h1"
+                className="font-display mt-5 text-[clamp(2.15rem,4.8vw,3.4rem)] font-medium leading-[1.04] tracking-[-0.02em] text-[#14120F] 2xl:text-[3.9rem]"
               >
-                Exceptional
+                Surgery of the
                 <br />
-                <span className="text-outline">Dental</span> Care
-              </motion.h1>
+                face and{' '}
+                <span className="text-outline-thin sm:text-outline xl:[-webkit-text-stroke-width:2px]">
+                  jaws.
+                </span>
+              </h1>
 
-              <motion.p
-                variants={fadeUp}
-                initial={init}
-                animate="show"
-                custom={3}
-                className="mt-6 max-w-[340px] text-[14px] leading-relaxed text-[#7a7367]"
-              >
-                We combine gentle care and clinical precision to make sure every
-                visit leaves you smiling with confidence.
-              </motion.p>
+              <p className="mt-5 text-[13px] font-medium text-[#3a352f] sm:text-[15px]">
+                {c.site.doctor} — {c.site.name}, {c.site.address.short}.
+              </p>
+            </motion.div>
 
-              <motion.div variants={fadeUp} initial={init} animate="show" custom={4}>
-                <a
-                  href="#contact"
-                  className="group mt-8 inline-flex items-center gap-3 rounded-full bg-[#14120F] py-4 pl-7 pr-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.03]"
+            {/* Surgeon + tracing */}
+            <div className="relative order-2 md:col-start-2 md:row-start-1 md:row-span-2 md:self-end xl:order-3 xl:col-span-4 xl:col-start-9 xl:row-start-1 xl:row-span-2 xl:self-end">
+              <div className="relative mx-auto w-full max-w-[420px] md:max-w-none">
+                {/* Backdrop profile behind the surgeon. Held well back in
+                    opacity so it reads as a watermark, not a second subject
+                    competing with the portrait. */}
+                <motion.img
+                  src={faceLine}
+                  alt=""
+                  aria-hidden
+                  width={1200}
+                  height={1800}
+                  loading="lazy"
+                  decoding="async"
+                  initial={still ? false : { opacity: 0 }}
+                  animate={{ opacity: 0.16 }}
+                  transition={{ duration: still ? 0 : 1.2, delay: still ? 0 : 0.25, ease }}
+                  className={FACE_LINE_PLACEMENT}
+                />
+
+                <motion.img
+                  src={portrait620}
+                  srcSet={`${portrait620} 506w, ${portrait1200} 980w`}
+                  sizes="(min-width:1280px) 460px, (min-width:1024px) 440px, (min-width:768px) 376px, (min-width:640px) 245px, 196px"
+                  width={980}
+                  height={1200}
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
+                  alt="Dr. Youssef Nasser, oral and maxillofacial surgeon, in surgical scrubs with surgical loupes"
+                  initial={still ? false : { opacity: 0, y: 32, scale: 1.015 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: still ? 0 : 1.05, delay: still ? 0 : 0.3, ease }}
+                  style={{
+                    maskImage: PORTRAIT_MASK,
+                    WebkitMaskImage: PORTRAIT_MASK,
+                    filter: 'contrast(1.04) saturate(0.93)',
+                  }}
+                  className="relative z-10 mx-auto block h-[240px] w-auto object-contain object-bottom sm:h-[300px] md:h-[440px] lg:h-[470px] xl:mr-[-2%] xl:h-[490px] 2xl:h-[560px]"
+                />
+
+                <motion.div
+                  variants={fadeUp}
+                  initial={init}
+                  animate="show"
+                  custom={2}
+                  className="absolute inset-x-0 bottom-0 z-20 pb-1 pt-12 text-center md:pl-2 md:text-left"
                 >
-                  Book Appointment
+                  <p className="font-display text-[17px] font-medium tracking-[-0.01em] text-[#14120F]">
+                    {c.site.doctor}
+                  </p>
+                  <span aria-hidden className="my-2 inline-block h-px w-7 bg-[#C0A578]" />
+                  <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#5f584d]">
+                    {c.site.specialty}
+                  </p>
+                </motion.div>
+              </div>
+
+              <p className="mt-3 hidden text-[10px] leading-snug text-[#6b6459] md:block">
+                Illustration — decorative line drawing, not a patient image and not a predicted
+                result.
+              </p>
+            </div>
+
+            {/* Copy + actions */}
+            <motion.div
+              variants={fadeUp}
+              initial={init}
+              animate="show"
+              custom={3}
+              className="order-3 md:col-start-1 md:row-start-2 xl:col-span-4 xl:col-start-1 xl:row-start-2 xl:self-start"
+            >
+              <p className="hidden max-w-[44ch] text-[14px] leading-[1.65] text-[#5f584d] sm:block xl:text-[15px]">
+                Every case starts with imaging, a written plan, and a straight conversation about
+                what the procedure actually involves — before anything is scheduled.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap min-[480px]:items-center">
+                <a
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Discuss your case with ${c.site.doctor} on WhatsApp`}
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#14120F] py-4 pl-7 pr-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.02] sm:w-auto"
+                >
+                  <WhatsAppIcon className="h-4 w-4 text-[#C9AC7C]" />
+                  Discuss your case
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </motion.div>
-            </div>
 
-            {/* Right: meta + headline + socials */}
-            <div className="order-3 md:order-2 md:col-start-2 md:row-start-1 md:max-w-[320px] md:justify-self-end md:text-right xl:absolute xl:right-14 xl:top-[130px] xl:z-30 xl:max-w-none 2xl:right-20">
-              <motion.div variants={fadeUp} initial={init} animate="show" custom={2}>
-                <p className="text-[12px] font-medium text-[#3a352f]">{today}</p>
-                <p className="mt-1 text-[12px] text-[#7a7367]">We're Open Clinic</p>
-                <p className="text-[12px] text-[#7a7367]">{site.hours.time}</p>
-                <p className="mt-4 inline-flex items-center gap-1.5 text-[12px] text-[#7a7367] md:justify-end">
-                  <MapPin className="h-3.5 w-3.5" /> {site.address.short}
-                </p>
-              </motion.div>
+                <a
+                  href={`tel:${site.phones[0].tel}`}
+                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#14120F]/15 bg-white/60 px-6 py-4 text-[13px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white sm:w-auto"
+                >
+                  <Phone className="h-3.5 w-3.5" />
+                  <span className="tabular-nums">Call {site.phones[0].label}</span>
+                </a>
+              </div>
 
-              <motion.h2
-                variants={fadeUp}
-                initial={init}
-                animate="show"
-                custom={3}
-                className="font-display mt-10 text-[clamp(2.2rem,4.6vw,4.2rem)] font-medium leading-[1.05] tracking-tight text-[#14120F] md:mt-12"
-              >
-                &amp; Straight
-                <br />
-                <span className="text-outline-thin">Smile</span>
-              </motion.h2>
+              <p className="mt-4 max-w-[40ch] text-[11px] leading-[1.6] text-[#6b6459]">
+                Surgical suitability is decided at consultation. WhatsApp replies{' '}
+                <span className="tabular-nums">
+                  {c.site.hours.days}, {c.site.hours.time}
+                </span>
+                .
+              </p>
+            </motion.div>
 
-              <motion.div
-                variants={fadeUp}
-                initial={init}
-                animate="show"
-                custom={4}
-                className="mt-8 flex gap-3 md:justify-end"
-              >
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    title={s.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/60 bg-white/40 text-[#3a352f] backdrop-blur transition-colors hover:bg-white/70"
-                  >
-                    <s.Icon className="h-4 w-4" />
-                  </a>
-                ))}
-              </motion.div>
-            </div>
-
-          {/* Implant + orbit + chips */}
-          <div className="relative z-20 order-2 mx-auto w-fit md:order-3 md:col-span-2 xl:absolute xl:bottom-0 xl:left-1/2 xl:h-[56%] xl:-translate-x-1/2">
-            <svg
-              viewBox="0 0 640 220"
-              className="pointer-events-none absolute -bottom-6 left-1/2 hidden w-[640px] -translate-x-1/2 xl:block"
-              fill="none"
-            >
-              <ellipse cx="320" cy="120" rx="300" ry="86" stroke="rgba(255,255,255,0.55)" strokeWidth="1" />
-              <circle cx="620" cy="120" r="5" fill="rgba(255,255,255,0.9)" />
-              <circle cx="620" cy="120" r="10" stroke="rgba(255,255,255,0.5)" strokeWidth="1" />
-            </svg>
-            <motion.img
-              src={implant}
-              alt="Ceramic dental implant"
-              initial={snap ? false : { opacity: 0, y: 60, scale: 0.96 }}
-              animate={{ opacity: 1, y: [0, -14, 0], scale: 1 }}
-              transition={{
-                opacity: { duration: 1, ease, delay: 0.35 },
-                scale: { duration: 1, ease, delay: 0.35 },
-                y: { duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 1.4 },
-              }}
-              className="relative z-20 h-[300px] object-contain drop-shadow-[0_35px_45px_rgba(20,18,15,0.35)] sm:h-[380px] md:h-[440px] xl:h-full"
-            />
-            <Chip title="Root Canal Treatment" className="right-full top-[44%] mr-3 xl:mr-5" delay={1.2} />
-            <Chip title="Dental Check-Up" className="left-full top-[32%] ml-3 xl:ml-5" delay={1.5} />
-          </div>
-
-          {/* Stats: centered row on mobile/tablet, corner-anchored on desktop */}
-          <div className="order-4 flex flex-col gap-10 sm:flex-row sm:flex-wrap sm:items-start sm:justify-center sm:gap-x-16 md:col-span-2 xl:contents">
-            <motion.div
+            {/* Scope of practice */}
+            <motion.section
               variants={fadeUp}
               initial={init}
               animate="show"
               custom={5}
-              className="xl:absolute xl:bottom-[90px] xl:left-14 xl:z-30 2xl:left-20"
+              aria-labelledby="scope-label"
+              className="order-4 md:col-span-2 md:row-start-3 xl:col-span-4 xl:col-start-5 xl:row-start-1 xl:row-span-2 xl:self-center"
             >
-              <p className="font-display text-[40px] font-medium leading-none tracking-tight text-[#14120F]">
-                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#14120F] align-middle" />
-                827<span className="text-[#C0A578]">+</span>
+              <p
+                id="scope-label"
+                className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#6b6459]"
+              >
+                Scope of practice <span className="text-[#C0A578]">/</span>{' '}
+                <span className="tabular-nums">01–07</span>
               </p>
-              <p className="mt-3 max-w-[210px] text-[12px] leading-relaxed text-[#7a7367]">
-                Transform your smile quickly and with our exceptional services.
-              </p>
-            </motion.div>
 
-            <motion.div
-              variants={fadeUp}
-              initial={init}
-              animate="show"
-              custom={6}
-              className="flex gap-14 sm:gap-16 xl:absolute xl:bottom-[90px] xl:right-14 xl:z-30 xl:flex-col xl:gap-9 xl:text-right 2xl:right-20"
-            >
-              <div>
-                <p className="font-display text-[40px] font-medium leading-none tracking-tight text-[#14120F]">
-                  170<span className="text-[#C0A578]">+</span>
-                </p>
-                <p className="mt-2 text-[12px] text-[#7a7367]">
-                  Performed
-                  <br />
-                  surgeries
-                </p>
-              </div>
-              <div>
-                <p className="font-display text-[40px] font-medium leading-none tracking-tight text-[#14120F]">
-                  85<span className="text-[#C0A578]">%</span>
-                </p>
-                <p className="mt-2 text-[12px] text-[#7a7367]">
-                  Satisfied
-                  <br />
-                  Clients
-                </p>
-              </div>
-            </motion.div>
+              <ul className="mt-4 border-t border-[#14120F]/10 md:grid md:grid-cols-2 md:gap-x-8 xl:block">
+                {SCOPE.map(([name, descriptor], i) => (
+                  <motion.li
+                    key={name}
+                    initial={still ? false : { opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: still ? 0 : 0.5,
+                      delay: still ? 0 : 0.75 + i * 0.045,
+                      ease,
+                    }}
+                    className="group border-b border-[#14120F]/10"
+                  >
+                    <div className="flex min-h-[52px] flex-col justify-center gap-x-4 py-2.5 xl:flex-row xl:items-baseline xl:py-4">
+                      <span className="flex items-baseline gap-3">
+                        <span className="text-[11px] font-semibold tabular-nums tracking-[0.14em] text-[#6b6459] transition-colors group-hover:text-[#C0A578]">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-display text-[15px] font-medium tracking-[-0.01em] text-[#3a352f] transition-colors group-hover:text-[#14120F] xl:text-[16px]">
+                          {name}
+                        </span>
+                      </span>
+                      <span className="ml-[26px] text-[11px] leading-snug text-[#6b6459] xl:ml-auto xl:max-w-[46%] xl:text-right">
+                        {descriptor}
+                      </span>
+                    </div>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.section>
           </div>
+
+          {/* How a case proceeds */}
+          <motion.ol
+            variants={fadeUp}
+            initial={init}
+            animate="show"
+            custom={6}
+            aria-label="How a case proceeds"
+            className="relative mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[#14120F]/10 pt-5 sm:grid-cols-4 xl:mt-9"
+          >
+            {RAIL.map((step, i) => (
+              <li key={step} className="relative">
+                <motion.span
+                  aria-hidden
+                  initial={still ? false : { scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{
+                    duration: still ? 0 : 0.4,
+                    delay: still ? 0 : 0.95 + i * 0.06,
+                    ease,
+                  }}
+                  className="absolute -top-[23px] left-0 h-1 w-1 bg-[#C0A578]"
+                />
+                <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-[#6b6459]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="mt-1 block text-[11px] font-medium uppercase tracking-[0.16em] text-[#6b6459]">
+                  {step}
+                </span>
+              </li>
+            ))}
+          </motion.ol>
+
+          {/* Checkable public record */}
+          <motion.div
+            variants={fadeUp}
+            initial={init}
+            animate="show"
+            custom={6}
+            className="mt-5 flex flex-col gap-3 border-t border-[#14120F]/10 pt-4 text-[11px] text-[#6b6459] lg:flex-row lg:items-center lg:justify-between"
+          >
+            <p>Referrals and second opinions welcome.</p>
+
+            <dl className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-2">
+              <div className="flex min-w-0 items-center gap-2">
+                <dt className="sr-only">Clinic</dt>
+                <dd className="min-w-0">
+                  <a
+                    href={site.maps.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 hover:underline"
+                  >
+                    <MapPin className="h-3.5 w-3.5 shrink-0" />
+                    {c.site.address.street} — {c.site.address.city}
+                  </a>
+                </dd>
+              </div>
+
+              <span aria-hidden className="text-[#C0A578]">
+                /
+              </span>
+
+              <div className="flex items-center gap-2">
+                <dt className="uppercase tracking-[0.16em]">Hours</dt>
+                <dd className="tabular-nums">
+                  {c.site.hours.days} · {c.site.hours.time}
+                </dd>
+              </div>
+
+              <span aria-hidden className="text-[#C0A578]">
+                /
+              </span>
+
+              <div className="flex items-center gap-2">
+                <dt className="uppercase tracking-[0.16em]">Second line</dt>
+                <dd>
+                  <a href={`tel:${site.phones[1].tel}`} className="tabular-nums hover:underline">
+                    {site.phones[1].label}
+                  </a>
+                </dd>
+              </div>
+
+              <span aria-hidden className="text-[#C0A578]">
+                /
+              </span>
+
+              <div className="flex items-center gap-2">
+                <dt className="sr-only">Instagram</dt>
+                <dd>
+                  <a
+                    href={site.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 hover:underline"
+                  >
+                    <Instagram className="h-3.5 w-3.5" />
+                    {site.instagramHandle}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

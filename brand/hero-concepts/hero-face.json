@@ -1,0 +1,19 @@
+{
+  "src": "brand/hero-concepts/faceline-v2/NORTHSTAR-implant.png",
+  "out": "brand/hero-concepts/hero-face.png",
+  "webp": "src/assets/hero/hero-face.webp",
+  "preview": "brand/hero-concepts/previews/hero-face-art.png",
+  "width": 2200,
+  "webpWidth": 1200,
+  "webpQuality": 80,
+  "alphaQuality": 65,
+  "dead": 0.02,
+  "span": 0.07,
+  "contrast": 1,
+  "inkOn": 0.3,
+  "cropX0": 0.06,
+  "cropX1": 1,
+  "cropY0": 0.07,
+  "cropY1": 0.86,
+  "fadeBottom": 0.09
+}

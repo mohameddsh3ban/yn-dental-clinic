@@ -1,0 +1,29 @@
+[
+  {
+    "created_at": "2026-08-28T15:36:08.254231Z",
+    "display_name": "Nano Banana Pro",
+    "id": "2d24ef1d-0f4b-4f84-8e93-f8f9b6973050",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153608_2d24ef1d-0f4b-4f84-8e93-f8f9b6973050_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 4800,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "8d13f099-b78d-443e-a68d-d1abdadd0613",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/8d13f099-b78d-443e-a68d-d1abdadd0613_resize.jpg"
+        }
+      ],
+      "prompt": "A precise anatomical illustration of a human JAW in an exact 90-degree lateral side view facing left, on a pure white seamless background. Show ONLY the complete lower jawbone (mandible) — condyle, ramus, angle and body — with its full lower row of small even natural teeth, plus the upper row of teeth directly above with only the thin alveolar ridge of the upper jaw above them. Show NOTHING else: no cranium, no skull, no eye socket, no cheekbone, no nasal bones, no skin, no lips, no muscle. One gold titanium dental implant screw with a white ceramic crown sits at the lower first molar inside a small rectangular window cut in the bone. Warm ivory bone with fine natural porosity, soft even studio light, gentle self-shadow, no outline, no ink line, medical-museum quality, photoreal render. The jaw is closed, the bite line perfectly horizontal, the tooth rows receding in one straight line. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no border. Match the size, angle and proportion of the jaw to the face in the reference drawing: the same jaw length from chin to condyle, the same jaw angle, the same tooth-row height. Output the jaw alone on pure white — do not draw the face, the outline or the reference drawing itself.",
+      "resolution": "4k",
+      "surface": null,
+      "width": 3584
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153608_2d24ef1d-0f4b-4f84-8e93-f8f9b6973050.png",
+    "status": "completed"
+  }
+]

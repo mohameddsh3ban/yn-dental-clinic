@@ -1,0 +1,29 @@
+[
+  {
+    "created_at": "2026-08-28T13:44:08.06264Z",
+    "display_name": "Nano Banana Pro",
+    "id": "a4e11ba2-361a-4c52-be74-d73d25ce4dae",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134408_a4e11ba2-361a-4c52-be74-d73d25ce4dae_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 4800,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "f061f17d-a022-4940-91d2-ecf62fbfcb54",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/f061f17d-a022-4940-91d2-ecf62fbfcb54.png"
+        }
+      ],
+      "prompt": "A complete human skull facing left, rotated only five degrees toward the camera so it still reads as a clean lateral side profile but gains subtle dimensional depth. Jaw closed in natural occlusion, cranium, brow, eye socket, nasal aperture, zygomatic arch, maxilla and mandible with full tooth rows. At the lower first-molar position a polished gold titanium dental implant screw is seated in the jawbone, revealed through a clean anatomical cutaway window in the outer bone plate so the gold threads read clearly, supporting a single glossy white ceramic molar crown in the tooth row. The gold implant is the only metallic accent in the image. Photorealistic medical 3D render, luxury product-photography lighting. Matte ivory bone material, warm bone-white, subtle natural porosity and fine cortical surface detail. Large soft key light from upper left, soft ambient fill, delicate contact shadow. Pure clean white seamless background, nothing else in frame. Object centred with generous margin, complete and uncropped. Extremely high detail, sharp focus, anatomically accurate. No text, no labels, no annotations, no leader lines, no arrows, no ruler, no watermark, no background objects.",
+      "resolution": "4k",
+      "surface": null,
+      "width": 3584
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134408_a4e11ba2-361a-4c52-be74-d73d25ce4dae.png",
+    "status": "completed"
+  }
+]

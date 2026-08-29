@@ -1,0 +1,17 @@
+{
+  "line": "brand/hero-concepts/face-line/hq0-charcoal.png",
+  "skull": "brand/hero-concepts/skull-profile/U-4k.png",
+  "out": "brand/hero-concepts/face-line-skull.png",
+  "webp": "src/assets/hero/face-line-skull.webp",
+  "webpWidth": 1500,
+  "width": 2200,
+  "scale": 0.62,
+  "x": 0.584,
+  "y": 0.315,
+  "opacity": 0.45,
+  "squash": 0.91,
+  "gold": 2,
+  "crownFade": 0.62,
+  "ink": "#14120F",
+  "warm": 0.16
+}

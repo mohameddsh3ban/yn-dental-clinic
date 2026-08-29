@@ -1,0 +1,28 @@
+[
+  {
+    "created_at": "2026-08-28T13:57:15.219843Z",
+    "display_name": "Flux Kontext",
+    "id": "17aa816e-1261-47b7-ac1b-e7310135b345",
+    "job_type": "flux_kontext",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_17aa816e-1261-47b7-ac1b-e7310135b345_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "enhance_prompt": true,
+      "height": 1184,
+      "input_images": [
+        {
+          "id": "6f527d18-24e4-4078-a58a-e83ac32a9335",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/6f527d18-24e4-4078-a58a-e83ac32a9335.jpg"
+        }
+      ],
+      "multi_ref": false,
+      "prompt": "Rotate the skull precisely to a 90-degree lateral side profile facing left, ensuring zero yaw with the sagittal midline plane perfectly parallel to the picture plane. Show only one eye socket fully visible, the nasal aperture edge-on, and the teeth rows aligned in a single straight receding line. Keep the exact same skull with its warm ivory bone texture and porosity, soft studio lighting, cranial sutures, and the gold titanium implant screw with white ceramic crown in the lower first molar bone cutaway. Maintain the pure white seamless background without any text, labels, annotations, or watermark.",
+      "seed": 556644,
+      "width": 880
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_17aa816e-1261-47b7-ac1b-e7310135b345.png",
+    "status": "completed"
+  }
+]

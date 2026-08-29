@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-29T15:55:12.090118Z",
+    "display_name": "GPT Image 2",
+    "id": "4affa81d-ca25-4a12-9c29-093ca1c9545e",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_155512_4affa81d-ca25-4a12-9c29-093ca1c9545e_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise anatomical illustration of a single human lower molar tooth, sectioned vertically so the inside is visible, on a pure white seamless background. The outer enamel crown is white and glossy, the dentine beneath it warm ivory, and the pulp chamber and the two root canals running down through the roots are filled with warm gold that reads as metal — the canals cleaned, shaped and sealed. The tooth stands upright, seen from the side, its roots pointing down, softly lit by even studio light with a gentle contact shadow, fine natural surface texture, medical-museum quality, photoreal render. No gums, no jawbone, no other teeth, no instruments, no hands. No text, no labels, no leader lines, no annotations, no arrows, no measurements, no watermark, no border. Composition: the tooth centred with generous white space around it, occupying about two thirds of the frame height.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 3504
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_155512_4affa81d-ca25-4a12-9c29-093ca1c9545e.png",
+    "status": "completed"
+  }
+]

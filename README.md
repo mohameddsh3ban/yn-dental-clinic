@@ -1,6 +1,6 @@
-# YN Dental Clinic — Dr. Youssef Nasser
+# Ozea Dental Clinic — Dr. Youssef Nasser
 
-Landing page for **YN Dental Clinic** (Dr. Youssef Nasser — dental implants and
+Landing page for **Ozea Dental Clinic** (Dr. Youssef Nasser — dental implants and
 maxillofacial surgery, Nasr City, Cairo). Single-page React site with a
 WhatsApp-first booking flow, service overview, testimonials, and an embedded
 Google Maps location card.

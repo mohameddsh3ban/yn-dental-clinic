@@ -1,0 +1,40 @@
+[
+  {
+    "created_at": "2026-08-28T17:31:55.69668Z",
+    "display_name": "GPT Image 2",
+    "id": "cc5dce0c-295e-45c4-b07a-ac062be73a4e",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_173155_cc5dce0c-295e-45c4-b07a-ac062be73a4e_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "height": 2336,
+      "medias": [
+        {
+          "data": {
+            "id": "baaa0419-35c7-4621-a1a6-d0c2b26d2df4",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/baaa0419-35c7-4621-a1a6-d0c2b26d2df4_resize.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "dfebd653-6cde-4031-96cc-2704cb9280a5",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/dfebd653-6cde-4031-96cc-2704cb9280a5.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "videotape-alpha",
+      "prompt": "The FIRST image is a line drawing of a face. The SECOND image is an anatomical render of a lower jaw with both tooth rows and a gold implant. Place the jaw from the second image inside the face of the first image, scaled and rotated so it fits that face exactly: the condyle at the ear, the body of the jaw following the INSIDE of the drawn jawline with a small margin of paper left between bone and line, the bite line level with the drawn mouth, the front teeth just behind the drawn lip profile. Keep the line drawing itself completely unchanged — every line survives untouched and stays visible on top of the bone. Show only the jaw, the two tooth rows and the implant; no cranium, no cheekbone, no eye socket, no spine. Render the bone as a soft warm ivory inlay at about forty percent strength with no outline of its own, the gold implant slightly brighter. Nothing may cross the drawn silhouette. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no signature, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 1744
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_173155_cc5dce0c-295e-45c4-b07a-ac062be73a4e.png",
+    "status": "completed"
+  }
+]

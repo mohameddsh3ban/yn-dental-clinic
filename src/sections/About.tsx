@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router'
 import { snap } from '@/lib/anim'
 import { ArrowUpRight } from 'lucide-react'
 import clinic from '@/assets/about-clinic.jpg'
-import doctor1 from '@/assets/doctor-1.jpg'
-import doctor2 from '@/assets/doctor-2.jpg'
-import { site } from '@/lib/site'
+import { DoctorPortrait } from '@/components/DoctorPortrait'
+import { useDoctors } from '@/lib/team'
+import { useI18n } from '@/lib/i18n'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -17,18 +18,10 @@ const reveal = {
   }),
 }
 
-const stats = [
-  { value: '98', suffix: '%', label: 'Satisfaction rate' },
-  { value: '50', suffix: 'K', label: 'Smiles transformed' },
-  { value: '4.9', suffix: '', label: 'Customer rating' },
-]
-
-const doctors = [
-  { name: site.doctor, role: 'Implants & Maxillofacial Surgery', img: doctor1 },
-  { name: 'Clinical Care Team', role: 'Hygiene · Cosmetic · Aftercare', img: doctor2 },
-]
-
 export default function About() {
+  const { c, t } = useI18n()
+  const doctors = useDoctors()
+
   return (
     <section id="about" className="hero-gradient rounded-[1.75rem] p-6 sm:p-10 xl:rounded-[2.25rem] xl:p-14 2xl:p-16">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -43,15 +36,19 @@ export default function About() {
           <div className="overflow-hidden rounded-[1.5rem]">
             <img
               src={clinic}
-              alt={`${site.name} — dentist treating a relaxed patient`}
+              alt={t(c.about.imageAlt, { clinic: c.site.name })}
               className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]"
             />
           </div>
-          <div className="glass-chip absolute -bottom-5 left-5 rounded-2xl px-5 py-4 sm:left-8">
-            <p className="font-display text-[26px] font-medium leading-none text-[#14120F]">
-              15<span className="text-[#C0A578]">+</span>
+          <div className="glass-chip absolute -bottom-5 start-5 rounded-2xl px-5 py-4 sm:start-8">
+            <p
+              dir="ltr"
+              className="font-display text-[26px] font-medium leading-none text-[#14120F] rtl:text-end"
+            >
+              {c.about.yearsValue}
+              <span className="text-[#C0A578]">+</span>
             </p>
-            <p className="mt-1.5 text-[11px] text-[#7a7367]">Years of gentle expertise</p>
+            <p className="mt-1.5 text-[11px] text-[#7a7367]">{c.about.yearsLabel}</p>
           </div>
         </motion.div>
 
@@ -65,59 +62,105 @@ export default function About() {
             viewport={{ once: true, margin: '-60px' }}
           >
             <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
-              About {site.short} <span className="text-[#C0A578]">/</span>
+              {c.about.eyebrow} {c.site.short} <span className="text-[#C0A578]">/</span>
             </p>
             <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
-              Excellence in dentistry with{' '}
-              <span className="text-outline">compassionate</span> care
+              {c.about.headlineTop}{' '}
+              <span className="text-outline">{c.about.headlineOutlined}</span>{' '}
+              {c.about.headlineTail}
             </h2>
             <p className="mt-6 max-w-[440px] text-[14px] leading-relaxed text-[#7a7367]">
-              Every treatment plan is built around you — your comfort, your
-              schedule, your goals. Our clinicians combine leading technology
-              with a genuinely gentle chairside manner.
+              {c.about.lead}
             </p>
+            {/* "Visit us" promises an address and directions, so it goes to the
+                map section rather than the contact block it used to point at. */}
             <a
-              href="#contact"
-              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-[#14120F]/15 bg-white/60 py-3.5 pl-6 pr-5 text-[13px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white"
+              href="#location"
+              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-[#14120F]/15 bg-white/60 py-3.5 ps-6 pe-5 text-[13px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white"
             >
-              Read more
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {c.about.visitUs}
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
             </a>
           </motion.div>
 
-          {/* Doctors */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {doctors.map((d, i) => (
-              <motion.div
-                key={d.name}
-                variants={reveal}
-                custom={2 + i}
-                initial={snap ? false : 'hidden'}
-                whileInView="show"
-                viewport={{ once: true, margin: '-60px' }}
-                className="group flex items-center gap-4 rounded-2xl border border-white/70 bg-white/60 p-3 backdrop-blur transition-shadow hover:shadow-[0_12px_36px_rgba(20,18,15,0.22)]"
-              >
-                <img
-                  src={d.img}
-                  alt={d.name}
-                  className="h-16 w-16 rounded-xl object-cover"
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-[13px] font-semibold text-[#14120F]">{d.name}</p>
-                  <p className="mt-0.5 text-[11px] text-[#9a9184]">{d.role}</p>
-                </div>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#14120F]/5 text-[#14120F] transition-colors group-hover:bg-[#14120F] group-hover:text-white">
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
-              </motion.div>
+          {/* Quick facts. The surgeons follow as badges, so there is no
+              "surgical team: 2 consultant surgeons" row here — the two names
+              state that themselves. */}
+          <motion.dl
+            variants={reveal}
+            custom={2}
+            initial={snap ? false : 'hidden'}
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            className="mt-10 grid gap-x-8 gap-y-5 border-t border-[#14120F]/10 pt-6 sm:grid-cols-2"
+          >
+            {[
+              [c.about.facts.clinic, `${c.site.address.street}, ${c.site.address.short}`],
+              [c.about.facts.hours, `${c.site.hours.days} · ${c.site.hours.time}`],
+              [c.about.facts.referrals, c.about.referralsValue],
+            ].map(([term, value]) => (
+              <div key={term}>
+                <dt className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+                  {term}
+                </dt>
+                <dd className="mt-1.5 text-[13px] leading-snug text-[#3a352f]">{value}</dd>
+              </div>
             ))}
-          </div>
+          </motion.dl>
+
+          {/* The surgical team, in place of the standalone team band that used to
+              sit below this section. Each badge is still a link to the full
+              profile — that is the only route to a surgeon's qualifications and
+              scope of practice, and the nav's team link lands on this #team. */}
+          <motion.div
+            id="team"
+            variants={reveal}
+            custom={3}
+            initial={snap ? false : 'hidden'}
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            className="mt-8 border-t border-[#14120F]/10 pt-6"
+          >
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+              {c.about.surgicalTeam} <span className="text-[#C0A578]">/</span>{' '}
+              <span className="tabular-nums">{String(doctors.length).padStart(2, '0')}</span>
+            </p>
+
+            <ul className="mt-4 flex flex-wrap gap-3">
+              {doctors.map((d) => (
+                <li key={d.slug} className="w-full min-w-0 sm:w-auto">
+                  <Link
+                    to={`/team/${d.slug}`}
+                    aria-label={t(c.about.profileAria, { name: d.name, title: d.title })}
+                    className="group flex w-full max-w-full items-center gap-3 rounded-full border border-[#14120F]/10 bg-white/55 py-1.5 ps-1.5 pe-4 backdrop-blur transition-colors hover:border-[#C0A578]/60 hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#14120F]"
+                  >
+                    <DoctorPortrait
+                      src={d.portrait.card}
+                      alt={`${d.name} — ${d.title}`}
+                      initials={d.initials}
+                      className="h-11 w-11 shrink-0 rounded-full object-cover object-[50%_14%]"
+                      monogramClassName="h-11 w-11 shrink-0 rounded-full text-[11px]"
+                    />
+                    <span className="min-w-0">
+                      <span className="font-display block truncate text-[13px] font-semibold leading-tight tracking-[-0.01em] text-[#14120F]">
+                        {d.name}
+                      </span>
+                      <span className="mt-1 block truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[#9a9184]">
+                        {d.role}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-[#6b6459] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </div>
 
       {/* Stats */}
       <div className="mt-16 grid gap-8 border-t border-[#14120F]/10 pt-10 sm:grid-cols-3 xl:mt-20">
-        {stats.map((s, i) => (
+        {c.about.stats.map((s, i) => (
           <motion.div
             key={s.label}
             variants={reveal}
@@ -127,7 +170,10 @@ export default function About() {
             viewport={{ once: true, margin: '-40px' }}
             className="flex items-baseline gap-4 sm:flex-col sm:gap-2"
           >
-            <p className="font-display text-[clamp(2.6rem,4vw,3.6rem)] font-medium leading-none tracking-tight text-[#14120F]">
+            <p
+              dir="ltr"
+              className="font-display text-[clamp(2.6rem,4vw,3.6rem)] font-medium leading-none tracking-tight text-[#14120F] rtl:text-end"
+            >
               {s.value}
               <span className="text-[#C0A578]">{s.suffix}</span>
             </p>

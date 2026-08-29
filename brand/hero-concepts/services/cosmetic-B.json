@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-29T16:37:07.953932Z",
+    "display_name": "GPT Image 2",
+    "id": "cafa762d-ab2b-489b-9f93-47202b9560e6",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_163707_cafa762d-ab2b-489b-9f93-47202b9560e6_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 1360,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise dental illustration of a curved row of six upper front human teeth — two central incisors, two lateral incisors and two canines — standing side by side in their natural arch, seen from slightly in front and above, each one polished to a bright even finish, the arch resting on a fine gold arc that traces where the gum line would be. Warm ivory dentine and glossy white enamel, with warm gold as the only other colour, on a pure white seamless background. Soft even studio light, a gentle contact shadow beneath the object, fine natural surface texture, medical-museum quality, photoreal render. No gums, no jawbone, no lips, no skin, no instruments, no hands, no packaging. No text, no labels, no leader lines, no annotations, no arrows, no measurements, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2048
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_163707_cafa762d-ab2b-489b-9f93-47202b9560e6.png",
+    "status": "completed"
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-08-28T13:48:45.426682Z",
+    "display_name": "Seedream 5.0 Pro",
+    "id": "6e396a56-7924-4884-ac03-d82d2d721ebf",
+    "job_type": "seedream_v5_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134845_6e396a56-7924-4884-ac03-d82d2d721ebf_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 2352,
+      "is_inpaint": false,
+      "medias": [
+        {
+          "data": {
+            "id": "f9788786-268b-446d-8948-8325c3485e4b",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/f9788786-268b-446d-8948-8325c3485e4b.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "prompt": "A complete human skull rendered in perfect side profile facing left. STRICT ORTHOGRAPHIC LATERAL VIEW: the camera sits exactly perpendicular to the sagittal plane, a true 90-degree side view. Only the left side of the skull is visible. Exactly ONE eye socket is in frame. The nasal aperture is seen edge-on as a notch in the profile edge, never as a front-facing opening. The tooth row recedes in a single straight line away from the camera. The silhouette reads like a lateral cephalometric radiograph: sloping forehead, nasal bone, anterior nasal spine, upper and lower tooth rows, chin point, gonial angle, ascending ramus, condyle, occipital dome at the back. No front-facing surface of the face is visible. At the lower first-molar position a polished gold titanium dental implant screw is seated in the mandible, revealed through a clean rectangular cutaway window in the outer bone plate so the gold threads read clearly, supporting one glossy white ceramic molar crown in the tooth row. The gold implant is the only metallic accent in the image. Photorealistic medical 3D render, luxury product-photography lighting. Matte ivory bone material, warm bone-white, subtle natural porosity and fine cortical surface detail, faint cranial sutures. Large soft key light from upper left, soft ambient fill. Pure clean white seamless background, nothing else in frame. Object centred and complete with generous margin. Extremely high detail, sharp focus, anatomically accurate. No text, no labels, no annotations, no leader lines, no arrows, no watermark.",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "seed": 88397,
+      "width": 1760
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134845_6e396a56-7924-4884-ac03-d82d2d721ebf.png",
+    "status": "completed"
+  }
+]

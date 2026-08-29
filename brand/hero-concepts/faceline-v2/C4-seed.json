@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-08-28T15:42:32.299939Z",
+    "display_name": "Seedream 5.0 Pro",
+    "id": "407ecbd4-4aae-44d7-b068-b5d59d6b5acb",
+    "job_type": "seedream_v5_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_154232_407ecbd4-4aae-44d7-b068-b5d59d6b5acb_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 2352,
+      "is_inpaint": false,
+      "medias": [
+        {
+          "data": {
+            "id": "1ebb0814-c04f-4122-bc18-b7685973a9b4",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/1ebb0814-c04f-4122-bc18-b7685973a9b4_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "prompt": "Take this line drawing and change NOTHING about it: every existing line — the head, the closed eye, the eyebrow, the nose, the LIPS, the chin, the jawline, the ear, the neck, the shoulder — must survive completely untouched, at the same weight, on the same warm off-white paper, and must remain fully visible ON TOP of everything you add. Add one thing only: a faint anatomical jaw seen through the skin, like a soft X-ray at about thirty-five percent strength, warm pale ivory, airbrushed with no outline of its own. Draw ONLY the lower jawbone (mandible) with its condyle at the ear, its ramus, its angle and its body; the full lower row of small even teeth; the upper row of teeth with only the thin ridge of upper jawbone above them; and one small gold titanium implant screw with a white ceramic crown at the lower first molar, sitting in a little window in the bone. Draw NO cranium, NO skull cap, NO eye socket, NO cheekbone, NO zygomatic arch, NO nasal bone, NO spine, NO neck bones. CRITICAL: the bone must stay strictly INSIDE the drawn silhouette — no part of the jawbone, the chin or the teeth may cross or overlap the drawn jawline, the drawn chin or the drawn lip contour; the drawn jawline reads as the skin lying over the bone, so leave a small margin of paper between the bone and that line all the way from the chin to the ear. The bite line sits level with the drawn mouth and the tooth rows recede straight back toward the ear. No text, no labels, no leader lines, no annotations, no watermark, no border.",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "seed": 534179,
+      "width": 1760
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_154232_407ecbd4-4aae-44d7-b068-b5d59d6b5acb.png",
+    "status": "completed"
+  }
+]

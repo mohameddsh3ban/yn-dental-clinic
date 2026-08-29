@@ -1,0 +1,29 @@
+[
+  {
+    "created_at": "2026-08-28T15:36:08.768846Z",
+    "display_name": "Nano Banana Pro",
+    "id": "33953957-20bc-4bc7-9205-4859d15e1d61",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153608_33953957-20bc-4bc7-9205-4859d15e1d61_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 4800,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "8795bb19-5c41-4956-ac0d-49e54e206ef2",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/8795bb19-5c41-4956-ac0d-49e54e206ef2_resize.jpg"
+        }
+      ],
+      "prompt": "Keep this line drawing EXACTLY as it is — do not redraw, move, thicken, restyle or re-letter a single line of the face, the ear, the lips, the eye, the neck or the shoulder, and keep the identical warm off-white paper. Your only task is to add, underneath the existing line work, a soft pale anatomical study of the JAW, placed so it fits the drawn face perfectly. Draw ONLY: the complete lower jawbone (mandible) — its condyle sitting exactly at the ear, the ramus rising just in front of the ear, the angle of the jaw, and the body of the jaw running along the INSIDE of the drawn jawline so the drawn jawline reads as the skin over that bone; the full lower tooth row of small even teeth sitting behind the drawn lips; the upper tooth row directly above it with only the thin alveolar ridge of the upper jaw above those teeth; and one gold titanium dental implant screw with a white ceramic crown at the lower first molar, shown in a small window in the bone. Draw NOTHING else: no cranium, no skull cap, no eye socket, no cheekbone, no nasal bones, no spine — the jaw and the teeth only, ending cleanly where the upper tooth row ends. Render the bone as warm ivory, soft and airbrushed with no outline of its own, semi-transparent like a gentle X-ray seen through the skin at about forty percent strength, the gold implant a little brighter than the bone. The teeth must be aligned to the drawn mouth: the bite line level with the line of the drawn lips, the front teeth just inside the drawn lip profile, the tooth rows receding straight back toward the ear. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no signature, no border.",
+      "resolution": "4k",
+      "surface": null,
+      "width": 3584
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153608_33953957-20bc-4bc7-9205-4859d15e1d61.png",
+    "status": "completed"
+  }
+]

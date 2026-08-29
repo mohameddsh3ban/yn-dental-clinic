@@ -1,0 +1,32 @@
+[
+  {
+    "created_at": "2026-08-28T13:44:01.442149Z",
+    "display_name": "GPT Image 2",
+    "id": "86155c4f-8559-4919-b9b8-11e557eb3bfc",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134401_86155c4f-8559-4919-b9b8-11e557eb3bfc_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "height": 3312,
+      "medias": [
+        {
+          "data": {
+            "id": "53c0da0f-f624-4280-ae21-eae4c42f8000",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/53c0da0f-f624-4280-ae21-eae4c42f8000.png"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "videotape-alpha",
+      "prompt": "A complete human skull in exact lateral side profile, facing left, jaw closed in natural occlusion. Full cranium dome, brow ridge, eye socket, nasal aperture, zygomatic arch, maxilla with upper tooth row and mandible with lower tooth row, ramus and condyle visible. At the lower first-molar position a polished gold titanium dental implant screw is seated in the jawbone, revealed through a clean anatomical cutaway window in the outer bone plate so the gold threads read clearly, supporting a single glossy white ceramic molar crown in the tooth row. The gold implant is the only metallic accent in the image. Photorealistic medical 3D render, luxury product-photography lighting. Matte ivory bone material, warm bone-white, subtle natural porosity and fine cortical surface detail. Large soft key light from upper left, soft ambient fill, delicate contact shadow. Pure clean white seamless background, nothing else in frame. Object centred with generous margin, complete and uncropped. Extremely high detail, sharp focus, anatomically accurate. No text, no labels, no annotations, no leader lines, no arrows, no ruler, no watermark, no background objects.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 2480
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134401_86155c4f-8559-4919-b9b8-11e557eb3bfc.png",
+    "status": "completed"
+  }
+]

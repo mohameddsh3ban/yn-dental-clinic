@@ -1,0 +1,28 @@
+[
+  {
+    "created_at": "2026-08-28T14:01:16.70996Z",
+    "display_name": "Topaz",
+    "id": "ec7092ac-64de-4ce3-b745-3502ec54ab8f",
+    "job_type": "topaz_image",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_140116_ec7092ac-64de-4ce3-b745-3502ec54ab8f_min.webp",
+    "params": {
+      "denoise": 0,
+      "face_enhancement": false,
+      "face_enhancement_creativity": 0,
+      "face_enhancement_strength": 0,
+      "height": 4704,
+      "input_image": {
+        "id": "9fdcf381-7fc3-4974-8953-873702b15d4c",
+        "type": "media_input",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/9fdcf381-7fc3-4974-8953-873702b15d4c.jpg"
+      },
+      "model": "CGI",
+      "output_height": 4704,
+      "output_width": 3520,
+      "sharpen": 0.15,
+      "width": 3520
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_140116_ec7092ac-64de-4ce3-b745-3502ec54ab8f.png",
+    "status": "completed"
+  }
+]

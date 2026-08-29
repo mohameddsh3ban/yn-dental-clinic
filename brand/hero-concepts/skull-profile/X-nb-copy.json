@@ -1,0 +1,29 @@
+[
+  {
+    "created_at": "2026-08-28T13:57:15.296288Z",
+    "display_name": "Nano Banana Pro",
+    "id": "7e330fbb-828a-48ef-bc2f-3656f32f8582",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_7e330fbb-828a-48ef-bc2f-3656f32f8582_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 4800,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "637a68d5-9b35-437b-a1b9-95034649af18",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/637a68d5-9b35-437b-a1b9-95034649af18.jpg"
+        }
+      ],
+      "prompt": "Rotate the skull in the reference image slightly further away from the camera, about fifteen degrees, until it is seen in an exact 90-degree lateral side profile facing left — zero yaw, the sagittal midline plane perfectly parallel to the picture plane, only ONE eye socket visible, the nasal aperture edge-on, the tooth rows receding in one straight line. Keep absolutely everything else identical: the same skull, the same warm ivory bone material and porosity, the same soft studio lighting, the same cranial sutures, the same gold titanium implant screw in its rectangular bone cutaway at the lower first molar with its white ceramic crown. Pure white seamless background. No text, no labels, no annotations, no watermark.",
+      "resolution": "4k",
+      "surface": null,
+      "width": 3584
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_7e330fbb-828a-48ef-bc2f-3656f32f8582.png",
+    "status": "completed"
+  }
+]

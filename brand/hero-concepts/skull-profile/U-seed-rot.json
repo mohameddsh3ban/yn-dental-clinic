@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-08-28T13:57:15.024185Z",
+    "display_name": "Seedream 5.0 Pro",
+    "id": "aeb4a2a0-6272-43e5-8a30-751ffe575221",
+    "job_type": "seedream_v5_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_aeb4a2a0-6272-43e5-8a30-751ffe575221_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 2352,
+      "is_inpaint": false,
+      "medias": [
+        {
+          "data": {
+            "id": "b3bdcbc5-4cf3-4959-98c9-841b7cd2832f",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/b3bdcbc5-4cf3-4959-98c9-841b7cd2832f.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "prompt": "Rotate the skull in the reference image slightly further away from the camera, about fifteen degrees, until it is seen in an exact 90-degree lateral side profile facing left — zero yaw, the sagittal midline plane perfectly parallel to the picture plane, only ONE eye socket visible, the nasal aperture edge-on, the tooth rows receding in one straight line. Keep absolutely everything else identical: the same skull, the same warm ivory bone material and porosity, the same soft studio lighting, the same cranial sutures, the same gold titanium implant screw in its rectangular bone cutaway at the lower first molar with its white ceramic crown. Pure white seamless background. No text, no labels, no annotations, no watermark.",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "seed": 247127,
+      "width": 1760
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_135715_aeb4a2a0-6272-43e5-8a30-751ffe575221.png",
+    "status": "completed"
+  }
+]

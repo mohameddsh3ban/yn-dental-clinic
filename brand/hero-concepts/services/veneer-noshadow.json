@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-29T17:11:20.090819Z",
+    "display_name": "GPT Image 2",
+    "id": "bebcd21f-0b8d-4565-84eb-2e4bdb9a6229",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_171120_bebcd21f-0b8d-4565-84eb-2e4bdb9a6229_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise dental illustration of three ultra-thin ceramic veneer shells floating in the air just in front of the three upper front teeth they belong to, aligned to them and slightly separated as if about to be placed. The shells are translucent white with a fine gold edge catching the light; the teeth behind them are warm ivory. Warm ivory dentine and glossy white enamel, with warm gold as the only other colour, on a pure white seamless background. Soft even studio light, fine natural surface texture, medical-museum quality, photoreal render. The object floats on pure white with NO cast shadow, NO contact shadow, NO reflection and no gradient behind it — the background is one flat pure white. No gums, no jawbone, no lips, no skin, no instruments, no hands. No text, no labels, no annotations, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 3504
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_171120_bebcd21f-0b8d-4565-84eb-2e4bdb9a6229.png",
+    "status": "completed"
+  }
+]

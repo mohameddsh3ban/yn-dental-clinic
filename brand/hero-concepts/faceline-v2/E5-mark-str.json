@@ -1,0 +1,40 @@
+[
+  {
+    "created_at": "2026-08-29T13:48:11.25635Z",
+    "display_name": "GPT Image 2",
+    "id": "a65c6008-1438-4500-a776-57eda9d47540",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_134811_a65c6008-1438-4500-a776-57eda9d47540_min.webp",
+    "params": {
+      "aspect_ratio": "2:3",
+      "height": 3504,
+      "medias": [
+        {
+          "data": {
+            "id": "9a672667-c448-4e46-81e9-eb02034776c7",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/9a672667-c448-4e46-81e9-eb02034776c7.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "466e46dc-7667-42ad-8c0c-775b7f334f5d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/466e46dc-7667-42ad-8c0c-775b7f334f5d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "videotape-alpha",
+      "prompt": "This is a finished illustration and it is already correct. Keep it exactly as it is: the same continuous line drawing of the face, the same closed eye, eyebrow, lashes, nose, lips, chin, jawline, ear, neck and shoulder, at the same weight; the same pale warm skull and jaw seen through the skin; the same tooth rows; the same warm off-white paper; the same colours, the same crop and the same composition. Do not redraw, restyle, sharpen, recolour or reposition anything. Make exactly ONE change. Replace a single tooth — the lower first molar, the sixth tooth from the front in the LOWER row — with a dental implant: a gold titanium implant screw with a visible thread, standing vertically in the jawbone exactly where that tooth roots were, carrying a white ceramic crown that meets the bite line and is the same size and shape as the tooth it replaces. The screw reads through the bone the way the rest of the anatomy does — a soft pale inlay seen through the skin — with the gold a little warmer and brighter than the bone so it registers as metal. Every other tooth in both rows stays exactly as it is. The SECOND image is the same illustration with the target tooth ringed in green. Use the ring only to identify which tooth to replace — do NOT draw the ring, or any circle, marker or highlight, in your output. Treat this as a retouch of one tooth, not a redraw of the picture: the output should be indistinguishable from the input everywhere except at that single molar. No text, no labels, no leader lines, no arrows, no annotations, no measurements, no watermark, no signature, no border, and no change to the paper.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 2336
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260829_134811_a65c6008-1438-4500-a776-57eda9d47540.png",
+    "status": "completed"
+  }
+]

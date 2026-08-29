@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-28T15:36:00.094274Z",
+    "display_name": "GPT Image 2",
+    "id": "cc588aee-cc5e-4014-b858-456cd3657fed",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153600_cc588aee-cc5e-4014-b858-456cd3657fed_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "height": 3312,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise anatomical illustration of a human JAW in an exact 90-degree lateral side view facing left, on a pure white seamless background. Show ONLY the complete lower jawbone (mandible) — condyle, ramus, angle and body — with its full lower row of small even natural teeth, plus the upper row of teeth directly above with only the thin alveolar ridge of the upper jaw above them. Show NOTHING else: no cranium, no skull, no eye socket, no cheekbone, no nasal bones, no skin, no lips, no muscle. One gold titanium dental implant screw with a white ceramic crown sits at the lower first molar inside a small rectangular window cut in the bone. Warm ivory bone with fine natural porosity, soft even studio light, gentle self-shadow, no outline, no ink line, medical-museum quality, photoreal render. The jaw is closed, the bite line perfectly horizontal, the tooth rows receding in one straight line. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 2480
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153600_cc588aee-cc5e-4014-b858-456cd3657fed.png",
+    "status": "completed"
+  }
+]

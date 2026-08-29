@@ -1,0 +1,34 @@
+[
+  {
+    "created_at": "2026-08-28T13:48:47.175816Z",
+    "display_name": "Nano Banana Pro",
+    "id": "1a777048-d47d-443d-8f0d-c253ff1ce29b",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134847_1a777048-d47d-443d-8f0d-c253ff1ce29b_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 4800,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "74ad243f-0a44-4d08-bc4d-2214232ef968",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/74ad243f-0a44-4d08-bc4d-2214232ef968.jpg"
+        },
+        {
+          "id": "917e205e-b998-497e-8b33-8732b136a9ec",
+          "type": "media_input",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/917e205e-b998-497e-8b33-8732b136a9ec.jpg"
+        }
+      ],
+      "prompt": "Take the photorealistic skull in the reference image and re-render the exact same skull, same bone material, same lighting, same gold implant, viewed in perfect side profile facing left. STRICT ORTHOGRAPHIC LATERAL VIEW: the camera sits exactly perpendicular to the sagittal plane, a true 90-degree side view. Only the left side of the skull is visible. Exactly ONE eye socket is in frame. The nasal aperture is seen edge-on as a notch in the profile edge, never as a front-facing opening. The tooth row recedes in a single straight line away from the camera. The silhouette reads like a lateral cephalometric radiograph: sloping forehead, nasal bone, anterior nasal spine, upper and lower tooth rows, chin point, gonial angle, ascending ramus, condyle, occipital dome at the back. No front-facing surface of the face is visible. At the lower first-molar position a polished gold titanium dental implant screw is seated in the mandible, revealed through a clean rectangular cutaway window in the outer bone plate so the gold threads read clearly, supporting one glossy white ceramic molar crown in the tooth row. The gold implant is the only metallic accent in the image. Photorealistic medical 3D render, luxury product-photography lighting. Matte ivory bone material, warm bone-white, subtle natural porosity and fine cortical surface detail, faint cranial sutures. Large soft key light from upper left, soft ambient fill. Pure clean white seamless background, nothing else in frame. Object centred and complete with generous margin. Extremely high detail, sharp focus, anatomically accurate. No text, no labels, no annotations, no leader lines, no arrows, no watermark.",
+      "resolution": "4k",
+      "surface": null,
+      "width": 3584
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_134847_1a777048-d47d-443d-8f0d-c253ff1ce29b.png",
+    "status": "completed"
+  }
+]

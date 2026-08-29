@@ -1,15 +1,9 @@
-// Single source of truth for clinic identity and contact details.
-// Update here — every section reads from this module.
-
-const WHATSAPP_MESSAGE =
-  "Hello Dr. Youssef Nasser, I'd like to book an appointment at YN Dental Clinic."
+// Single source of truth for the clinic's language-independent details:
+// numbers, handles and links. Everything with words in it — the clinic name,
+// the doctor's name, the address, the opening hours — lives in `lib/copy`, so
+// the Arabic site is not quietly serving English strings.
 
 export const site = {
-  name: 'YN Dental Clinic',
-  short: 'YN',
-  doctor: 'Dr. Youssef Nasser',
-  specialty: 'Dental Implants & Maxillofacial Surgery',
-
   instagram: 'https://www.instagram.com/dr.youssefnasser_',
   instagramHandle: '@dr.youssefnasser_',
 
@@ -19,22 +13,15 @@ export const site = {
     { label: '+20 110 738 1860', tel: '+201107381860' },
   ],
 
-  whatsapp: `https://wa.me/201069799460?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
-
-  address: {
-    street: '6 Mahmoud Ammar, Al Golf',
-    city: 'Nasr City, Cairo Governorate',
-    short: 'Nasr City, Cairo',
-  },
-
-  hours: {
-    days: 'Mon – Sat',
-    time: '09 AM – 16 PM',
-  },
-
   maps: {
     link: 'https://maps.app.goo.gl/33yMJCLWxvj25xks9',
     embed:
       'https://www.google.com/maps?q=Dr.Youssef+Nasser+Dental+implant+and+maxillofacial+surgery,+6+Mahmoud+Ammar,+Al+Golf,+Nasr+City,+Cairo+Governorate+4451421&z=16&output=embed',
   },
 } as const
+
+/** The WhatsApp deep link, carrying an opening message in the visitor's language. */
+export function whatsappUrl(message: string): string {
+  const number = site.phones[0].tel.replace(/\D/g, '')
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
+}

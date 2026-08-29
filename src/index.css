@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -44,11 +44,55 @@
     background: #CFC8BC;
     -webkit-font-smoothing: antialiased;
   }
+
+  /* ---- Arabic ------------------------------------------------------------
+     Three things have to change for the Arabic site, and all three are
+     typographic rather than structural — the layout itself flips from the
+     `dir` attribute alone, through logical margins and insets.
+
+     1. The face. Inter and Inter Tight carry no Arabic glyphs, so every
+        Arabic string would otherwise fall back to a system face and lose the
+        page's voice. IBM Plex Sans Arabic is the closest match in weight and
+        counter shape to Inter, so the two languages read as one design.
+     2. Capitals. Arabic has no letter case; `text-transform: uppercase` is a
+        no-op at best and confuses screen readers at worst, and the site puts
+        it on every eyebrow and section heading.
+     3. Tracking. Latin display type here is tracked out to 0.2em. Arabic is a
+        cursive script — spacing the letters pulls the joins apart and makes a
+        word look misspelled. Reset it everywhere rather than auditing 40
+        individual utilities; the selector outranks a Tailwind utility class,
+        so no `!important` is needed.
+     ---------------------------------------------------------------------- */
+  html[lang='ar'],
+  html[lang='ar'] body {
+    font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  }
+  html[lang='ar'] .font-display,
+  html[lang='ar'] .font-engraved {
+    font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  }
+  html[lang='ar'] * {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  /* A subtree that declares itself English keeps Inter — a patient review left
+     in English, for instance. IBM Plex Sans Arabic ships Latin glyphs, so
+     numerals and the Ozea wordmark do not need this; only running English prose
+     does, and marking it `lang="en"` is what a screen reader needs anyway. */
+  html[lang='ar'] [lang='en'],
+  html[lang='ar'] [lang='en'] * {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
   .font-display {
     font-family: 'Inter Tight', 'Inter', sans-serif;
+  }
+  /* Arabic text: Inter carries no Arabic glyphs, so anything in Arabic would
+     otherwise fall back to a system face and break the page's typographic voice. */
+  .font-ar {
+    font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
   }
   /* Engraved serif used by the logo wordmark */
   .font-engraved {
@@ -62,6 +106,13 @@
     -webkit-text-stroke: 1px rgba(20, 18, 15, 0.55);
     color: transparent;
   }
+  /* Without text-stroke support the outlined word would render invisible. */
+  @supports not (-webkit-text-stroke: 1px black) {
+    .text-outline,
+    .text-outline-thin {
+      color: rgba(20, 18, 15, 0.9);
+    }
+  }
   .glass-chip {
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(14px);
@@ -71,6 +122,22 @@
   }
   .hero-gradient {
     background: linear-gradient(165deg, #F4F3F0 0%, #e3dcd0 38%, #d9d1c2 72%, #CFC8BC 100%);
+  }
+  /* The hero canvas the face artwork sits on. Three layers, in order: a pool of
+     light where the head lands, a vignette that stops the corners from
+     competing with it, and the cream gradient itself. */
+  .hero-canvas {
+    background:
+      radial-gradient(58% 54% at 56% 42%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 72%),
+      radial-gradient(120% 120% at 50% 50%, rgba(20, 18, 15, 0) 52%, rgba(20, 18, 15, 0.07) 100%),
+      linear-gradient(168deg, #F4F3F0 0%, #e3dcd0 42%, #d9d1c2 74%, #CFC8BC 100%);
+  }
+  /* Paper grain. Kept as an inline SVG so the hero costs no extra request, and
+     held under 5% because the artwork it sits behind is itself near-white. */
+  .hero-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.045;
   }
 }
 
@@ -89,5 +156,16 @@
   }
   .marquee-pause:hover .animate-marquee {
     animation-play-state: paused;
+  }
+
+  /* A horizontal rail scrolled by its own buttons: the native scrollbar under
+     it would be a second, uglier control for the same thing. Scrolling itself
+     stays intact — trackpad, touch and keyboard all still work. */
+  .rail-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .rail-scroll::-webkit-scrollbar {
+    display: none;
   }
 }

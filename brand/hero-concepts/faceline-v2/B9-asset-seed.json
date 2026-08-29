@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-08-28T15:36:07.969529Z",
+    "display_name": "Seedream 5.0 Pro",
+    "id": "17e5c5fa-f636-4fa9-bb08-1f2bd1055154",
+    "job_type": "seedream_v5_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153607_17e5c5fa-f636-4fa9-bb08-1f2bd1055154_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "batch_size": 1,
+      "height": 2352,
+      "is_inpaint": false,
+      "medias": [
+        {
+          "data": {
+            "id": "5b79156e-9951-4f1a-a5ef-b9d47f423f95",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/5b79156e-9951-4f1a-a5ef-b9d47f423f95_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "prompt": "A precise anatomical illustration of a human JAW in an exact 90-degree lateral side view facing left, on a pure white seamless background. Show ONLY the complete lower jawbone (mandible) — condyle, ramus, angle and body — with its full lower row of small even natural teeth, plus the upper row of teeth directly above with only the thin alveolar ridge of the upper jaw above them. Show NOTHING else: no cranium, no skull, no eye socket, no cheekbone, no nasal bones, no skin, no lips, no muscle. One gold titanium dental implant screw with a white ceramic crown sits at the lower first molar inside a small rectangular window cut in the bone. Warm ivory bone with fine natural porosity, soft even studio light, gentle self-shadow, no outline, no ink line, medical-museum quality, photoreal render. The jaw is closed, the bite line perfectly horizontal, the tooth rows receding in one straight line. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no border. Match the size, angle and proportion of the jaw to the face in the reference drawing: the same jaw length from chin to condyle, the same jaw angle, the same tooth-row height. Output the jaw alone on pure white — do not draw the face, the outline or the reference drawing itself.",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "seed": 285753,
+      "width": 1760
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260828_153607_17e5c5fa-f636-4fa9-bb08-1f2bd1055154.png",
+    "status": "completed"
+  }
+]

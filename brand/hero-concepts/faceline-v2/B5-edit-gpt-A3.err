@@ -1,0 +1,1 @@
+Error: {"actions":[{"type":"upgrade_plan"}],"billing_period":"annual","concurrent_jobs_limit":8,"error_type":"rate_limit_reached","job_set_type":"gpt_image_2","plan_type":"max","use_unlim":false,"workspace":{"role":"owner","type":"private"}}

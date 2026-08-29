@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { snap } from '@/lib/anim'
 import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons'
-import { site } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
+import { site, whatsappUrl } from '@/lib/site'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -16,6 +17,9 @@ const reveal = {
 }
 
 export default function Location() {
+  const { c, t } = useI18n()
+  const whatsapp = whatsappUrl(c.site.whatsappMessage)
+
   return (
     <section
       id="location"
@@ -30,15 +34,15 @@ export default function Location() {
       >
         <div>
           <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
-            Visit us <span className="text-[#C0A578]">/</span>
+            {c.location.eyebrow} <span className="text-[#C0A578]">/</span>
           </p>
           <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
-            Find us in <span className="text-outline">Nasr City</span>
+            {c.location.headlineTop}{' '}
+            <span className="text-outline">{c.location.headlineOutlined}</span>
           </h2>
         </div>
         <p className="max-w-[320px] text-[13px] leading-relaxed text-[#7a7367]">
-          Easy to reach from Al Golf and Heliopolis — message us on WhatsApp and
-          we'll hold a slot that fits your day.
+          {c.location.lead}
         </p>
       </motion.div>
 
@@ -58,7 +62,7 @@ export default function Location() {
             </span>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
-                Clinic address
+                {c.location.addressLabel}
               </p>
               <a
                 href={site.maps.link}
@@ -67,11 +71,11 @@ export default function Location() {
                 className="group mt-2 inline-flex items-start gap-1.5 text-[14px] font-medium leading-relaxed text-[#14120F] transition-colors hover:text-[#C0A578]"
               >
                 <span>
-                  {site.address.street}
+                  {c.site.address.street}
                   <br />
-                  {site.address.city}
+                  {c.site.address.city}
                 </span>
-                <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#9a9184] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#9a9184] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
               </a>
             </div>
           </div>
@@ -82,10 +86,13 @@ export default function Location() {
             </span>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
-                Opening hours
+                {c.location.hoursLabel}
               </p>
               <p className="mt-2 text-[14px] font-medium text-[#14120F]">
-                {site.hours.days} · {site.hours.time}
+                {c.site.hours.days} ·{' '}
+                <span dir="ltr" className="inline-block tabular-nums">
+                  {c.site.hours.time}
+                </span>
               </p>
             </div>
           </div>
@@ -96,7 +103,7 @@ export default function Location() {
             </span>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
-                Call the clinic
+                {c.location.phoneLabel}
               </p>
               <div className="mt-2 flex flex-col gap-1">
                 {site.phones.map((p) => (
@@ -104,7 +111,7 @@ export default function Location() {
                     key={p.tel}
                     href={`tel:${p.tel}`}
                     dir="ltr"
-                    className="text-[14px] font-medium text-[#14120F] transition-colors hover:text-[#C0A578]"
+                    className="text-[14px] font-medium text-[#14120F] transition-colors hover:text-[#C0A578] rtl:text-end"
                   >
                     {p.label}
                   </a>
@@ -119,12 +126,13 @@ export default function Location() {
             </span>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
-                Follow the clinic
+                {c.location.socialLabel}
               </p>
               <a
                 href={site.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                dir="ltr"
                 className="mt-2 inline-block text-[14px] font-medium text-[#14120F] transition-colors hover:text-[#C0A578]"
               >
                 {site.instagramHandle}
@@ -134,13 +142,13 @@ export default function Location() {
 
           <div className="mt-auto flex flex-wrap gap-3 border-t border-[#14120F]/10 pt-6">
             <a
-              href={site.whatsapp}
+              href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-[#14120F] py-3.5 pl-5 pr-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.03]"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-[#14120F] py-3.5 ps-5 pe-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.03]"
             >
               <WhatsAppIcon className="h-4 w-4 text-[#C9AC7C]" />
-              Chat on WhatsApp
+              {c.location.chat}
             </a>
             <a
               href={site.maps.link}
@@ -148,8 +156,8 @@ export default function Location() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 rounded-full border border-[#14120F]/15 bg-white/70 px-5 py-3.5 text-[13px] font-medium text-[#14120F] transition-colors hover:bg-white"
             >
-              Get directions
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              {c.location.directions}
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
             </a>
           </div>
         </motion.div>
@@ -164,7 +172,7 @@ export default function Location() {
           className="relative overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/60 shadow-[0_18px_50px_rgba(20,18,15,0.14)]"
         >
           <iframe
-            title={`${site.name} on Google Maps`}
+            title={t(c.location.mapTitle, { clinic: c.site.name })}
             src={site.maps.embed}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
