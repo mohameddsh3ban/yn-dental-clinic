@@ -83,9 +83,7 @@ export default function DoctorProfile() {
           {/* Header */}
           <header className="relative z-20 flex items-center justify-between gap-4 px-5 pt-6 sm:px-8 xl:px-14 xl:pt-9 2xl:px-20">
             <Link to="/" className="flex items-center gap-3" aria-label={c.site.name}>
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#14120F]">
-                <BrandLogo alt="" className="h-9 w-9" />
-              </span>
+              <BrandLogo alt="" className="h-11 w-11 shrink-0" />
               <span className="leading-none">
                 <span
                   lang="en"
@@ -271,7 +269,7 @@ export default function DoctorProfile() {
               whileInView="show"
               viewport={{ once: true, margin: '-60px' }}
             >
-              <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+              <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
                 {c.profile.scope} <span className="text-[#C0A578]">/</span>{' '}
                 <span dir="ltr" className="inline-block tabular-nums">
                   01–{String(doctor.focus.length).padStart(2, '0')}
@@ -339,7 +337,7 @@ export default function DoctorProfile() {
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
           >
-            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
               {c.profile.cvEyebrow} <span className="text-[#C0A578]">/</span>
             </p>
             <h2
@@ -361,7 +359,7 @@ export default function DoctorProfile() {
                 whileInView="show"
                 viewport={{ once: true, margin: '-50px' }}
               >
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
                   <span className="tabular-nums text-[#C0A578]">
                     {String(i + 1).padStart(2, '0')}
                   </span>{' '}

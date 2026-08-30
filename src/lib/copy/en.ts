@@ -58,7 +58,7 @@ export const en = {
     lead:
       'Jaw position, bite and profile are planned as one thing, because a face is read as one thing — never as parts. Every plan starts from imaging and measurement.',
     book: 'Book appointment',
-    bookAria: 'Book an appointment with {doctor} on WhatsApp',
+    bookAria: 'Book appointment with {doctor} on WhatsApp',
     railLabel: 'How a case proceeds',
     rail: ['Consultation', 'Imaging', 'Written plan', 'Surgery'],
     figureAlt:
@@ -95,8 +95,10 @@ export const en = {
       { title: 'Dental crowns', tag: 'Restorative' },
       { title: 'Dental veneers', tag: 'Cosmetic' },
       { title: 'Composite veneer', tag: 'Single visit' },
-      { title: 'Restoration', tag: 'Reconstructive' },
+      { title: 'Dental implants', tag: 'Surgical' },
+      { title: 'maxillofacial & reconstruction', tag: 'Reconstructive' },
       { title: 'Endo treatments', tag: 'Root canal' },
+      { title: 'TMJ surgeries', tag: 'Jaw joint' },
     ],
   },
 
@@ -110,7 +112,12 @@ export const en = {
     visitUs: 'Visit us',
     yearsValue: '15',
     yearsLabel: 'Years of gentle expertise',
-    imageAlt: '{clinic} — dentist treating a relaxed patient',
+    /** One per card in the About photo stack, in the order they are dealt. */
+    imageAlts: [
+      '{clinic} — two of the practice surgeons operating in theatre',
+      '{clinic} — a surgeon operating under the theatre lamp',
+    ],
+    imageDotAria: 'Show photo {n}',
     facts: { clinic: 'Clinic', hours: 'Hours', referrals: 'Referrals' },
     referralsValue: 'Second opinions welcome',
     surgicalTeam: 'Surgical team',
@@ -233,6 +240,8 @@ export const en = {
     chat: 'Chat on WhatsApp',
     directions: 'Get directions',
     mapTitle: '{clinic} on Google Maps',
+    mapLoad: 'Show the map',
+    mapNotice: 'Loading the map sets Google cookies on your device.',
   },
 
   footer: {
@@ -344,6 +353,10 @@ export const en = {
         {
           name: 'Ankylosis & Dislocation',
           descriptor: 'A jaw that will not open, or will not stay in',
+        },
+        {
+          name: 'Total Joint Replacement',
+          descriptor: 'A prosthetic temporomandibular joint',
         },
         { name: 'Orthognathic Surgery', descriptor: 'Corrective jaw alignment' },
         { name: 'Facial Trauma & Reconstruction', descriptor: 'Mandible, orbit and zygoma' },

@@ -7,7 +7,6 @@ import { flat, snap } from '@/lib/anim'
 import { useI18n } from '@/lib/i18n'
 import { navLinks } from '@/lib/nav'
 import { site, whatsappUrl } from '@/lib/site'
-import heroFace from '@/assets/hero/hero-face.webp'
 
 /**
  * The face-led hero: the client's own line drawing of a profile with the skull,
@@ -36,7 +35,11 @@ const fadeUp = {
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.75, ease, delay: 0.12 + i * 0.09 },
+    // Kept deliberately short: every element still fading in is viewport area
+    // that is not finished yet, and the hero is what Speed Index measures. The
+    // stagger still reads at these numbers; the last item settles at ~0.8s
+    // instead of ~1.3s.
+    transition: { duration: 0.5, ease, delay: 0.06 + i * 0.055 },
   }),
 }
 
@@ -95,6 +98,20 @@ const socials = [
 
 /** Fixed pixel heights at every breakpoint — a percentage height collapses to
  * nothing in a relaxed-height capture. */
+/**
+ * The hero drawing is the LCP element, so it is served from `public/` rather
+ * than imported: index.html preloads it by a stable URL before the bundle is
+ * parsed, and the `srcSet`/`sizes` here must stay in step with the
+ * `imagesrcset`/`imagesizes` on that preload link or the browser fetches the
+ * artwork twice.
+ */
+const HERO_ART = {
+  src: '/hero/hero-face-900.webp',
+  srcSet:
+    '/hero/hero-face-400.webp 400w, /hero/hero-face-600.webp 600w, /hero/hero-face-900.webp 900w',
+  sizes: '(min-width: 1536px) 466px, (min-width: 768px) 395px, (min-width: 640px) 332px, 269px',
+} as const
+
 const FIGURE_HEIGHT = 'h-[340px] sm:h-[420px] md:h-[500px] xl:h-[500px] 2xl:h-[590px]'
 
 export default function HeroFacial() {
@@ -296,16 +313,22 @@ export default function HeroFacial() {
           <div className="relative order-2 mx-auto w-fit xl:absolute xl:bottom-[126px] xl:start-[56%] xl:z-20 xl:-translate-x-1/2 xl:rtl:translate-x-1/2 2xl:bottom-[140px] 2xl:start-[52%]">
             <div className="relative rtl:-scale-x-100" dir="ltr">
               <motion.img
-                src={heroFace}
-                width={1200}
-                height={1519}
+                src={HERO_ART.src}
+                srcSet={HERO_ART.srcSet}
+                sizes={HERO_ART.sizes}
+                width={900}
+                height={1139}
                 alt={c.hero.figureAlt}
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"
-                initial={still ? false : { opacity: 0, y: 26, scale: 1.012 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: still ? 0 : 1.1, delay: still ? 0 : 0.2, ease }}
+                // Transform only, and no delay: this is the LCP element, and
+                // Chrome does not count an element as painted while it is
+                // still at `opacity: 0`. Fading it in cost ~1.1s of LCP for an
+                // effect the settle already reads as.
+                initial={still ? false : { y: 26, scale: 1.012 }}
+                animate={{ y: 0, scale: 1 }}
+                transition={{ duration: still ? 0 : 0.9, ease }}
                 className={`relative z-20 w-auto object-contain ${FIGURE_HEIGHT}`}
               />
 

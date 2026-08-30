@@ -45,7 +45,7 @@ export default function Scope() {
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
         >
-          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
             Scope of practice <span className="text-[#C0A578]">/</span>{' '}
             <span className="tabular-nums">01–07</span>
           </p>
@@ -84,7 +84,7 @@ export default function Scope() {
           >
             <div className="flex min-h-[56px] flex-col justify-center gap-x-4 py-3 lg:flex-row lg:items-baseline lg:py-4">
               <span className="flex items-baseline gap-3">
-                <span className="text-[11px] font-semibold tabular-nums tracking-[0.14em] text-[#9a9184] transition-colors group-hover:text-[#C0A578]">
+                <span className="text-[11px] font-semibold tabular-nums tracking-[0.14em] text-[#6f685c] transition-colors group-hover:text-[#C0A578]">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="font-display text-[15px] font-medium tracking-[-0.01em] text-[#3a352f] transition-colors group-hover:text-[#14120F] xl:text-[17px]">

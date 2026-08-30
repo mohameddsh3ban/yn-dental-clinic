@@ -26,7 +26,10 @@ export function LanguageToggle({
       type="button"
       onClick={toggle}
       lang={lang === 'en' ? 'ar' : 'en'}
-      aria-label={c.common.switchTo}
+      // The accessible name has to start with the visible label, otherwise a
+      // speech-control user reading the button ("العربية") addresses a name
+      // that does not contain it.
+      aria-label={`${c.common.otherLanguage} — ${c.common.switchTo}`}
       title={c.common.switchTo}
       className={`inline-flex shrink-0 items-center gap-2 rounded-full border border-[#14120F]/10 bg-white/70 px-3 py-2 text-[12px] font-medium text-[#14120F] backdrop-blur transition-colors hover:border-[#14120F]/25 hover:bg-white sm:px-4 ${className}`}
     >

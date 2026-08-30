@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { snap } from '@/lib/anim'
 import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from 'lucide-react'
@@ -20,6 +21,11 @@ export default function Location() {
   const { c, t } = useI18n()
   const whatsapp = whatsappUrl(c.site.whatsappMessage)
 
+  // The Google embed sets third-party cookies the moment it loads, so it stays
+  // behind a click. Visitors who only want the address never pay for it — the
+  // address, the hours and a directions link are all on the panel beside it.
+  const [mapLoaded, setMapLoaded] = useState(false)
+
   return (
     <section
       id="location"
@@ -33,7 +39,7 @@ export default function Location() {
         className="flex flex-wrap items-end justify-between gap-6"
       >
         <div>
-          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
             {c.location.eyebrow} <span className="text-[#C0A578]">/</span>
           </p>
           <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
@@ -61,7 +67,7 @@ export default function Location() {
               <MapPin className="h-4 w-4" />
             </span>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6f685c]">
                 {c.location.addressLabel}
               </p>
               <a
@@ -75,7 +81,7 @@ export default function Location() {
                   <br />
                   {c.site.address.city}
                 </span>
-                <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#9a9184] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
+                <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#6f685c] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
               </a>
             </div>
           </div>
@@ -85,7 +91,7 @@ export default function Location() {
               <Clock className="h-4 w-4" />
             </span>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6f685c]">
                 {c.location.hoursLabel}
               </p>
               <p className="mt-2 text-[14px] font-medium text-[#14120F]">
@@ -102,7 +108,7 @@ export default function Location() {
               <Phone className="h-4 w-4" />
             </span>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6f685c]">
                 {c.location.phoneLabel}
               </p>
               <div className="mt-2 flex flex-col gap-1">
@@ -125,7 +131,7 @@ export default function Location() {
               <Instagram className="h-4 w-4" />
             </span>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a9184]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6f685c]">
                 {c.location.socialLabel}
               </p>
               <a
@@ -171,13 +177,34 @@ export default function Location() {
           viewport={{ once: true, margin: '-60px' }}
           className="relative overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/60 shadow-[0_18px_50px_rgba(20,18,15,0.14)]"
         >
-          <iframe
-            title={t(c.location.mapTitle, { clinic: c.site.name })}
-            src={site.maps.embed}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="block h-[340px] w-full border-0 sm:h-[420px] lg:h-full lg:min-h-[520px]"
-          />
+          {mapLoaded ? (
+            <iframe
+              title={t(c.location.mapTitle, { clinic: c.site.name })}
+              src={site.maps.embed}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="block h-[340px] w-full border-0 sm:h-[420px] lg:h-full lg:min-h-[520px]"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMapLoaded(true)}
+              className="hero-gradient flex h-[340px] w-full flex-col items-center justify-center gap-4 px-6 text-center transition-colors hover:brightness-[1.02] sm:h-[420px] lg:h-full lg:min-h-[520px]"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#14120F] text-[#C9AC7C]">
+                <MapPin className="h-5 w-5" />
+              </span>
+              <span className="font-display text-[18px] font-medium uppercase tracking-tight text-[#14120F]">
+                {c.location.mapLoad}
+              </span>
+              <span className="max-w-[280px] text-[12px] leading-relaxed text-[#6f685c]">
+                {c.site.address.street} · {c.site.address.city}
+              </span>
+              <span className="max-w-[280px] text-[11px] leading-relaxed text-[#6f685c]">
+                {c.location.mapNotice}
+              </span>
+            </button>
+          )}
         </motion.div>
       </div>
     </section>

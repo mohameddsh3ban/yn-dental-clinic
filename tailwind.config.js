@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // The shadcn components under src/components/ui are scaffolding — nothing in
+  // the site imports one — but scanning them emitted ~80 KB of utilities that
+  // no element ever matches, and the browser still pays to match them against
+  // every node. Drop the exclusion the moment one of them is actually used.
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', '!./src/components/ui/**'],
   theme: {
     extend: {
       colors: {

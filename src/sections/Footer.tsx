@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useLocation } from 'react-router'
 import { snap } from '@/lib/anim'
 import { ArrowRight, Instagram, MapPin, Phone } from 'lucide-react'
-import implant from '@/assets/implant.png'
+import implant from '@/assets/implant.webp'
 import { BrandLogo } from '@/components/BrandLogo'
 import { WhatsAppIcon } from '@/components/icons'
 import { useI18n } from '@/lib/i18n'
@@ -131,14 +131,14 @@ export default function Footer() {
       <footer className="relative border-t border-white/10 px-6 py-10 sm:px-10 xl:px-14 2xl:px-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_auto]">
           <div>
-            <BrandLogo variant="full" className="h-32 w-auto" alt={c.site.name} />
+            <BrandLogo variant="full" tone="dark" className="w-[196px]" />
             <p className="mt-5 max-w-[280px] text-[12px] leading-relaxed text-white/50">
               {t(c.footer.brandBlurb, { doctor: c.site.doctor, specialty: c.site.specialty })}
             </p>
           </div>
 
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
               {c.footer.explore}
             </p>
             <ul className="mt-4 space-y-2.5 text-[13px] text-white/70">
@@ -153,7 +153,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
               {c.footer.visitUs}
             </p>
             <ul className="mt-4 space-y-2.5 text-[13px] text-white/70">
@@ -164,7 +164,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-start gap-2 transition-colors hover:text-white"
                 >
-                  <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/40" />
+                  <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/60" />
                   <span>
                     {c.site.address.street}
                     <br />
@@ -185,7 +185,7 @@ export default function Footer() {
                     dir="ltr"
                     className="flex items-center gap-2 transition-colors hover:text-white rtl:justify-end"
                   >
-                    <Phone className="h-3.5 w-3.5 text-white/40" /> {p.label}
+                    <Phone className="h-3.5 w-3.5 text-white/60" /> {p.label}
                   </a>
                 </li>
               ))}
@@ -197,7 +197,7 @@ export default function Footer() {
                   dir="ltr"
                   className="flex items-center gap-2 transition-colors hover:text-white rtl:justify-end"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-white/40" /> {site.instagramHandle}
+                  <Instagram className="h-3.5 w-3.5 text-white/60" /> {site.instagramHandle}
                 </a>
               </li>
             </ul>
@@ -220,7 +220,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-[11px] text-white/40">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-[11px] text-white/60">
           <p>{t(c.footer.rights, { clinic: c.site.name })}</p>
           <div className="flex gap-6">
             <a href={`${home}#top`} className="transition-colors hover:text-white/70">

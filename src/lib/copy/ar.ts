@@ -101,8 +101,10 @@ export const ar: Copy = {
       { title: 'تيجان الأسنان', tag: 'ترميم' },
       { title: 'عدسات الأسنان', tag: 'تجميل' },
       { title: 'عدسات الكومبوزيت', tag: 'زيارة واحدة' },
+      { title: 'زراعة الأسنان', tag: 'جراحة' },
       { title: 'إعادة التأهيل', tag: 'ترميم شامل' },
       { title: 'علاج العصب', tag: 'حشو جذور' },
+      { title: 'جراحات مفصل الفك', tag: 'المفصل الفكي' },
     ],
   },
 
@@ -116,14 +118,18 @@ export const ar: Copy = {
     visitUs: 'زُر العيادة',
     yearsValue: '15',
     yearsLabel: 'عامًا من الخبرة اللطيفة',
-    imageAlt: '{clinic} — طبيب أسنان يعالج مريضًا مطمئنًا',
+    imageAlts: [
+      '{clinic} — جرّاحان من الفريق أثناء عملية جراحية',
+      '{clinic} — جرّاح أثناء العمل تحت ضوء غرفة العمليات',
+    ],
+    imageDotAria: 'عرض الصورة {n}',
     facts: { clinic: 'العيادة', hours: 'المواعيد', referrals: 'التحويلات' },
     referralsValue: 'نرحّب بالرأي الطبي الثاني',
     surgicalTeam: 'فريق الجراحين',
     profileAria: '{name} — {title}، الملف الكامل',
     stats: [
       { value: '98', suffix: '%', label: 'نسبة الرضا' },
-      { value: '50', suffix: 'K', label: 'ابتسامة تغيَّرت' },
+      { value: '20', suffix: 'K', label: 'ابتسامة تغيَّرت' },
       { value: '4.9', suffix: '', label: 'تقييم المرضى' },
     ],
   },
@@ -238,6 +244,8 @@ export const ar: Copy = {
     chat: 'تواصل عبر WhatsApp',
     directions: 'الحصول على الاتجاهات',
     mapTitle: '{clinic} على خرائط Google',
+    mapLoad: 'إظهار الخريطة',
+    mapNotice: 'تحميل الخريطة يضع ملفات تعريف ارتباط من Google على جهازك.',
   },
 
   footer: {
@@ -336,6 +344,7 @@ export const ar: Copy = {
         { name: 'جراحة المفصل الفكي الصدغي', descriptor: 'إزاحة القرص والانغلاق وألم المفصل' },
         { name: 'غسل المفصل وتنظيره', descriptor: 'غسل وفحص المفصل بأقل تدخُّل جراحي' },
         { name: 'التصلُّب والخلع المتكرر', descriptor: 'فك لا يفتح، أو لا يثبت في مكانه' },
+        { name: 'استبدال المفصل بالكامل', descriptor: 'مفصل فكي صناعي' },
         { name: 'جراحة تقويم الفكين', descriptor: 'تصحيح انطباق الفكين' },
         { name: 'إصابات الوجه وترميمها', descriptor: 'الفك السفلي والحجاج وعظم الوجنة' },
         { name: 'الأكياس والآفات الحميدة', descriptor: 'الاستئصال وأخذ العينة' },

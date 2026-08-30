@@ -3,11 +3,13 @@ import { motion } from 'framer-motion'
 import { snap } from '@/lib/anim'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import cosmeticArch from '@/assets/services/cosmetic-arch.webp'
+import crownSeat from '@/assets/services/crown-seat.webp'
 import jawArch from '@/assets/services/jaw-arch.webp'
 import veneerShells from '@/assets/services/veneer-shells.webp'
 import compositeLayers from '@/assets/services/composite-layers.webp'
 import jawPlate from '@/assets/services/jaw-plate.webp'
 import endoMolar from '@/assets/services/endo-molar.webp'
+import tmjProsthesis from '@/assets/services/tmj-prosthesis.webp'
 import { useI18n } from '@/lib/i18n'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -32,14 +34,22 @@ const reveal = {
  */
 const ART: readonly string[] = [
   cosmeticArch,
-  jawArch,
+  crownSeat,
   veneerShells,
   compositeLayers,
+  jawArch,
   jawPlate,
   endoMolar,
+  tmjProsthesis,
 ]
 
-const avatarColors = ['bg-[#C0A578]', 'bg-[#14120F]', 'bg-[#8f8574]', 'bg-[#2B2723]']
+/** Each chip carries the ink that clears 4.5:1 on its own fill. */
+const avatarChips = [
+  'bg-[#C0A578] text-[#14120F]',
+  'bg-[#14120F] text-white',
+  'bg-[#8f8574] text-[#14120F]',
+  'bg-[#2B2723] text-white',
+]
 
 export default function Services() {
   const { c, rtl } = useI18n()
@@ -106,7 +116,7 @@ export default function Services() {
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
         >
-          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
             {c.services.eyebrow} <span className="text-[#C0A578]">/</span>
           </p>
           <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
@@ -144,7 +154,7 @@ export default function Services() {
               {['SM', 'JK', 'AL', 'RW'].map((n, i) => (
                 <span
                   key={n}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[11px] font-semibold text-white ${avatarColors[i]}`}
+                  className={`flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[11px] font-semibold ${avatarChips[i]}`}
                 >
                   {n}
                 </span>
@@ -157,7 +167,7 @@ export default function Services() {
               <span dir="ltr" className="inline-block tabular-nums">
                 750<span className="text-[#C0A578]">+</span>
               </span>
-              <span className="ms-1.5 text-[12px] font-normal text-[#9a9184]">
+              <span className="ms-1.5 text-[12px] font-normal text-[#6f685c]">
                 {c.services.reviews}
               </span>
             </p>

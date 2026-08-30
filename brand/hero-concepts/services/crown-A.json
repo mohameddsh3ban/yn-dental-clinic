@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-30T20:27:39.499398Z",
+    "display_name": "GPT Image 2",
+    "id": "428a159e-b19a-4100-8d84-5934cd534ed4",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260830_202739_428a159e-b19a-4100-8d84-5934cd534ed4_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise dental illustration of a single lower molar being crowned, seen from the side: below is the prepared tooth — a reduced ivory dentine stump with a clean shoulder margin — and floating directly above it, aligned and slightly separated as if about to be seated, is its glossy white ceramic crown, the crown shaped with natural cusps. A fine gold line traces the margin where the crown will meet the tooth. Warm ivory dentine and bone with fine natural porosity, glossy white enamel, and warm polished gold as the only other material, on a pure white seamless background. Soft even studio light, a gentle contact shadow, crisp highlights on the gold, medical-museum quality, photoreal render. No gums, no skin, no instruments, no hands, no blurred background, no clear or translucent plastic. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 3504
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260830_202739_428a159e-b19a-4100-8d84-5934cd534ed4.png",
+    "status": "completed"
+  }
+]

@@ -1,8 +1,12 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router'
 import Home from './pages/Home'
-import HeroDemo from './pages/HeroDemo'
-import DoctorProfile from './pages/DoctorProfile'
+
+// The homepage is what every visit lands on; the other two routes are reached
+// by a click, so their code is fetched then rather than shipped in the bundle
+// that has to parse before the hero can paint.
+const HeroDemo = lazy(() => import('./pages/HeroDemo'))
+const DoctorProfile = lazy(() => import('./pages/DoctorProfile'))
 
 /**
  * A client-side route change keeps the old scroll position, which lands a
@@ -24,12 +28,14 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/team/:slug" element={<DoctorProfile />} />
-        {/* Concept sandbox for hero artwork — not linked from the live site. */}
-        <Route path="/hero-demo" element={<HeroDemo />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/team/:slug" element={<DoctorProfile />} />
+          {/* Concept sandbox for hero artwork — not linked from the live site. */}
+          <Route path="/hero-demo" element={<HeroDemo />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }

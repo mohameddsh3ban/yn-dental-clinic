@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-30T20:05:17.763773Z",
+    "display_name": "GPT Image 2",
+    "id": "53fbfd92-2331-4ebc-8015-6403b32e1324",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260830_200517_53fbfd92-2331-4ebc-8015-6403b32e1324_min.webp",
+    "params": {
+      "aspect_ratio": "3:2",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "A precise medical illustration of a total temporomandibular joint replacement prosthesis fitted to a human lower jaw, on a pure white seamless background. The mandible is a clear, translucent frosted-acrylic surgical model; fitted along its right ramus is a polished gold titanium prosthesis — a long contoured plate following the ramus, fixed by six small bright screws in countersunk holes, rising at the top into a smooth rounded condylar head that seats where the natural jaw joint sits. The jaw is seen from the side and slightly in front, tilted so the gold component faces the viewer. Warm polished gold and clear translucent white are the only materials. Soft even studio light, a gentle contact shadow, crisp reflections on the metal, fine surface detail, medical-museum quality, photoreal render. No gums, no teeth beyond the model, no skin, no instruments, no hands, no operating room, no blurred background. No text, no labels, no leader lines, no annotations, no measurements, no watermark, no border.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "4k",
+      "width": 3504
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_36DduHliEuHGidkziG2DTwyqJ2z/hf_20260830_200517_53fbfd92-2331-4ebc-8015-6403b32e1324.png",
+    "status": "completed"
+  }
+]

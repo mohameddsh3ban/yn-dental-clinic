@@ -2,10 +2,12 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 import { snap } from '@/lib/anim'
 import { ArrowUpRight } from 'lucide-react'
-import clinic from '@/assets/about-clinic.jpg'
+import surgeryTeam from '@/assets/about/surgery-team.webp'
+import surgeryTheatre from '@/assets/about/surgery-theatre.webp'
 import { DoctorPortrait } from '@/components/DoctorPortrait'
 import { useDoctors } from '@/lib/team'
 import { useI18n } from '@/lib/i18n'
+import { PhotoStack } from '@/components/PhotoStack'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -22,34 +24,43 @@ export default function About() {
   const { c, t } = useI18n()
   const doctors = useDoctors()
 
+  const photos = [surgeryTeam, surgeryTheatre].map((src, i) => ({
+    src,
+    alt: t(c.about.imageAlts[i], { clinic: c.site.name }),
+  }))
+
   return (
     <section id="about" className="hero-gradient rounded-[1.75rem] p-6 sm:p-10 xl:rounded-[2.25rem] xl:p-14 2xl:p-16">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-        {/* Image */}
+        {/* Photographs. Two theatre shots that keep swapping places, rather
+            than the single stock chairside picture this section used to run. */}
         <motion.div
           variants={reveal}
           initial={snap ? false : 'hidden'}
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
-          className="relative"
+          className="mx-auto w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[520px]"
         >
-          <div className="overflow-hidden rounded-[1.5rem]">
-            <img
-              src={clinic}
-              alt={t(c.about.imageAlt, { clinic: c.site.name })}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]"
-            />
-          </div>
-          <div className="glass-chip absolute -bottom-5 start-5 rounded-2xl px-5 py-4 sm:start-8">
-            <p
-              dir="ltr"
-              className="font-display text-[26px] font-medium leading-none text-[#14120F] rtl:text-end"
-            >
-              {c.about.yearsValue}
-              <span className="text-[#C0A578]">+</span>
-            </p>
-            <p className="mt-1.5 text-[11px] text-[#7a7367]">{c.about.yearsLabel}</p>
-          </div>
+          <PhotoStack
+            photos={photos}
+            dotAria={c.about.imageDotAria}
+            corner={
+              // The chip now sits on a photograph rather than on the
+              // section ground, so it needs a more opaque pane than the
+              // 55% white `.glass-chip` gives — the label is unreadable
+              // against scrubs at that strength.
+              <div className="glass-chip rounded-2xl bg-white/85 px-5 py-4">
+                <p
+                  dir="ltr"
+                  className="font-display text-[26px] font-medium leading-none text-[#14120F] rtl:text-end"
+                >
+                  {c.about.yearsValue}
+                  <span className="text-[#C0A578]">+</span>
+                </p>
+                <p className="mt-1.5 text-[11px] text-[#5f594f]">{c.about.yearsLabel}</p>
+              </div>
+            }
+          />
         </motion.div>
 
         {/* Copy */}
@@ -61,7 +72,7 @@ export default function About() {
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
           >
-            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
               {c.about.eyebrow} {c.site.short} <span className="text-[#C0A578]">/</span>
             </p>
             <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
@@ -100,7 +111,7 @@ export default function About() {
               [c.about.facts.referrals, c.about.referralsValue],
             ].map(([term, value]) => (
               <div key={term}>
-                <dt className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+                <dt className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
                   {term}
                 </dt>
                 <dd className="mt-1.5 text-[13px] leading-snug text-[#3a352f]">{value}</dd>
@@ -121,7 +132,7 @@ export default function About() {
             viewport={{ once: true, margin: '-60px' }}
             className="mt-8 border-t border-[#14120F]/10 pt-6"
           >
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
               {c.about.surgicalTeam} <span className="text-[#C0A578]">/</span>{' '}
               <span className="tabular-nums">{String(doctors.length).padStart(2, '0')}</span>
             </p>
@@ -145,7 +156,7 @@ export default function About() {
                       <span className="font-display block truncate text-[13px] font-semibold leading-tight tracking-[-0.01em] text-[#14120F]">
                         {d.name}
                       </span>
-                      <span className="mt-1 block truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[#9a9184]">
+                      <span className="mt-1 block truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[#6f685c]">
                         {d.role}
                       </span>
                     </span>
@@ -177,7 +188,7 @@ export default function About() {
               {s.value}
               <span className="text-[#C0A578]">{s.suffix}</span>
             </p>
-            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#9a9184]">
+            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#6f685c]">
               {s.label}
             </p>
           </motion.div>

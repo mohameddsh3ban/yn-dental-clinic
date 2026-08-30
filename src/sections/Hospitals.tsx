@@ -58,7 +58,7 @@ export default function Hospitals() {
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
         >
-          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
             {c.hospitals.eyebrow} <span className="text-[#C0A578]">/</span>{' '}
             <span className="tabular-nums" dir="ltr">
               01–{String(hospitals.length).padStart(2, '0')}
@@ -124,7 +124,7 @@ export default function Hospitals() {
                 </p>
                 <p
                   lang={script(h.note).lang}
-                  className={`mt-1.5 truncate text-[11px] font-medium uppercase tracking-[0.14em] text-[#9a9184] ${script(h.note).className}`}
+                  className={`mt-1.5 truncate text-[11px] font-medium uppercase tracking-[0.14em] text-[#6f685c] ${script(h.note).className}`}
                 >
                   {h.note}
                 </p>

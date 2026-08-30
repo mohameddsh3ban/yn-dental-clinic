@@ -15,7 +15,14 @@ const reveal = {
   }),
 }
 
-const avatarColors = ['bg-[#C0A578]', 'bg-[#14120F]', 'bg-[#8f8574]', 'bg-[#2B2723]', 'bg-[#a78f63]']
+/** Each chip carries the ink that clears 4.5:1 on its own fill. */
+const avatarChips = [
+  'bg-[#C0A578] text-[#14120F]',
+  'bg-[#14120F] text-white',
+  'bg-[#8f8574] text-[#14120F]',
+  'bg-[#2B2723] text-white',
+  'bg-[#a78f63] text-[#14120F]',
+]
 
 type Quote = Copy['testimonials']['quotes'][number]
 
@@ -65,7 +72,7 @@ function QuoteCard({ q, i }: { q: Quote; i: number }) {
       </p>
       <div className="mt-6 flex items-center gap-3">
         <span
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold text-white ${avatarColors[i % avatarColors.length]}`}
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${avatarChips[i % avatarChips.length]}`}
         >
           {initials(q)}
         </span>
@@ -73,7 +80,7 @@ function QuoteCard({ q, i }: { q: Quote; i: number }) {
           <p className={`font-semibold text-[#14120F] ${ar ? 'text-[14px]' : 'text-[13px]'}`}>
             {q.name}
           </p>
-          <p className={`text-[#9a9184] ${ar ? 'text-[12px]' : 'text-[11px]'}`}>{q.role}</p>
+          <p className={`text-[#6f685c] ${ar ? 'text-[12px]' : 'text-[11px]'}`}>{q.role}</p>
         </div>
       </div>
     </div>
@@ -95,7 +102,7 @@ export default function Testimonials() {
           className="flex flex-wrap items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#9a9184]">
+            <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
               {c.testimonials.eyebrow} <span className="text-[#C0A578]">/</span>
             </p>
             <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">

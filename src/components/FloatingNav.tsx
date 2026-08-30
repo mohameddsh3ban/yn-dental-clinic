@@ -19,10 +19,28 @@ export default function FloatingNav() {
   const { c } = useI18n()
 
   useEffect(() => {
-    const onScroll = () => setPinned(window.scrollY > REVEAL_AT)
-    onScroll()
+    // Reading `scrollY` straight out of the scroll handler forces a layout on
+    // every event while the animated pill is mid-flight. Deferring the read to
+    // the next frame — one at a time — puts it after style recalculation
+    // instead of in front of it.
+    let frame = 0
+
+    const measure = () => {
+      frame = 0
+      setPinned(window.scrollY > REVEAL_AT)
+    }
+
+    const onScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(measure)
+    }
+
+    measure()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      if (frame) cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+    }
   }, [])
 
   return (
@@ -42,9 +60,9 @@ export default function FloatingNav() {
             <a
               href="#top"
               aria-label={c.site.name}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#14120F] transition-transform hover:scale-105"
+              className="block h-9 w-9 shrink-0 transition-transform hover:scale-105"
             >
-              <BrandLogo alt="" className="h-7 w-7" />
+              <BrandLogo alt="" className="h-9 w-9" />
             </a>
 
             <div className="hidden items-center gap-5 px-1 text-[13px] font-medium text-[#3a352f] md:flex lg:gap-7">

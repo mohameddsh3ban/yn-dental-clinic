@@ -3,18 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SVG first, PNG for the browsers that still want one. Both are cut from
+         the same vector master, with the SVG's strokes thickened so the mark
+         does not grey out in the tab strip. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>Ozea Dental Clinic — Dr. Youssef Nasser</title>
     <meta
       name="description"
       content="Ozea Dental Clinic — Dr. Youssef Nasser, dental implants and maxillofacial surgery in Nasr City, Cairo. Book on WhatsApp."
     />
+    <link rel="canonical" href="https://dryoussefnasser.devstudiocraft.com/" />
+    <meta name="theme-color" content="#14120F" />
+
+    <!-- The share card is the logo seal itself: the same drawing the hero and
+         the header badge are cut from. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ozea Dental Clinic — Dr. Youssef Nasser" />
+    <meta
+      property="og:description"
+      content="Dental implants and maxillofacial surgery in Nasr City, Cairo."
+    />
+    <meta property="og:image" content="https://dryoussefnasser.devstudiocraft.com/brand/ozea-share.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts are self-hosted (public/fonts) so the first paint waits on no
+         third-party origin. The two faces the hero sets are preloaded; the
+         rest arrive with the stylesheet. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/inter-tight-latin-300-700.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-300-600.woff2" crossorigin />
+
+    <!-- The hero drawing is the LCP element. Preloading it here makes it
+         discoverable in the initial document instead of after the React
+         bundle has parsed. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/hero-face-900.webp"
+      imagesrcset="/hero/hero-face-400.webp 400w, /hero/hero-face-600.webp 600w, /hero/hero-face-900.webp 900w"
+      imagesizes="(min-width: 1536px) 466px, (min-width: 768px) 395px, (min-width: 640px) 332px, 269px"
+      fetchpriority="high"
+    />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  <!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js?token=3acb240f-9931-4a51-aba0-4e41cabe9ef1"></script>
-<!-- impeccable-live-end -->
-</body>
+  </body>
 </html>

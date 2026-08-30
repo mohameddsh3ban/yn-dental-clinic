@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dryoussefnasser.devstudiocraft.com/sitemap.xml
