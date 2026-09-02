@@ -1,19 +1,8 @@
 import { motion } from 'framer-motion'
-import { snap } from '@/lib/anim'
+import { reveal, snap, viewportOnce, wipe } from '@/lib/anim'
 import { Star } from 'lucide-react'
 import { useI18n } from '@/lib/i18n'
 import type { Copy } from '@/lib/copy'
-
-const ease = [0.22, 1, 0.36, 1] as const
-
-const reveal = {
-  hidden: { opacity: 0, y: 32 },
-  show: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.85, ease, delay: i * 0.1 },
-  }),
-}
 
 /** Each chip carries the ink that clears 4.5:1 on its own fill. */
 const avatarChips = [
@@ -51,11 +40,11 @@ function QuoteCard({ q, i }: { q: Quote; i: number }) {
     <div
       dir={ar ? 'rtl' : 'ltr'}
       lang={ar ? 'ar' : 'en'}
-      className={`flex w-[320px] shrink-0 flex-col rounded-[1.5rem] bg-[#F4F3F0] p-6 sm:w-[380px] ${
+      className={`group flex w-[320px] shrink-0 flex-col rounded-[1.5rem] bg-[#F4F3F0] p-6 transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[#EDEAE3] sm:w-[380px] ${
         ar ? 'font-ar text-right' : 'text-left'
       }`}
     >
-      <div className="flex gap-1">
+      <div className="flex gap-1 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
         {Array.from({ length: 5 }).map((_, s) => (
           <Star key={s} className="h-3.5 w-3.5 fill-[#C0A578] text-[#C0A578]" />
         ))}
@@ -98,28 +87,38 @@ export default function Testimonials() {
           variants={reveal}
           initial={snap ? false : 'hidden'}
           whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={viewportOnce}
           className="flex flex-wrap items-end justify-between gap-6"
         >
           <div>
             <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
               {c.testimonials.eyebrow} <span className="text-[#C0A578]">/</span>
             </p>
-            <h2 className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]">
+            <motion.h2
+              variants={wipe}
+              className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]"
+            >
               {c.testimonials.headlineTop}{' '}
               <span className="text-outline">{c.testimonials.headlineOutlined}</span>
-            </h2>
+            </motion.h2>
           </div>
-          <p className="max-w-[300px] text-[13px] leading-relaxed text-[#7a7367]">
+          <motion.p
+            variants={reveal}
+            custom={1}
+            className="max-w-[300px] text-[13px] leading-relaxed text-[#7a7367]"
+          >
             {c.testimonials.lead}
-          </p>
+          </motion.p>
         </motion.div>
       </div>
 
       {/* Marquee. The track stays LTR in both languages: the animation
           translates the row by a fixed -50%, and letting the row flip would
           send it off screen on the first frame in Arabic. */}
-      <div className="marquee-pause relative mt-10 xl:mt-12" dir="ltr">
+      <div
+        className="marquee-pause relative mt-10 [&_.animate-marquee]:focus-within:[animation-play-state:paused] [&_.animate-marquee]:active:[animation-play-state:paused] xl:mt-12"
+        dir="ltr"
+      >
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
         <div className="animate-marquee flex w-max gap-5 px-5">

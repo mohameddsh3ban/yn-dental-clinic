@@ -400,6 +400,29 @@ with a two-digit tabular index, a procedure name in Inter Tight, and a lower-cas
 stacks under the name. Rows respond to hover with color only — the index turns gold and the name
 turns full ink — never with translation, underline, or background.
 
+### Cases (the viewing room)
+
+The one section set on Surgical Ink rather than paper: clinical photographs read truer against dark,
+and it is the only place on the page where the photograph, not the type, is the content. Its
+outlined headline word uses `.text-outline-light` (a white stroke) because the ink stroke would
+vanish on this ground. Three parts, in order:
+
+- **Before/after slider.** The "after" photograph fills the frame; the "before" sits over it,
+  clipped to the start side of a hairline divider with a 48px glass knob. The control is a real
+  `<input type="range">` laid invisibly across the whole frame — pointer, touch, pen and keyboard for
+  free, plus a slider role. On first sight the divider makes one excursion and returns; it stops the
+  moment the visitor takes hold and never plays under reduced motion. The clip and the knob mirror
+  from `dir`, so "before" always sits at the reading start.
+- **Filter chips.** White pill on ink for the active chip, moved between chips with a shared
+  `layoutId` spring. Counts are set in gold as measurements. `aria-pressed` carries the state.
+- **Grid.** Three columns, dense flow, tiles as `<button>`s that open the viewer. Portrait frames
+  span two rows, the closing detail shot spans all three columns, and the order is chosen so twelve
+  cells close with no hole. Tiles paint a 24px blurred preview from a data URI until the photograph
+  lands. On a mouse a white "View" label rides with the pointer; touch never sees it.
+- **Viewer.** A Radix dialog: ink at 90% with blur, the photograph slides in from the side it was
+  summoned from, arrows and a horizontal swipe step through the set (mirrored in Arabic), and focus
+  returns to the tile that opened it.
+
 ### Cephalometric Tracing (signature component)
 
 A lateral planning diagram drawn entirely in SVG on a 520×680 viewBox: soft-tissue profile facing
@@ -407,6 +430,35 @@ left, the mandible as a separate closed path at the heaviest stroke, maxilla, fo
 reference planes, eleven gold landmark dots, TMJ rings, and a gonial-angle arc. It draws itself once
 on entrance and is then completely still. It carries a visible caption identifying it as a schematic
 rather than a patient image, and that caption is not optional.
+
+## Motion Vocabulary
+
+Everything moves on one curve, `[0.22, 1, 0.36, 1]`, exported from `src/lib/anim.ts` with the
+handful of shapes below. Nothing else is invented per section.
+
+- **reveal** — rise 32px and fade, 0.85s, staggered by a tenth of a second. Every below-the-fold
+  block enters this way, once.
+- **wipe** — a section headline is uncovered upward out of a clip rather than faded, the way a ruled
+  line is drawn. The clip overshoots the box so an outlined stroke is never trimmed.
+- **press** — every pill and tile sinks to 97% while held (`active:scale-[0.97]` or `whileTap`).
+  Hover states stay what they were; press is the addition.
+- **count-up** — a statistic climbs to its value the first time it is seen; the settled figure is
+  the literal from the copy, decimals preserved.
+- **scroll hairline** — a 2px gold line along the top edge that grows with the scroll position on a
+  short spring. It is a measurement of where the reader is, which is the one job gold is allowed.
+- **active point** — a 3px gold dot under the floating nav link for the section under the reader,
+  sliding between links with a shared `layoutId`.
+- **hover lift** — cards rise 4px on a spring (Hospitals) or 2px (testimonial quotes, tile titles).
+  Never with a shadow; the lift is the whole signal.
+- **scroll-linked depth** — the footer's implants and watermark drift a few pixels against the
+  scroll. Transform only; skipped entirely under reduced motion.
+
+The two loops that predate this vocabulary — the testimonial marquee and the About photo deck — are
+kept, pause on hover and focus, and stop under reduced motion. Nothing new may loop.
+
+`<MotionConfig reducedMotion="user">` at the root disables every framer transform and layout
+animation for visitors who asked the OS for less motion; opacity still fades. `useStill()` is the
+component-level check for anything autonomous (the slider's demonstration, count-ups, the drift).
 
 ## Do's and Don'ts
 

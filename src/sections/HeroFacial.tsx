@@ -1,6 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Instagram, MapPin, Phone } from 'lucide-react'
 import { BrandLockup } from '@/components/BrandLogo'
+import { CountUp } from '@/components/CountUp'
+import { MobileMenu } from '@/components/MobileMenu'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { WhatsAppIcon } from '@/components/icons'
 import { flat, snap } from '@/lib/anim'
@@ -173,7 +175,7 @@ export default function HeroFacial() {
           variants={fadeUp}
           initial={init}
           animate="show"
-          className="relative z-40 flex items-center justify-between px-6 pt-6 sm:px-10 xl:px-14 xl:pt-9 2xl:px-20"
+          className="relative z-40 flex items-center justify-between px-5 pt-6 sm:px-10 xl:px-14 xl:pt-9 2xl:px-20"
         >
           <BrandLockup />
           <nav
@@ -186,20 +188,25 @@ export default function HeroFacial() {
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-3">
+          {/* Tight at 320px: lockup, language, WhatsApp and the menu share one
+              row, so the gaps close up until `sm`. */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <LanguageToggle />
             <a
               href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={c.common.whatsapp}
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#14120F] px-3 py-2.5 text-[12px] font-medium text-white transition-transform hover:scale-[1.02] sm:px-5"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#14120F] px-2.5 py-2.5 text-[12px] font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.97] sm:px-5"
             >
               <WhatsAppIcon className="h-3.5 w-3.5 text-[#C9AC7C]" />
               {/* The word is dropped on a phone: the language toggle now shares
                   this row, and a full-width WhatsApp CTA sits right below it. */}
               <span className="max-sm:hidden">{c.common.whatsapp}</span>
             </a>
+            {/* The link row only fits from `lg`; below that the menu carries
+                the same destinations, one tap away from the first paint. */}
+            <MobileMenu className="lg:hidden" />
           </div>
         </motion.header>
 
@@ -262,7 +269,7 @@ export default function HeroFacial() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t(c.hero.bookAria, { doctor: c.site.doctor })}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#14120F] py-4 ps-7 pe-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.02] min-[480px]:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#14120F] py-4 ps-7 pe-6 text-[13px] font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.97] min-[480px]:w-auto"
                 >
                   <WhatsAppIcon className="h-4 w-4 text-[#C9AC7C]" />
                   {c.hero.book}
@@ -271,7 +278,7 @@ export default function HeroFacial() {
                 <a
                   href={`tel:${site.phones[0].tel}`}
                   dir="ltr"
-                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#14120F]/15 bg-white/60 px-6 py-4 text-[13px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white min-[480px]:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#14120F]/15 bg-white/60 px-6 py-4 text-[13px] font-medium text-[#14120F] backdrop-blur transition-[transform,background-color,color] hover:bg-[#14120F] hover:text-white active:scale-[0.97] min-[480px]:w-auto"
                 >
                   <Phone className="h-3.5 w-3.5" />
                   <span className="tabular-nums">{site.phones[0].label}</span>
@@ -497,7 +504,7 @@ export default function HeroFacial() {
                     dir="ltr"
                     className="font-display text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium leading-none tracking-[-0.02em] tabular-nums text-[#14120F] rtl:text-end"
                   >
-                    {stat.value}
+                    <CountUp value={stat.value} />
                     <span className="text-[#14120F]/30">{stat.unit}</span>
                   </dd>
                   <dt className="mt-2 whitespace-pre-line text-[11px] leading-snug text-[#6b6459]">

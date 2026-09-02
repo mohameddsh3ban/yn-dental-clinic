@@ -24,7 +24,7 @@ export const en = {
       city: 'Nasr City, Cairo Governorate',
       short: 'Nasr City, Cairo',
     },
-    hours: { days: 'Mon – Sat', time: '09:00 – 16:00' },
+    hours: { days: 'Every day', time: '24/7' },
     whatsappMessage:
       "Hello Dr. Youssef Nasser, I'd like to book an appointment at Ozea Dental Clinic.",
   },
@@ -38,16 +38,20 @@ export const en = {
     switchTo: 'Switch to Arabic',
     mainNav: 'Main',
     siteNav: 'Site',
+    menu: 'Menu',
+    closeMenu: 'Close menu',
+    backToTop: 'Back to top',
   },
 
   nav: {
     home: 'Home',
     services: 'Our Services',
+    cases: 'Cases',
     clinic: 'Our Clinic',
     hospitals: 'Hospitals',
     location: 'Location',
     contact: 'Contact',
-    team: 'Our Surgeons',
+    team: 'Our Team',
     testimonials: 'Testimonials',
   },
 
@@ -102,6 +106,76 @@ export const en = {
     ],
   },
 
+  cases: {
+    eyebrow: 'Cases',
+    headlineTop: 'Before and',
+    headlineOutlined: 'after',
+    lead:
+      'Photographs from cases treated at the clinic, as they were taken at the chair and on the bench. Each one names the procedure; none of them promises your result — that is decided at consultation, from your own imaging.',
+    compare: {
+      label: 'Featured case',
+      title: 'Ceramic veneers, upper front teeth',
+      body:
+        'Discoloured older restorations on the upper front teeth, replaced with ceramic veneers. Drag the handle across the photograph to compare the two.',
+      before: 'Before',
+      after: 'After',
+      handleAria: 'Compare before and after',
+      hint: 'Drag to compare',
+    },
+    filters: {
+      all: 'All',
+      implants: 'Implants & full arch',
+      restorative: 'Crowns & veneers',
+      lab: 'Lab work',
+    },
+    filterAria: 'Filter cases',
+    /** Keyed by slug — see `lib/cases.ts`. */
+    items: {
+      'full-arch-both': {
+        title: 'Full-arch fixed prostheses, both jaws',
+        note: 'Implant-supported · retracted view',
+      },
+      'upper-arch-fixed': {
+        title: 'Upper full-arch fixed prosthesis',
+        note: 'Opposing natural lower teeth',
+      },
+      'upper-arch-closeup': {
+        title: 'Upper full-arch prosthesis, detail',
+        note: 'Gingival contour and tooth form',
+      },
+      'full-mouth-smile': {
+        title: 'Full-mouth rehabilitation',
+        note: 'Final smile · both arches',
+      },
+      'smile-portrait': {
+        title: 'Anterior restorations, final smile',
+        note: 'Upper front teeth',
+      },
+      'anterior-crowns-retractor': {
+        title: 'Upper anterior ceramic crowns',
+        note: 'Retracted view at fitting',
+      },
+      'anterior-crowns-smile': {
+        title: 'Upper anterior crowns, smile view',
+        note: 'Smile line at fitting',
+      },
+      'lab-master-cast': {
+        title: 'Ceramic crowns on the master cast',
+        note: 'Lab stage · before fitting',
+      },
+    },
+    open: 'Open case {n}: {title}',
+    close: 'Close',
+    previous: 'Previous case',
+    next: 'Next case',
+    counter: '{n} of {total}',
+    view: 'View',
+    disclaimer:
+      'Clinical photographs of patients treated at {clinic}. Results vary from person to person; suitability for any procedure is decided at consultation.',
+    cta: 'Discuss your case',
+    ctaBlurb: 'Bring your X-ray or a photograph to the consultation, or send it ahead on WhatsApp.',
+  },
+
   about: {
     eyebrow: 'About',
     headlineTop: 'Excellence in dentistry with',
@@ -120,7 +194,7 @@ export const en = {
     imageDotAria: 'Show photo {n}',
     facts: { clinic: 'Clinic', hours: 'Hours', referrals: 'Referrals' },
     referralsValue: 'Second opinions welcome',
-    surgicalTeam: 'Surgical team',
+    surgicalTeam: 'Clinical team',
     profileAria: '{name} — {title}, full profile',
     stats: [
       { value: '98', suffix: '%', label: 'Satisfaction rate' },
@@ -269,8 +343,6 @@ export const en = {
     hours: 'Hours',
     clinic: 'Clinic',
     scope: 'Scope of practice',
-    whatOperates: 'What {name}',
-    operatesOn: 'operates on',
     cvEyebrow: 'Curriculum vitae',
     cvHeadline: 'Qualifications, post and',
     cvOutlined: 'special interest',
@@ -288,6 +360,8 @@ export const en = {
       title: 'Oral & Maxillofacial Surgeon',
       specialty: 'Dental Implants & Maxillofacial Surgery',
       credentials: ['Oral & Maxillofacial Surgery', 'Dental Implants', '15+ years'],
+      scopeLead: 'What {name}',
+      scopeVerb: 'operates on',
       lead:
         'Surgery of the face and jaws — from a single implant to full-arch rehabilitation and corrective jaw surgery.',
       intro:
@@ -331,12 +405,65 @@ export const en = {
       visualCaption:
         'Lateral cephalometric tracing — the schematic a jaw surgeon measures from. Illustration, not a patient image and not a predicted result.',
     },
+    'sara-sameh': {
+      name: 'Dr. Sara Sameh',
+      role: 'Cosmetics & Veneers',
+      title: 'Cosmetic & Restorative Dentist',
+      specialty: 'Cosmetic Dentistry · Veneers',
+      credentials: ['Cosmetic Dentistry', 'Veneers', 'Smile Design'],
+      scopeLead: 'What {name}',
+      scopeVerb: 'treats',
+      lead:
+        'Cosmetic and restorative dentistry — smile design, veneers and the conservative work that keeps a natural tooth natural.',
+      intro:
+        'A smile is planned before it is prepared. Shade, shape and proportion are agreed with you first — photographs, measurements, and a mock-up you can see and change — and the option that removes the least tooth structure is always on the table.',
+      focus: [
+        { name: 'Porcelain Veneers', descriptor: 'Shape, shade and proportion' },
+        { name: 'Composite Bonding', descriptor: 'Reshaping without a laboratory' },
+        { name: 'Smile Design', descriptor: 'Planned and previewed before preparation' },
+        { name: 'Crowns & Onlays', descriptor: 'Restoring a broken or worn tooth' },
+        { name: 'Teeth Whitening', descriptor: 'In-clinic and supervised at home' },
+        { name: 'Aesthetic Fillings', descriptor: 'Tooth-coloured, minimally invasive' },
+        { name: 'Gum Contouring', descriptor: 'Balancing the frame around the teeth' },
+      ],
+      cv: [
+        {
+          heading: 'Practice',
+          items: [
+            'Cosmetic and restorative dentistry at Ozea Dental Clinic, Nasr City, Cairo',
+            'Veneers, bonding and full smile-design cases',
+            'Conservative restoration of worn, chipped and discoloured teeth',
+          ],
+        },
+        {
+          heading: 'How a case proceeds',
+          items: [
+            'Consultation and photographs',
+            'Shade, shape and proportion agreed',
+            'Mock-up you see before preparation',
+            'Fit and follow-up',
+          ],
+        },
+        {
+          heading: 'Approach',
+          items: [
+            'The least tooth structure removed that the result allows',
+            'Nothing prepared before the design is agreed in writing',
+            'Referrals and second opinions welcome',
+          ],
+        },
+      ],
+      visualCaption:
+        'Veneer preparation in section — enamel reduction, margin and the seated shell. Illustration, not a patient image and not a predicted result.',
+    },
     'adham-yehia-zakaria': {
       name: 'Dr. Adham Yehia Zakaria',
       role: 'TMJ & Maxillofacial Surgery',
       title: 'Consultant, Oral & Maxillofacial Surgery',
       specialty: 'Temporomandibular Joint · Oral & Maxillofacial Surgery',
       credentials: ['MSc', 'PhD', 'Consultant', 'Lecturer — Cairo University'],
+      scopeLead: 'What {name}',
+      scopeVerb: 'operates on',
       lead:
         'Consultant of oral and maxillofacial surgery with a dedicated temporomandibular joint practice, and a lecturer at Cairo University.',
       intro:

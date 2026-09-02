@@ -34,17 +34,28 @@ Node.js 20 or newer.
 
 ```
 src/
-  pages/Home.tsx        Single route, composes all sections
-  sections/             Hero, Services, About, Testimonials, Location, Footer
-  components/           BrandLogo, FloatingNav, icons
-  components/ui/        shadcn/ui primitives
+  pages/Home.tsx        Landing page: hero first, everything else in one lazy chunk
+  pages/DoctorProfile   /team/:slug surgeon profiles
+  sections/             HeroFacial, Services, Cases, About, Hospitals, Testimonials, Location, Footer
+  components/           BrandLogo, FloatingNav + MobileMenu, CompareSlider, CaseLightbox,
+                        SmoothImage, CountUp, ScrollProgress, BackToTop, icons
+  components/ui/        shadcn/ui primitives (scaffolding, excluded from the Tailwind scan)
   lib/site.ts           Clinic identity + contact details (single source of truth)
-  lib/nav.ts            Section anchors for the floating nav
-  lib/anim.ts           Shared Framer Motion variants
+  lib/copy/             English and Arabic dictionaries — every visible word
+  lib/nav.ts            Section anchors shared by the header, the pill nav and the phone menu
+  lib/cases.ts          Case photographs: files, sizes, filter groups
+  lib/anim.ts           Shared Framer Motion vocabulary (ease, reveal, wipe, press, useStill)
   assets/               Photography and logo bitmaps imported by the bundler
-brand/                  Source brand artwork (not shipped in the bundle)
-public/                 favicon, _redirects, _headers, static brand files
+brand/                  Source artwork and photo masters (not shipped in the bundle)
+public/                 favicon, fonts, _redirects, _headers, static brand files
 ```
+
+### Case photographs
+
+Drop new masters in `brand/cases/`, add them to `scripts/prep-case-art.mjs` and to the
+list in `src/lib/cases.ts`, then run `npm run build:case-art`. The script writes two
+widths of WebP plus a typed manifest with each image's size and blurred preview; the
+captions live in `src/lib/copy/{en,ar}.ts` under `cases.items`, keyed by slug.
 
 ### Editing clinic details
 

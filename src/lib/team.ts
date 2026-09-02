@@ -27,7 +27,7 @@ type DoctorMeta = {
   /** Monogram shown while a portrait is missing or fails to load. */
   initials: string
   /** Which schematic illustrates this doctor's work. */
-  visual: 'ceph' | 'tmj'
+  visual: 'ceph' | 'tmj' | 'veneer'
   portrait: {
     /** Square-ish crop for the team card. */
     card?: string | readonly string[]
@@ -90,6 +90,30 @@ const TEAM: readonly DoctorMeta[] = [
         '/team/adham-yehia-zakaria.jpg',
         '/team/adham-yehia-zakaria.jpeg',
         '/team/adham-yehia-zakaria.png',
+      ],
+    },
+  },
+  {
+    slug: 'sara-sameh',
+    initials: 'SS',
+    visual: 'veneer',
+    // Same source chain as the surgeons above. The supplied original is
+    // 385x513, so scripts/prepare-team-portraits.mjs writes only the native
+    // 385x481 crop — no -620 or -1200 entry, because listing a file the script
+    // cannot produce would 404 on every card and profile view. Add the sized
+    // entries back when a larger original arrives.
+    portrait: {
+      card: [
+        '/team/sara-sameh.webp',
+        '/team/sara-sameh.jpg',
+        '/team/sara-sameh.jpeg',
+        '/team/sara-sameh.png',
+      ],
+      hero: [
+        '/team/sara-sameh.webp',
+        '/team/sara-sameh.jpg',
+        '/team/sara-sameh.jpeg',
+        '/team/sara-sameh.png',
       ],
     },
   },

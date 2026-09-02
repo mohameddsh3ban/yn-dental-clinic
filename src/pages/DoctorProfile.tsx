@@ -279,10 +279,13 @@ export default function DoctorProfile() {
                 id="focus-heading"
                 className="font-display mt-4 text-[clamp(1.7rem,3.8vw,3rem)] font-medium uppercase leading-[1.05] tracking-tight text-[#14120F]"
               >
-                {t(c.profile.whatOperates, {
+                {/* The verb belongs to the doctor, not the page: a cosmetic
+                    dentist treats where a surgeon operates, and Arabic
+                    conjugates it by gender. Both halves live in lib/copy. */}
+                {t(doctor.scopeLead, {
                   name: doctor.name.split(' ').slice(0, 2).join(' '),
                 })}{' '}
-                <span className="text-outline">{c.profile.operatesOn}</span>
+                <span className="text-outline">{doctor.scopeVerb}</span>
               </h2>
             </motion.div>
             <motion.p

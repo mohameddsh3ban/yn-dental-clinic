@@ -13,11 +13,15 @@
     "cut:service-art": "bash scripts/cut-service-art.sh",
     "build:hospital-art": "node scripts/prep-hospital-art.mjs",
     "build:about-art": "node scripts/prep-about-art.mjs",
+    "build:case-art": "node scripts/prep-case-art.mjs",
     "build:fonts": "node scripts/fetch-fonts.mjs",
     "build:assets": "node scripts/optimize-assets.mjs",
     "serve:dist": "node scripts/serve-dist.mjs",
     "build:logo": "node scripts/build-logo.mjs",
-    "trace:logo": "node scripts/trace-logo.mjs"
+    "trace:logo": "node scripts/trace-logo.mjs",
+    "build:brand-kit": "node scripts/build-brand-kit.mjs",
+    "build:print-fonts": "node scripts/brand-kit/fetch-print-fonts.mjs",
+    "pack:brand-kit": "node scripts/brand-kit/pack-cli.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -80,7 +84,9 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "kimi-plugin-inspect-react": "^1.0.3",
+    "pdf-lib": "^1.17.1",
     "postcss": "^8.5.6",
+    "qrcode": "^1.5.4",
     "sharp": "^0.35.4",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",

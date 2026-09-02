@@ -5,13 +5,13 @@ import { useDocumentMeta } from '@/lib/useDocumentMeta'
 
 /**
  * Only the hero is above the fold, and it is the page's LCP element. Every
- * other section — and the floating nav, which does not appear until the hero
- * has scrolled away — is split out so the browser parses and commits the hero
+ * other section — and the page chrome (floating nav, scroll hairline, back to
+ * top), none of which appears until the hero has scrolled away — is split out so the browser parses and commits the hero
  * on its own first. The rest arrives in a second chunk that is requested as
  * soon as this module renders, which on any real connection lands well before
  * a visitor has scrolled to it.
  */
-const FloatingNav = lazy(() => import('@/components/FloatingNav'))
+const PageChrome = lazy(() => import('@/components/PageChrome'))
 const BelowFold = lazy(() => import('@/sections/BelowFold'))
 
 export default function Home() {
@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <div id="top" className="bg-[#CFC8BC]">
       <Suspense fallback={null}>
-        <FloatingNav />
+        <PageChrome />
       </Suspense>
       <HeroFacial />
       {belowFold && (

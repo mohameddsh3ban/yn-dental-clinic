@@ -35,8 +35,7 @@ listed, the logistics are verifiable public record, and nothing on the page asse
 
 - Booking runs entirely through WhatsApp (`site.whatsapp` deep link) and two published phone lines.
   There is no booking form, no backend, and no scheduling system.
-- Clinic: 6 Mahmoud Ammar, Al Golf, Nasr City, Cairo Governorate. Consulting hours Mon – Sat,
-  09:00 – 16:00.
+- Clinic: 6 Mahmoud Ammar, Al Golf, Nasr City, Cairo Governorate. Open 24/7.
 - Public records the site points at and must stay consistent with: the Google Maps place listing
   and the Instagram account `@dr.youssefnasser_`.
 - The clinic accepts referrals from other practitioners and provides second opinions. Confirmed by
@@ -49,13 +48,18 @@ listed, the logistics are verifiable public record, and nothing on the page asse
 
 - Stack in place: Vite 7, React 19, TypeScript, Tailwind CSS 3, framer-motion, react-router 7,
   shadcn/ui primitives. No backend, no CMS, no analytics.
-- Routes: `/` (the landing page) and `/hero-demo`, a concept sandbox not linked from the live site.
-- English only. The `EN` control in the header is currently decorative — no i18n and no RTL support
-  exists, and nothing on the site may depend on a language toggle working.
+- Routes: `/` (the landing page), `/team/:slug` (surgeon profiles) and `/hero-demo`, a concept
+  sandbox not linked from the live site.
+- Bilingual English/Arabic with full RTL: every string lives in `src/lib/copy/{en,ar}.ts` and the
+  Arabic dictionary is typed against the English one, so a key added on one side fails the build
+  until the other has it. Directional behaviour (compare-slider clipping, lightbox arrow keys and
+  swipes, scroll-progress origin, drag-to-scroll) is mirrored from `dir`, not duplicated.
+- Homepage sections, in order: hero, services, cases (before/after slider, filterable photo grid,
+  full-screen viewer), about, hospitals, testimonials, location, contact/footer.
 - Two query flags exist for capture and testing and must keep working: `?snap=1` renders every
   animation in its final state, `?flat=1` relaxes viewport-height sizing.
 - Must render without horizontal overflow from 320px to 2560px.
-- Undecided: whether the stated WhatsApp reply window (Mon – Sat, 09:00 – 16:00) reflects real
+- Undecided: whether the stated WhatsApp reply window (24/7) reflects real
   response behaviour, and who answers that line. Until confirmed, no copy may claim who replies.
 
 ## Brand Commitments
@@ -78,9 +82,18 @@ listed, the logistics are verifiable public record, and nothing on the page asse
   `yn-05-face-studio`, `yn-06-face-thobe`. `yn-04-clinic-mirror` is a phone selfie and is not
   publication-grade.
 - Generic clinical and service photography in `src/assets/` and `brand/generated/`.
-- **Absences future work must not fabricate:** there is no patient photography, no before/after
-  imagery, no radiograph, CT, or 3D render, and no consented case material of any kind. Any
-  anatomical illustration must be drawn in code and labelled as a schematic, not a patient image.
+- **Clinical case photography (added 2026-09-02):** nine photographs supplied by the clinic over
+  WhatsApp — full-arch implant prostheses, anterior crowns, a lab master cast, a portrait, and one
+  stacked before/after composite of upper anterior veneers. Masters live in `brand/cases/`;
+  `npm run build:case-art` cuts the shipped derivatives and splits the composite into the pair the
+  comparison slider uses. The Cases section captions each one with the procedure it shows and
+  nothing more. **Open items the clinic must confirm before this stays live:** (1) every pictured
+  patient's consent to publication — two photographs show faces; (2) each caption's procedure
+  name, in both languages. Until confirmed, the on-page disclaimer claims only that these are
+  patients treated at the clinic and that results vary.
+- **Still absent and not to be fabricated:** radiographs, CT, 3D renders, or any patient material
+  beyond the nine photographs above. Any anatomical illustration must be drawn in code and labelled
+  as a schematic, not a patient image.
 - **No verified credentials.** No syndicate registration number, degree, fellowship, board
   certification, hospital affiliation, or award has been supplied. Confirmed by the owner on
   2026-08-27 that nothing beyond the specialty string should appear. Nothing else may be displayed.
@@ -107,5 +120,9 @@ listed, the logistics are verifiable public record, and nothing on the page asse
   `#7a7367` and `#9a9184`, used throughout the older sections, fail that test; `#5f584d` and
   `#6b6459` are the replacements.
 - `prefers-reduced-motion` must render the complete interface — no content may be motion-gated.
-- Known gap: below `lg` the site has no navigation affordance beyond the WhatsApp button. There is
-  no hamburger menu.
+- Below `lg` the hero header and the floating pill both carry a menu button that opens a glass sheet
+  with every section link, the language control and both contact routes (added 2026-09-02; the
+  sheet is a Radix dialog, so it traps focus, closes on Escape and returns focus to the button).
+- The OS "reduce motion" setting is honoured page-wide: framer transforms and layout moves are
+  skipped via `MotionConfig`, anchor scrolling is instant, the testimonial marquee stops and
+  becomes hand-scrollable, and the before/after divider never demonstrates itself.

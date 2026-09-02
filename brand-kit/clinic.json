@@ -1,0 +1,69 @@
+{
+  "_comment": [
+    "Print data for the Ozea brand kit. This is the ONLY place the printed pieces read from.",
+    "Numbers, handles and links are cross-checked against src/lib/site.ts by the build script:",
+    "if they drift apart the build fails rather than shipping a card with a dead number.",
+    "Words are the same strings the site serves from src/lib/copy/{en,ar}.ts.",
+    "NOTHING here may be a claim the clinic has not supplied — see PRODUCT.md."
+  ],
+
+  "brand": {
+    "name": { "en": "Ozea Dental Clinic", "ar": "عيادة Ozea لطب الأسنان" },
+    "short": "Ozea",
+    "dentalClinic": { "en": "Dental Clinic", "ar": "عيادة أسنان" }
+  },
+
+  "doctor": {
+    "name": { "en": "Dr. Youssef Nasser", "ar": "د. يوسف ناصر" },
+    "specialty": {
+      "en": "Dental Implants & Maxillofacial Surgery",
+      "ar": "زراعة الأسنان وجراحة الوجه والفكين"
+    },
+    "licenseLabel": { "en": "Syndicate Reg. No.", "ar": "رقم القيد بالنقابة" },
+    "license": null
+  },
+
+  "phones": [
+    { "label": "+20 106 979 9460", "tel": "+201069799460", "whatsapp": true },
+    { "label": "+20 110 738 1860", "tel": "+201107381860", "whatsapp": false }
+  ],
+
+  "address": {
+    "street": { "en": "6 Mahmoud Ammar, Al Golf", "ar": "6 محمود عمار، الجولف" },
+    "city": { "en": "Nasr City, Cairo Governorate", "ar": "مدينة نصر، محافظة القاهرة" },
+    "short": { "en": "Nasr City · Cairo", "ar": "مدينة نصر · القاهرة" }
+  },
+
+  "hours": {
+    "days": { "en": "Every day", "ar": "كل يوم" },
+    "time": "24/7"
+  },
+
+  "instagram": { "handle": "@dr.youssefnasser_", "url": "https://www.instagram.com/dr.youssefnasser_" },
+
+  "maps": { "url": "https://maps.app.goo.gl/33yMJCLWxvj25xks9" },
+
+  "whatsappMessage": {
+    "en": "Hello Dr. Youssef Nasser, I'd like to book an appointment at Ozea Dental Clinic.",
+    "ar": "مرحبًا د. يوسف ناصر، أود حجز موعد في عيادة Ozea لطب الأسنان."
+  },
+
+  "labels": {
+    "phone": { "en": "Phone", "ar": "هاتف" },
+    "whatsapp": { "en": "WhatsApp", "ar": "WhatsApp" },
+    "instagram": { "en": "Instagram", "ar": "Instagram" },
+    "clinic": { "en": "Clinic", "ar": "العيادة" },
+    "hours": { "en": "Hours", "ar": "المواعيد" },
+    "scanWhatsapp": { "en": "Scan to book", "ar": "امسح للحجز" },
+    "scanMaps": { "en": "Scan for directions", "ar": "امسح للوصول" },
+    "patient": { "en": "Patient", "ar": "المريض" },
+    "age": { "en": "Age", "ar": "السن" },
+    "sex": { "en": "Sex", "ar": "النوع" },
+    "date": { "en": "Date", "ar": "التاريخ" },
+    "fileNo": { "en": "File no.", "ar": "رقم الملف" },
+    "diagnosis": { "en": "Diagnosis", "ar": "التشخيص" },
+    "signature": { "en": "Signature", "ar": "التوقيع" },
+    "followUp": { "en": "Follow-up", "ar": "المتابعة" },
+    "prescription": { "en": "Prescription", "ar": "روشتة" }
+  }
+}

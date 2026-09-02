@@ -32,3 +32,8 @@ dist-ssr
 
 # Stray build artifact
 none
+
+# Brand kit intermediates — the PDFs, logos and previews are committed,
+# the self-contained HTML they are rendered from is not.
+brand-kit/build
+brand-kit/*.zip

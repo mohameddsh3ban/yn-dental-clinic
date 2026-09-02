@@ -106,11 +106,19 @@
     -webkit-text-stroke: 1px rgba(20, 18, 15, 0.55);
     color: transparent;
   }
+  /* The same treatment on an ink ground — the Cases headline. */
+  .text-outline-light {
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+    color: transparent;
+  }
   /* Without text-stroke support the outlined word would render invisible. */
   @supports not (-webkit-text-stroke: 1px black) {
     .text-outline,
     .text-outline-thin {
       color: rgba(20, 18, 15, 0.9);
+    }
+    .text-outline-light {
+      color: rgba(255, 255, 255, 0.92);
     }
   }
   .glass-chip {
@@ -168,4 +176,58 @@
   .rail-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  /* The before/after divider's control: a range input stretched over the whole
+     photograph. Invisible — the handle that follows its value is drawn
+     separately — but its track and thumb still have to fill the box so a press
+     anywhere on the frame lands on the slider. */
+  .compare-range::-webkit-slider-runnable-track {
+    height: 100%;
+    background: transparent;
+  }
+  .compare-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 0;
+  }
+  .compare-range::-moz-range-track {
+    height: 100%;
+    background: transparent;
+  }
+  .compare-range::-moz-range-thumb {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 0;
+  }
+}
+
+/* ---- Motion and focus, page-wide ------------------------------------------
+   Anyone who asked the OS for less motion gets: instant anchor jumps, a still
+   testimonial rail they can scroll by hand, and no autonomous movement. Framer
+   animations are covered separately by <MotionConfig reducedMotion="user">. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+  .marquee-pause {
+    overflow-x: auto;
+  }
+}
+
+/* One focus ring for anything that did not draw its own: ink on the light
+   surfaces, white inside the ink sections. Mouse clicks never show it. */
+:focus-visible {
+  outline: 2px solid #14120F;
+  outline-offset: 3px;
+}
+#contact :focus-visible,
+#cases :focus-visible {
+  outline-color: #ffffff;
 }

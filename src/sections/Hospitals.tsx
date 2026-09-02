@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion'
-import { snap } from '@/lib/anim'
+import { reveal, snap, spring, useStill, viewportOnce, wipe } from '@/lib/anim'
 import { useI18n } from '@/lib/i18n'
 import { useHospitals } from '@/lib/hospitals'
-
-const ease = [0.22, 1, 0.36, 1] as const
 
 const ARABIC = /[؀-ۿ]/
 
@@ -24,15 +22,6 @@ function script(text: string) {
   }
 }
 
-const reveal = {
-  hidden: { opacity: 0, y: 32 },
-  show: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.85, ease, delay: i * 0.1 },
-  }),
-}
-
 /**
  * The hospitals surgery is carried out in.
  *
@@ -43,6 +32,7 @@ const reveal = {
  */
 export default function Hospitals() {
   const { c } = useI18n()
+  const still = useStill()
   const hospitals = useHospitals()
 
   return (
@@ -56,7 +46,7 @@ export default function Hospitals() {
           variants={reveal}
           initial={snap ? false : 'hidden'}
           whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={viewportOnce}
         >
           <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-[#6f685c]">
             {c.hospitals.eyebrow} <span className="text-[#C0A578]">/</span>{' '}
@@ -64,21 +54,22 @@ export default function Hospitals() {
               01–{String(hospitals.length).padStart(2, '0')}
             </span>
           </p>
-          <h2
+          <motion.h2
             id="hospitals-heading"
+            variants={wipe}
             className="font-display mt-4 text-[clamp(1.9rem,4.2vw,3.4rem)] font-medium uppercase leading-[1.04] tracking-tight text-[#14120F]"
           >
             {c.hospitals.headlineTop}
             <br />
             <span className="text-outline">{c.hospitals.headlineOutlined}</span>
-          </h2>
+          </motion.h2>
         </motion.div>
         <motion.p
           variants={reveal}
           custom={1}
           initial={snap ? false : 'hidden'}
           whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={viewportOnce}
           className="max-w-[380px] text-[14px] leading-relaxed text-[#7a7367] lg:justify-self-end"
         >
           {c.hospitals.lead}
@@ -96,9 +87,10 @@ export default function Hospitals() {
             initial={snap ? false : 'hidden'}
             whileInView="show"
             viewport={{ once: true, margin: '-40px' }}
-            className="group overflow-hidden rounded-[1.25rem] border border-[#14120F]/10 bg-[#FAF9F7] transition-colors hover:border-[#C0A578]/60"
+            whileHover={still ? undefined : { y: -4, transition: spring }}
+            className="group overflow-hidden rounded-[1.25rem] border border-[#14120F]/10 bg-[#FAF9F7] transition-colors will-change-transform hover:border-[#C0A578]/60"
           >
-            <div className={h.logo ? 'hero-gradient' : undefined}>
+            <div className={h.logo ? 'hero-gradient relative overflow-hidden' : 'relative overflow-hidden'}>
               <img
                 src={h.img}
                 alt={h.name}
@@ -112,6 +104,12 @@ export default function Hospitals() {
                     : 'aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]'
                 }
               />
+              {!h.logo && (
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#14120F]/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                />
+              )}
             </div>
 
             <div className="flex items-baseline justify-between gap-4 border-t border-[#14120F]/10 px-5 py-4">
@@ -129,7 +127,10 @@ export default function Hospitals() {
                   {h.note}
                 </p>
               </div>
-              <span className="shrink-0 text-[11px] tabular-nums text-[#C0A578]" dir="ltr">
+              <span
+                className="shrink-0 text-[11px] tabular-nums text-[#C0A578] opacity-70 transition-opacity group-hover:opacity-100"
+                dir="ltr"
+              >
                 {String(i + 1).padStart(2, '0')}
               </span>
             </div>
