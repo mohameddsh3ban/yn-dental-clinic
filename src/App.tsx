@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router'
 import Home from './pages/Home'
-import { SITE_SUSPENDED } from '@/lib/suspended'
 
 // The homepage is what every visit lands on; the other two routes are reached
 // by a click, so their code is fetched then rather than shipped in the bundle
@@ -26,17 +25,6 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  // While the site is suspended every URL — including a bookmarked doctor
-  // profile — resolves to the suspended homepage, so no page is reachable
-  // around the notice.
-  if (SITE_SUSPENDED) {
-    return (
-      <Routes>
-        <Route path="*" element={<Home />} />
-      </Routes>
-    )
-  }
-
   return (
     <>
       <ScrollToTop />

@@ -1,9 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import HeroFacial from '@/sections/HeroFacial'
-import SuspendedNotice from '@/components/SuspendedNotice'
 import { useI18n } from '@/lib/i18n'
 import { useDocumentMeta } from '@/lib/useDocumentMeta'
-import { SITE_SUSPENDED } from '@/lib/suspended'
 
 /**
  * Only the hero is above the fold, and it is the page's LCP element. Every
@@ -26,7 +24,6 @@ export default function Home() {
   // page's largest contentful paint. Two frames later nobody has scrolled yet.
   const [belowFold, setBelowFold] = useState(false)
   useEffect(() => {
-    if (SITE_SUSPENDED) return
     let second = 0
     const first = requestAnimationFrame(() => {
       second = requestAnimationFrame(() => setBelowFold(true))
@@ -41,7 +38,6 @@ export default function Home() {
   // target may live in the split chunk, so keep looking for it across a few
   // frames rather than giving up on the first miss.
   useEffect(() => {
-    if (SITE_SUSPENDED) return
     const hash = window.location.hash
     if (!hash) return
 
@@ -61,23 +57,6 @@ export default function Home() {
     frame = requestAnimationFrame(find)
     return () => cancelAnimationFrame(frame)
   }, [])
-
-  // Suspended: the hero stays as the backdrop so the page still looks like the
-  // clinic's, but it is blurred, clipped to one viewport and taken out of the
-  // accessibility tree — there is nothing here to read or click but the notice.
-  if (SITE_SUSPENDED) {
-    return (
-      <div id="top" className="relative h-[100svh] overflow-hidden bg-[#CFC8BC]">
-        <div
-          aria-hidden
-          className="pointer-events-none h-full select-none blur-[14px] saturate-[0.85]"
-        >
-          <HeroFacial />
-        </div>
-        <SuspendedNotice />
-      </div>
-    )
-  }
 
   return (
     <div id="top" className="bg-[#CFC8BC]">
