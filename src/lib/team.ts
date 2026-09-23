@@ -72,20 +72,18 @@ const TEAM: readonly DoctorMeta[] = [
     slug: 'adham-yehia-zakaria',
     initials: 'AZ',
     visual: 'tmj',
-    // Sources are tried in order: the optimised pair that
-    // scripts/prepare-team-portraits.mjs writes, then the raw photo dropped
+    // Sources are tried in order: the optimised WebP, then the raw photo dropped
     // straight into public/team/ with no build step. If none resolve, the card
-    // and the profile fall back to the engraved monogram.
+    // and the profile fall back to the engraved monogram. No -620 or -1200
+    // entry: neither file exists, and listing one would 404 on every view.
     portrait: {
       card: [
-        '/team/adham-yehia-zakaria-620.webp',
         '/team/adham-yehia-zakaria.webp',
         '/team/adham-yehia-zakaria.jpg',
         '/team/adham-yehia-zakaria.jpeg',
         '/team/adham-yehia-zakaria.png',
       ],
       hero: [
-        '/team/adham-yehia-zakaria-1200.webp',
         '/team/adham-yehia-zakaria.webp',
         '/team/adham-yehia-zakaria.jpg',
         '/team/adham-yehia-zakaria.jpeg',

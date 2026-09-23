@@ -29,7 +29,13 @@ export function DoctorPortrait({
   style?: React.CSSProperties
 }) {
   const candidates = src === undefined ? [] : typeof src === 'string' ? [src] : src
-  const [attempt, setAttempt] = useState(0)
+  // The failure count belongs to one source chain. Profile routes reuse this
+  // instance when only the slug changes, so a count carried over from the
+  // previous doctor would skip the next doctor's real files straight to the
+  // monogram. Keying it by the chain resets it whenever the chain changes.
+  const chainKey = candidates.join('|')
+  const [failures, setFailures] = useState({ chainKey, attempt: 0 })
+  const attempt = failures.chainKey === chainKey ? failures.attempt : 0
   const current = candidates[attempt]
 
   if (current === undefined) {
@@ -56,7 +62,7 @@ export function DoctorPortrait({
       alt={alt}
       loading={loading}
       decoding="async"
-      onError={() => setAttempt((i) => i + 1)}
+      onError={() => setFailures({ chainKey, attempt: attempt + 1 })}
       className={className}
       style={style}
     />
