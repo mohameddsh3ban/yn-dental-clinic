@@ -359,7 +359,7 @@ export const en = {
       role: 'Implants & Maxillofacial Surgery',
       title: 'Oral & Maxillofacial Surgeon',
       specialty: 'Dental Implants & Maxillofacial Surgery',
-      credentials: ['Oral & Maxillofacial Surgery', 'Dental Implants', '15+ years'],
+      credentials: ['Oral & Maxillofacial Surgery', 'Dental Implants'],
       scopeLead: 'What {name}',
       scopeVerb: 'operates on',
       lead:
