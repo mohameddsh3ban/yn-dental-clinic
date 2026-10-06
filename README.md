@@ -5,7 +5,7 @@ maxillofacial surgery, Nasr City, Cairo). Single-page React site with a
 WhatsApp-first booking flow, service overview, testimonials, and an embedded
 Google Maps location card.
 
-**Live:** https://dryoussefnasser.devstudiocraft.com
+**Live:** https://ozeamaxillofacialclinic.com
 
 ## Stack
 
