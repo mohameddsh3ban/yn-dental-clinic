@@ -33,7 +33,10 @@ function inlineStylesheet(): Plugin {
         if (!tag.test(source)) continue
 
         source = source.replace(tag, `<style>${String(asset.source)}</style>`)
-        delete bundle[name]
+        // The file itself stays in the build. A lazy chunk that makes a
+        // dynamic import of its own (the 3D page loading its scene) lists this
+        // stylesheet among that import's dependencies; if the file is gone,
+        // Vite's preload rejects and the import fails with it.
       }
 
       html.source = source
