@@ -66,7 +66,7 @@ export const en = {
     railLabel: "Your consultation",
     rail: ["Your concerns", "Examination", "Options", "Next steps"],
     figureAlt:
-      'Line drawing of a face in profile with the skull, the jaws and both tooth rows shown through it, and a gold dental implant at a lower molar',
+      'A sculpted face in profile with the jaw, the jaw joint and both tooth rows visible through the cheek, and a gold dental implant at a lower molar',
     annotations: { implant: 'Implant site', tmj: 'Jaw joint · TMJ' },
     today: 'Today',
     open: 'Open',
@@ -74,7 +74,7 @@ export const en = {
     metaBlurb:
       "A second opinion is welcome. If you already have a treatment plan, bring it along with the questions you want answered.",
     illustrationNote:
-      'Illustration — schematic line drawing, not a patient image and not a predicted result.',
+      'Illustration — an anatomical render, not a patient image and not a predicted result.',
     planningGateway: {
       navLabel: '3D planning',
       eyebrow: 'Interactive planning studio',

@@ -105,8 +105,8 @@ async function page(pathname, { stripped, clientOnly = false } = {}) {
   html = html.replace(/<html lang="[^"]*" dir="[^"]*">/, `<html lang="${seo.lang}" dir="${seo.dir}">`)
   html = block(html, 'seo', renderHead(seo))
 
-  // Only the homepage paints the planning-studio still; the interactive model
-  // is never preloaded from home or another route.
+  // Only the homepage paints the hero artwork; preloading it elsewhere is a
+  // wasted high-priority request.
   if (!seo.isHome) html = block(html, 'home', '')
 
   const fonts = (FONT_PRELOADS[seo.lang] ?? []).filter((f) =>

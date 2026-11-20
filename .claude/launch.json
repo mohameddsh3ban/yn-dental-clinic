@@ -61,6 +61,15 @@
       ],
       "port": 3400,
       "autoPort": true
+    },
+    {
+      "name": "dental-yn-dist",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serve-dist.mjs",
+        "4174"
+      ],
+      "port": 4174
     }
   ]
 }

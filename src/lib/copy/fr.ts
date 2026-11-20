@@ -82,7 +82,7 @@ export const fr: Copy = {
     railLabel: 'Votre consultation',
     rail: ['Vos inquiétudes', 'Examen', 'Options', 'Prochaines étapes'],
     figureAlt:
-      'Dessin au trait d’un visage de profil laissant voir le crâne, les mâchoires et les deux arcades dentaires, avec un implant dentaire doré au niveau d’une molaire inférieure',
+      'Visage sculpté de profil laissant voir à travers la joue la mâchoire, son articulation et les deux arcades dentaires, avec un implant dentaire doré au niveau d’une molaire inférieure',
     annotations: { implant: 'Site implantaire', tmj: 'Articulation · ATM' },
     today: 'Aujourd’hui',
     open: 'Ouvert',
@@ -90,7 +90,7 @@ export const fr: Copy = {
     metaBlurb:
       'Un deuxième avis est le bienvenu. Si vous avez déjà un plan de traitement, apportez-le, ainsi que vos questions.',
     illustrationNote:
-      'Illustration — dessin schématique au trait ; ce n’est ni une image de patient ni un résultat prévu.',
+      'Illustration — rendu anatomique ; ce n’est ni une image de patient ni un résultat prévu.',
     planningGateway: {
       navLabel: 'Planification 3D',
       eyebrow: 'Studio de planification interactif',

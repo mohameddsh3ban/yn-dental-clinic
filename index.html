@@ -47,14 +47,15 @@
     <!--/fonts-->
 
     <!--home-->
-    <!-- The planning-studio still is the homepage LCP. The actual interactive
-         model is intentionally not requested until its own route is opened. -->
+    <!-- The hero artwork is the homepage LCP element. Preloading it here makes
+         it discoverable in the initial document instead of after the React
+         bundle has parsed. Keep in step with HERO_ART in sections/HeroFacial.tsx. -->
     <link
       rel="preload"
       as="image"
-      href="/hero/planning-studio-960.webp"
-      imagesrcset="/hero/planning-studio-400.webp 400w, /hero/planning-studio-640.webp 640w, /hero/planning-studio-960.webp 960w"
-      imagesizes="(min-width: 1536px) 680px, (min-width: 1024px) 52vw, (min-width: 640px) 78vw, 100vw"
+      href="/hero/hero-profile-960.webp"
+      imagesrcset="/hero/hero-profile-400.webp 400w, /hero/hero-profile-640.webp 640w, /hero/hero-profile-960.webp 960w"
+      imagesizes="(min-width: 1536px) 484px, (min-width: 768px) 406px, (min-width: 640px) 344px, 297px"
       fetchpriority="high"
     />
     <!--/home-->

@@ -59,6 +59,9 @@ const studyLabels = {
   ru: { open: 'Рассмотреть имплантат в 3D', close: 'Вернуться к черепу', share: 'Поделиться видом в WhatsApp', ask: 'Спросить клинику об этом виде', message: 'Объясните, пожалуйста, что видно на этой учебной модели.' },
 }
 
+/** How solid the skin is in its see-through state. */
+const SEE_THROUGH = 0.42
+
 /** One run of the timeline, start to finish. */
 const PLAY_MS = 9000
 /** The timeline is redrawn at most this often while it plays. */
@@ -173,8 +176,10 @@ function PlanningTable({ copy, still, guideRequest }: PlanningViewerProps & { st
   const [playing, setPlaying] = useState(false)
   const [xray, setXray] = useState(false)
   const [labels, setLabels] = useState(false)
-  const [face, setFace] = useState(false)
-  const [faceOpacity, setFaceOpacity] = useState(1)
+  // The viewer opens on the sculpted head with the jaws showing through the
+  // cheek — the same figure as the homepage hero, now in the round.
+  const [face, setFace] = useState(true)
+  const [faceOpacity, setFaceOpacity] = useState(SEE_THROUGH)
   const [layers, setLayers] = useState<Record<LayerId, boolean>>({
     cranium: true,
     maxilla: true,
@@ -345,6 +350,8 @@ function PlanningTable({ copy, still, guideRequest }: PlanningViewerProps & { st
         created.setCase(caseAtStart.current, true)
         created.setLabels(caseAtStart.current === 'explore')
         created.setProgress(progressRef.current)
+        created.setFaceOpacity(SEE_THROUGH)
+        created.setFace(true)
         const shared = readView(window.location.hash)
         if (shared) {
           restoreShared(shared, created)
@@ -1143,7 +1150,7 @@ function PlanningTable({ copy, still, guideRequest }: PlanningViewerProps & { st
             <button type="button" aria-pressed={faceOpacity === 1} onClick={() => changeFaceOpacity(1)} className="min-h-11 flex-1 rounded-lg px-3 aria-pressed:bg-[#292c2c] aria-pressed:text-white">
               {{ en: 'Skin surface', ar: 'سطح الوجه', fr: 'Surface du visage', ru: 'Поверхность лица' }[lang]}
             </button>
-            <button type="button" aria-pressed={faceOpacity < 1} onClick={() => changeFaceOpacity(0.42)} className="min-h-11 flex-1 rounded-lg px-3 aria-pressed:bg-[#292c2c] aria-pressed:text-white">
+            <button type="button" aria-pressed={faceOpacity < 1} onClick={() => changeFaceOpacity(SEE_THROUGH)} className="min-h-11 flex-1 rounded-lg px-3 aria-pressed:bg-[#292c2c] aria-pressed:text-white">
               {{ en: 'See the bone beneath', ar: 'شاهد العظام تحت الجلد', fr: 'Voir les os sous la peau', ru: 'Посмотреть кости' }[lang]}
             </button>
           </div>}

@@ -88,7 +88,9 @@ export type Viewer = {
 
 const MODEL_URL = '/models/ozea-skull.glb'
 const RIG_URL = '/models/ozea-skull.rig.json'
-const TEXTURED_FACE_URL = '/models/ozea-face-textured.glb'
+// The sculpted head from the homepage hero, reconstructed in 3D and fitted to
+// this skull by scripts/planning3d/fit_face_sculpt.py.
+const TEXTURED_FACE_URL = '/models/ozea-face-sculpt.glb'
 const DRACO_PATH = '/draco/'
 
 const ORTHO = ['cranium', 'zygoma', 'maxilla', 'mand_prox_L', 'mand_prox_R', 'mand_distal', 'chin']
@@ -575,7 +577,13 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
     uMand: { value: new THREE.Vector3() },
     uChin: { value: new THREE.Vector3() },
   }
-  function skinMaterial(depthOnly: boolean, source?: THREE.MeshStandardMaterial, paintFeatures = true) {
+  function skinMaterial(
+    depthOnly: boolean,
+    source?: THREE.MeshStandardMaterial,
+    paintFeatures = true,
+    /** The mesh carries `aWindow`: see-through over the jaws, solid elsewhere. */
+    windowed = false,
+  ) {
     const material = new THREE.MeshStandardMaterial({
       // Matte warm-neutral skin: deliberately low environment response so the
       // registered face reads as tissue instead of polished wax.
@@ -593,15 +601,19 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
       clippingPlanes: planes,
     })
     material.onBeforeCompile = (shader) => {
-      Object.assign(shader.uniforms, tissue, { uFace: faceAmount, uBase: faceBase })
+      Object.assign(shader.uniforms, tissue, {
+        uFace: faceAmount,
+        uBase: faceBase,
+        uHasWindow: { value: windowed ? 1 : 0 },
+      })
       shader.vertexShader = shader.vertexShader
         .replace(
           '#include <common>',
-          '#include <common>\nattribute vec3 aTissue;\nuniform vec3 uMax;\nuniform vec3 uMand;\nuniform vec3 uChin;\nvarying vec3 vSkinPosition;',
+          '#include <common>\nattribute vec3 aTissue;\nattribute float aWindow;\nuniform vec3 uMax;\nuniform vec3 uMand;\nuniform vec3 uChin;\nvarying vec3 vSkinPosition;\nvarying float vWindow;',
         )
         .replace(
           '#include <begin_vertex>',
-          '#include <begin_vertex>\ntransformed += aTissue.r * uMax + aTissue.g * uMand + aTissue.b * uChin;\nvSkinPosition = transformed;',
+          '#include <begin_vertex>\ntransformed += aTissue.r * uMax + aTissue.g * uMand + aTissue.b * uChin;\nvSkinPosition = transformed;\nvWindow = aWindow;',
         )
       const featurePaint = paintFeatures
         ? `
@@ -624,12 +636,19 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
           gl_FragColor.rgb *= complexion;`
         : ''
       shader.fragmentShader = shader.fragmentShader
-        .replace('#include <common>', '#include <common>\nuniform float uFace;\nuniform float uBase;\nvarying vec3 vSkinPosition;\nfloat softFeature(vec3 p, vec3 centre, vec3 radius) { vec3 d = (p - centre) / radius; return exp(-dot(d, d) * 2.0); }')
+        .replace('#include <common>', '#include <common>\nuniform float uFace;\nuniform float uBase;\nuniform float uHasWindow;\nvarying vec3 vSkinPosition;\nvarying float vWindow;\nfloat softFeature(vec3 p, vec3 centre, vec3 radius) { vec3 d = (p - centre) / radius; return exp(-dot(d, d) * 2.0); }')
         .replace(
           '#include <dithering_fragment>',
           `#include <dithering_fragment>
           ${featurePaint}
-          gl_FragColor.a *= uFace * uBase;`,
+          // A windowed skin stays solid except over the jaws and cheekbone,
+          // where it thins toward the eye and holds at its contour — the
+          // anatomy reads through the cheek, as in the hero artwork.
+          float skinRim = 1.0 - abs(dot(normalize(vNormal), normalize(vViewPosition)));
+          float through = clamp(uBase * 0.5 + 0.62 * pow(skinRim, 1.8), 0.0, 1.0);
+          float skinAlpha = mix(uBase, mix(1.0, through, vWindow), uHasWindow);
+          skinAlpha = mix(skinAlpha, 1.0, step(0.985, uBase));
+          gl_FragColor.a *= uFace * skinAlpha;`,
         )
     }
     return material
@@ -772,6 +791,8 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
   // R/G/B soft-tissue weights as the fallback mesh (maxilla/mandible/chin).
   // A failed request is invisible to the user: the fitted face stays active.
   const texturedFaceMaterials: THREE.MeshStandardMaterial[] = []
+  /** Depth-only pass of the windowed skin: it must keep writing depth. */
+  let windowDepth: THREE.MeshStandardMaterial | null = null
   const texturedFaceTextures = new Set<THREE.Texture>()
   let texturedFaceLoading = false
   let texturedFaceLoaded = false
@@ -793,10 +814,18 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
   function loadTexturedFace() {
     if (texturedFaceLoading || texturedFaceLoaded) return
     texturedFaceLoading = true
+    // The stand-in head is a different face; showing it for the moment the
+    // sculpt takes to arrive would flash a stranger. It returns only if the
+    // sculpt cannot be loaded.
+    fallbackFace.visible = false
     const texturedLoader = new GLTFLoader()
+    const faceDraco = new DRACOLoader()
+    faceDraco.setDecoderPath(DRACO_PATH)
+    texturedLoader.setDRACOLoader(faceDraco)
     void texturedLoader
       .loadAsync(TEXTURED_FACE_URL)
       .then((gltf) => {
+        faceDraco.dispose()
         if (disposed) {
           releaseUnattachedFace(gltf.scene)
           return
@@ -815,8 +844,13 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
         })()
         if (!source) throw new Error('textured face has no standard material')
 
-        const texturedSkin = skinMaterial(false, source, false)
-        const texturedSkinDepth = skinMaterial(true, undefined, false)
+        const texturedSkin = skinMaterial(false, source, false, true)
+        const texturedSkinDepth = skinMaterial(true, undefined, false, true)
+        // Alabaster: paler and a touch glossier than living skin.
+        texturedSkin.color.set(0xfff8ef)
+        texturedSkin.roughness = 0.5
+        texturedSkin.envMapIntensity = 0.34
+        windowDepth = texturedSkinDepth
         texturedFaceMaterials.push(texturedSkin, texturedSkinDepth)
         for (const texture of [source.map, source.normalMap, source.roughnessMap]) if (texture) texturedFaceTextures.add(texture)
 
@@ -830,6 +864,9 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
             tissueWeights[i * 3 + 2] = weights.getZ(i)
           }
           mesh.geometry.setAttribute('aTissue', new THREE.BufferAttribute(tissueWeights, 3))
+          const windowWeights = new Float32Array(weights.count)
+          if (weights.itemSize >= 4) for (let i = 0; i < weights.count; i++) windowWeights[i] = weights.getW(i)
+          mesh.geometry.setAttribute('aWindow', new THREE.BufferAttribute(windowWeights, 1))
           mesh.geometry.deleteAttribute('color')
           mesh.material = texturedSkin
           mesh.castShadow = false
@@ -854,6 +891,8 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
         // This is an enhancement, not a dependency. Preserve the already
         // displayed registered fallback if the optional asset is unavailable.
         texturedFaceLoading = false
+        fallbackFace.visible = true
+        invalidate()
       })
   }
 
@@ -1289,7 +1328,9 @@ export async function createViewer(opts: ViewerOptions): Promise<Viewer> {
     for (const material of texturedFaceMaterials) {
       if (material.transparent === faceOpaque) {
         material.transparent = !faceOpaque
-        material.depthWrite = faceOpaque
+        // The windowed skin keeps its depth pass while see-through, so it
+        // still hides its own far side and only the window shows bone.
+        material.depthWrite = faceOpaque || material === windowDepth
         material.needsUpdate = true
       }
     }

@@ -31,3 +31,16 @@ at y=0, converted millimetres to metres, applied a neutral enamel material,
 and exported a web-ready GLB. It is an illustrative crown asset, not a patient
 scan or a treatment plan. The same geometry may be mirrored for FDI 36 by the
 viewer.
+
+## Sculpted face layer (current)
+
+`public/models/ozea-face-sculpt.glb` is Ozea's own figure: the sculpted head
+from the homepage hero. Its front, side and back views and the 3D mesh built
+from them were generated for Ozea on Higgsfield (GPT Image 2.6, then Tripo H3.1
+multiview-to-3D), so there is no third-party licence to credit. It is fitted to
+the teaching skull, given its soft-tissue weights and its see-through window by
+`scripts/planning3d/fit_face_sculpt.py`:
+
+    blender -b --factory-startup --python scripts/planning3d/fit_face_sculpt.py --         public/models/ozea-skull.glb <sculpt.glb> public/models/ozea-face-sculpt.glb
+
+The earlier photographic scan (`ozea-face-textured.glb`) is no longer loaded.
