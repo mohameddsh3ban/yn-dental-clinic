@@ -1,5 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router'
 import { ArrowUpRight, Phone, X } from 'lucide-react'
 import { BrandLogo } from '@/components/BrandLogo'
 import { LanguageToggle } from '@/components/LanguageToggle'
@@ -7,6 +8,7 @@ import { WhatsAppIcon } from '@/components/icons'
 import { ease, press, useStill } from '@/lib/anim'
 import { useI18n } from '@/lib/i18n'
 import { navLinks } from '@/lib/nav'
+import { PLANNING_PATH } from '@/lib/planning3d'
 import { site, whatsappUrl } from '@/lib/site'
 
 /**
@@ -26,7 +28,7 @@ export default function MobileMenuSheet({
   open: boolean
   onOpenChange: (open: boolean) => void
 }) {
-  const { c } = useI18n()
+  const { c, path } = useI18n()
   const still = useStill()
   const whatsapp = whatsappUrl(c.site.whatsappMessage)
   const links = navLinks(c)
@@ -105,6 +107,23 @@ export default function MobileMenuSheet({
                         </a>
                       </motion.li>
                     ))}
+                    <motion.li
+                      initial={still ? false : { opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: still ? 0 : 0.35, ease, delay: still ? 0 : 0.08 + links.length * 0.04 }}
+                    >
+                      <Link
+                        to={path(PLANNING_PATH)}
+                        onClick={() => onOpenChange(false)}
+                        className="group flex items-center justify-between gap-4 py-3.5 text-[17px] font-medium tracking-[-0.01em] text-[#14120F] transition-colors hover:text-[#3a352f]"
+                      >
+                        <span className="flex items-baseline gap-3">
+                          <span className="text-[10px] font-semibold tabular-nums tracking-[0.14em] text-[#C0A578]" dir="ltr">{String(links.length + 1).padStart(2, '0')}</span>
+                          <span className="font-display">{c.hero.planningGateway.navLabel}</span>
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-[#6b6459] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
+                      </Link>
+                    </motion.li>
                   </ul>
                 </nav>
 

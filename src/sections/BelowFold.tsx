@@ -3,6 +3,7 @@ import Cases from '@/sections/Cases'
 import About from '@/sections/About'
 import Hospitals from '@/sections/Hospitals'
 import Testimonials from '@/sections/Testimonials'
+import Faq from '@/sections/Faq'
 import Location from '@/sections/Location'
 import Footer from '@/sections/Footer'
 
@@ -18,6 +19,7 @@ export default function BelowFold() {
       <About />
       <Hospitals />
       <Testimonials />
+      <Faq />
       <Location />
       <Footer />
     </main>

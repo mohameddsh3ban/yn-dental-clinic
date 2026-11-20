@@ -22,6 +22,18 @@ const COPY = {
     body: 'هذا الموقع متوقف مؤقتًا لعدم سداد اشتراك الخادم. بمجرد سداد المبلغ المستحق يعود الموقع للعمل فورًا بكامل محتواه.',
     cta: 'ادفع لاستعادة الموقع',
   },
+  fr: {
+    eyebrow: 'Avis de service',
+    title: 'Site suspendu',
+    body: 'Le site est temporairement hors ligne en raison d’un abonnement d’hébergement impayé. Son contenu sera de nouveau accessible après le règlement.',
+    cta: 'Régler l’abonnement',
+  },
+  ru: {
+    eyebrow: 'Служебное уведомление',
+    title: 'Сайт временно недоступен',
+    body: 'Работа сайта приостановлена из-за неоплаченного хостинга. После оплаты все материалы снова будут доступны.',
+    cta: 'Оплатить хостинг',
+  },
 } as const
 
 export default function SuspendedNotice() {

@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react'
 import type { Copy, Lang } from '@/lib/copy'
+import type { PagesCopy } from '@/lib/copy/pages/types'
 
 /**
  * The language context and the hook that reads it.
@@ -16,10 +17,15 @@ export type I18n = {
   rtl: boolean
   /** The whole dictionary for the active language. */
   c: Copy
+  /** The long-form page copy for the active language. */
+  p: PagesCopy
   setLang: (next: Lang) => void
-  toggle: () => void
   /** `t(c.hero.bookAria, { doctor })` — fills `{name}` placeholders. */
   t: (template: string, values?: Record<string, string>) => string
+  /** `path('/team/x')` → the same route in the active language (`/ar/team/x`). */
+  path: (to: string) => string
+  /** The current page in another language — what the language menu links to. */
+  pathIn: (lang: Lang) => string
 }
 
 export const I18nContext = createContext<I18n | null>(null)

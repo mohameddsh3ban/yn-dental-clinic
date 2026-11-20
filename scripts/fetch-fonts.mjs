@@ -20,7 +20,7 @@ const CSS_URL =
   'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap'
 
 /** Subsets the site actually renders. Everything else is dead weight. */
-const KEEP = new Set(['latin', 'latin-ext', 'arabic'])
+const KEEP = new Set(['latin', 'latin-ext', 'arabic', 'cyrillic'])
 
 const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'

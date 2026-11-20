@@ -1,12 +1,15 @@
 import { useRef, type ComponentType } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { ease, reveal, snap, useStill, viewportOnce, wipe } from '@/lib/anim'
 import { ArrowRight, Instagram, MapPin, Phone } from 'lucide-react'
 import implant from '@/assets/implant.webp'
 import { BrandLogo } from '@/components/BrandLogo'
 import { WhatsAppIcon } from '@/components/icons'
+import { LANG_META, LANGS } from '@/lib/copy'
 import { useI18n } from '@/lib/i18n'
+import { CONTACT_PATH, PAGES, SERVICES_PATH } from '@/lib/pages'
+import { stripLang } from '@/lib/paths'
 import { site, whatsappUrl } from '@/lib/site'
 
 type Social = {
@@ -15,14 +18,18 @@ type Social = {
   Icon: ComponentType<{ className?: string }>
 }
 
-export default function Footer() {
-  // The footer is shared with the doctor profiles, where a bare "#services"
-  // points at nothing. Off the homepage the section links become "/#services".
+/** Lets a focused educational page keep its WhatsApp prompt and prefilled subject. */
+export type FooterCtaOverride = { label: string; whatsapp: string }
+
+export default function Footer({ ctaOverride }: { ctaOverride?: FooterCtaOverride }) {
+  // The footer is shared with every inner page, where a bare "#services"
+  // points at nothing. Off the homepage the section links become "/#services"
+  // (or "/ar#services" — the homepage of the language being read).
   const { pathname } = useLocation()
-  const home = pathname === '/' ? '' : '/'
-  const { c, t } = useI18n()
+  const { c, p, t, lang, path, pathIn } = useI18n()
+  const home = stripLang(pathname) === '/' ? '' : path('/')
   const still = useStill()
-  const whatsapp = whatsappUrl(c.site.whatsappMessage)
+  const whatsapp = ctaOverride?.whatsapp ?? whatsappUrl(c.site.whatsappMessage)
 
   // Scroll-linked depth. As the section travels through the viewport the two
   // implants drift 24px in opposite directions and the watermark lags 40px, so
@@ -96,7 +103,7 @@ export default function Footer() {
               className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-[13px] font-semibold text-[#14120F] transition-transform hover:scale-[1.04] active:scale-[0.97] sm:justify-start"
             >
               <WhatsAppIcon className="h-4 w-4 text-[#1f7a4d]" />
-              {c.footer.book}
+              {ctaOverride?.label ?? c.footer.book}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
             </a>
             {/* Two numbers side by side on a phone: at 12px the label plus its
@@ -245,8 +252,48 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Every treatment page, from every page: the internal links that
+            let a visitor — and a crawler — reach any of them in one step. */}
+        <nav aria-label={p.ui.services} className="mt-10 border-t border-white/10 pt-8">
+          <Link
+            to={path(SERVICES_PATH)}
+            className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
+          >
+            {p.ui.services}
+          </Link>
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 text-[13px] text-white/70 md:grid-cols-3 xl:grid-cols-5">
+            {PAGES.map((m) => (
+              <li key={m.id}>
+                <Link to={path(m.path)} className="transition-colors hover:text-white">
+                  {p.content[m.id].nav}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link to={path(CONTACT_PATH)} className="transition-colors hover:text-white">
+                {p.ui.contactCta}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 pe-14 text-[11px] text-white/60 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:pe-0">
           <p>{t(c.footer.rights, { clinic: c.site.name })}</p>
+          <ul aria-label={p.ui.language} className="flex flex-wrap gap-x-5 gap-y-2">
+            {LANGS.map((l) => (
+              <li key={l}>
+                <Link
+                  to={pathIn(l)}
+                  hrefLang={LANG_META[l].hreflang}
+                  lang={l}
+                  aria-current={l === lang ? 'true' : undefined}
+                  className={`transition-colors hover:text-white ${l === lang ? 'text-white' : ''}`}
+                >
+                  {LANG_META[l].label}
+                </Link>
+              </li>
+            ))}
+          </ul>
           <div className="flex gap-6">
             <a href={`${home}#top`} className="transition-colors hover:text-white/70">
               {c.footer.privacy}

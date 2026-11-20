@@ -44,6 +44,11 @@ function inlineStylesheet(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
+  build: {
+    // scripts/prerender.mjs reads the manifest to preload each page's chunks,
+    // then deletes it from dist.
+    manifest: true,
+  },
   plugins: [
     // Dev only: it stamps every element with a `code-path` attribute, which is
     // an editor affordance and has no business in what visitors download.

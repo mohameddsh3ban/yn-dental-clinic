@@ -8,6 +8,7 @@ import {
   type PointerEvent,
 } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
+import { Link } from 'react-router'
 import { reveal, snap, viewportOnce, wipe } from '@/lib/anim'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import cosmeticArch from '@/assets/services/cosmetic-arch.webp'
@@ -19,6 +20,7 @@ import jawPlate from '@/assets/services/jaw-plate.webp'
 import endoMolar from '@/assets/services/endo-molar.webp'
 import tmjProsthesis from '@/assets/services/tmj-prosthesis.webp'
 import { useI18n } from '@/lib/i18n'
+import { HOME_CARD_PAGES, SERVICES_PATH, pageMeta } from '@/lib/pages'
 import { cn } from '@/lib/utils'
 
 /** A mouse pull has to travel this far before it stops counting as a click. */
@@ -44,23 +46,8 @@ const ART: readonly string[] = [
   tmjProsthesis,
 ]
 
-/** Each chip carries the ink that clears 4.5:1 on its own fill. */
-const avatarChips = [
-  'bg-[#C0A578] text-[#14120F]',
-  'bg-[#14120F] text-white',
-  'bg-[#8f8574] text-[#14120F]',
-  'bg-[#2B2723] text-white',
-]
-
-/**
- * The avatar chips overlap by 12px at rest and ease apart to 4px when the row
- * is hovered. Logical margins keep the overlap on the trailing side in either
- * direction, so there is nothing to reverse for Arabic.
- */
-const chipShift = 'transition-[margin] duration-300 ease-out -ms-3 group-hover/avatars:-ms-1'
-
 export default function Services() {
-  const { c, rtl } = useI18n()
+  const { c, p, rtl, path } = useI18n()
   const rail = useRef<HTMLDivElement>(null)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
@@ -214,56 +201,16 @@ export default function Services() {
       </div>
 
       {/* Body */}
-      {/* `minmax(0,1fr)`: an `auto` track would grow to the meta row's min-content
-          (avatars plus arrows, ~276px) and push a 320px phone into sideways
-          scroll; capped, the row wraps instead. */}
-      <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[240px_1fr] xl:mt-16">
-        {/* Leading meta column */}
+      <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-5 xl:mt-16">
         <motion.div
           variants={reveal}
           custom={1}
           initial={snap ? false : 'hidden'}
           whileInView="show"
           viewport={viewportOnce}
-          className="flex flex-row flex-wrap items-center justify-between gap-6 lg:flex-col lg:items-start lg:justify-start"
+          className="flex justify-end"
         >
-          <div>
-            <div className="group/avatars flex">
-              {['SM', 'JK', 'AL', 'RW'].map((n, i) => (
-                <span
-                  key={n}
-                  className={cn(
-                    'flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[11px] font-semibold',
-                    // The first chip anchors the row; only the ones behind it overlap.
-                    i > 0 && chipShift,
-                    avatarChips[i],
-                  )}
-                >
-                  {n}
-                </span>
-              ))}
-              <span
-                className={cn(
-                  'flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-[#F4F3F0] text-[11px] font-semibold text-[#14120F]',
-                  chipShift,
-                )}
-              >
-                +
-              </span>
-            </div>
-            <p className="mt-4 text-[15px] font-semibold text-[#14120F]">
-              <span dir="ltr" className="inline-block tabular-nums">
-                750<span className="text-[#C0A578]">+</span>
-              </span>
-              <span className="ms-1.5 text-[12px] font-normal text-[#6f685c]">
-                {c.services.reviews}
-              </span>
-            </p>
-            <p className="mt-3 hidden max-w-[200px] text-[12px] leading-relaxed text-[#7a7367] lg:block">
-              {c.services.reviewsBlurb}
-            </p>
-          </div>
-          <div className="flex gap-3 lg:mt-auto lg:pt-10">
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={() => page(-1)}
@@ -322,10 +269,11 @@ export default function Services() {
           >
             {c.services.items.map((s, i) => {
               return (
-                <a
+                <Link
                   key={s.title}
                   data-card
-                  href="#contact"
+                  // Each card opens the page for its treatment.
+                  to={path(pageMeta(HOME_CARD_PAGES[i]).path)}
                   onClick={onCardClick}
                   className="hero-gradient group relative aspect-[4/5] w-[248px] shrink-0 snap-start overflow-hidden rounded-[1.5rem] transition-transform active:scale-[0.98] sm:w-[290px] xl:w-[310px]"
                 >
@@ -369,7 +317,7 @@ export default function Services() {
                       <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
                     </span>
                   </div>
-                </a>
+                </Link>
               )
             })}
           </div>
@@ -389,6 +337,14 @@ export default function Services() {
               className="h-full w-full origin-left bg-[#C0A578] rtl:origin-right"
             />
           </div>
+
+          <Link
+            to={path(SERVICES_PATH)}
+            className="group mt-6 inline-flex items-center gap-2 rounded-full border border-[#14120F]/15 px-5 py-3 text-[12px] font-medium text-[#14120F] transition-colors hover:bg-[#14120F] hover:text-white"
+          >
+            {p.ui.servicesCta}
+            <Forward className="h-3.5 w-3.5" />
+          </Link>
         </motion.div>
       </div>
     </section>

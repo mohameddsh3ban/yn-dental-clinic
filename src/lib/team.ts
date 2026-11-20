@@ -117,11 +117,31 @@ const TEAM: readonly DoctorMeta[] = [
   },
 ]
 
+/**
+ * The doctors' names in English, for the pre-filled WhatsApp message on the
+ * French and Russian sites: the clinic reads Arabic and English, so the
+ * message — name included — is written in English there (see STAFF_LANG).
+ */
+export const DOCTOR_NAME_EN: Record<DoctorSlug, string> = {
+  'youssef-nasser': 'Dr. Youssef Nasser',
+  'sara-sameh': 'Dr. Sara Sameh',
+  'adham-yehia-zakaria': 'Dr. Adham Yehia Zakaria',
+}
+
 /** The slugs, in display order — safe to read outside React. */
 export const doctorSlugs: readonly DoctorSlug[] = TEAM.map((d) => d.slug)
 
 function merge(meta: DoctorMeta, copy: Copy): Doctor {
   return { ...meta, ...copy.team[meta.slug] }
+}
+
+/**
+ * One doctor from a given dictionary — for code that runs outside React, such
+ * as the structured data and the build-time page list.
+ */
+export function doctorFrom(slug: string, copy: Copy): Doctor | undefined {
+  const meta = TEAM.find((d) => d.slug === slug)
+  return meta && merge(meta, copy)
 }
 
 /** The team in the visitor's language. */

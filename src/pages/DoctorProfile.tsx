@@ -1,15 +1,15 @@
-import { Link, Navigate, useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, Phone } from 'lucide-react'
 import { snap } from '@/lib/anim'
-import { BrandLogo } from '@/components/BrandLogo'
+import { SubpageHeader } from '@/components/SubpageHeader'
 import { DoctorPortrait } from '@/components/DoctorPortrait'
-import { LanguageToggle } from '@/components/LanguageToggle'
 import { WhatsAppIcon } from '@/components/icons'
 import Footer from '@/sections/Footer'
-import { doctorSlugs, useDoctor, useDoctors } from '@/lib/team'
+import NotFound from '@/pages/NotFound'
+import { STAFF_LANG } from '@/lib/copy'
+import { DOCTOR_NAME_EN, doctorSlugs, useDoctor, useDoctors } from '@/lib/team'
 import { useI18n } from '@/lib/i18n'
-import { useDocumentMeta } from '@/lib/useDocumentMeta'
 import { site, whatsappUrl } from '@/lib/site'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -29,37 +29,25 @@ const PORTRAIT_MASK =
 
 export default function DoctorProfile() {
   const { slug } = useParams()
-  const { c, t } = useI18n()
+  const { c, t, lang, path } = useI18n()
   const doctors = useDoctors()
   const doctor = useDoctor(slug)
   const reduced = useReducedMotion()
   const still = snap || !!reduced
   const init = still ? false : 'hidden'
 
-  // Per-profile title and description. Both hooks run unconditionally — an
-  // unknown slug still renders a redirect below, and a hook cannot sit behind
-  // that early return.
-  useDocumentMeta(
-    doctor
-      ? t(c.profile.docTitle, { name: doctor.name, title: doctor.title, clinic: c.site.name })
-      : c.meta.title,
-    doctor
-      ? t(c.profile.docDescription, {
-          name: doctor.name,
-          title: doctor.title,
-          clinic: c.site.name,
-          lead: doctor.lead,
-        })
-      : c.meta.description,
-  )
-
-  // Unknown slug: send the visitor to the team band rather than a dead end.
-  if (!doctor) return <Navigate to="/#team" replace />
+  // Unknown slug: this is a page that does not exist, and it says so — a
+  // redirect to the homepage would tell a search engine the URL is fine.
+  if (!doctor) return <NotFound />
 
   const index = doctorSlugs.indexOf(doctor.slug) + 1
   const others = doctors.filter((d) => d.slug !== doctor.slug)
   const whatsapp = whatsappUrl(
-    t(c.profile.whatsappMessage, { name: doctor.name, clinic: c.site.name }),
+    t(c.profile.whatsappMessage, {
+      // In a language the clinic does not read, the message is in English.
+      name: STAFF_LANG[lang] === lang ? doctor.name : DOCTOR_NAME_EN[doctor.slug],
+      clinic: c.site.name,
+    }),
   )
 
   return (
@@ -80,45 +68,15 @@ export default function DoctorProfile() {
             ))}
           </div>
 
-          {/* Header */}
-          <header className="relative z-20 flex items-center justify-between gap-4 px-5 pt-6 sm:px-8 xl:px-14 xl:pt-9 2xl:px-20">
-            <Link to="/" className="flex items-center gap-3" aria-label={c.site.name}>
-              <BrandLogo alt="" className="h-11 w-11 shrink-0" />
-              <span className="leading-none">
-                <span
-                  lang="en"
-                  dir="ltr"
-                  style={{ letterSpacing: '0.12em' }}
-                  className="font-display block text-lg font-semibold text-[#14120F]"
-                >
-                  {c.site.short}
-                </span>
-                <span className="font-engraved mt-1 block text-[8px] uppercase tracking-[0.3em] text-[#8a8172]">
-                  {c.site.dentalClinic}
-                </span>
-              </span>
+          <SubpageHeader whatsapp={whatsapp}>
+            <Link
+              to={path('/#team')}
+              className="hidden items-center gap-2 rounded-full border border-[#14120F]/15 bg-white/70 px-4 py-2 text-[12px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white sm:inline-flex"
+            >
+              <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />
+              {c.profile.allTeam}
             </Link>
-
-            <div className="flex items-center gap-3">
-              <LanguageToggle />
-              <Link
-                to="/#team"
-                className="hidden items-center gap-2 rounded-full border border-[#14120F]/15 bg-white/70 px-4 py-2 text-[12px] font-medium text-[#14120F] backdrop-blur transition-colors hover:bg-[#14120F] hover:text-white sm:inline-flex"
-              >
-                <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />
-                {c.profile.allTeam}
-              </Link>
-              <a
-                href={whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#14120F] px-5 py-2.5 text-[12px] font-medium text-white transition-transform hover:scale-[1.03]"
-              >
-                <WhatsAppIcon className="h-3.5 w-3.5 text-[#C9AC7C]" />
-                {c.common.whatsapp}
-              </a>
-            </div>
-          </header>
+          </SubpageHeader>
 
           {/* Identity */}
           <div className="relative z-10 mx-auto grid w-full max-w-[1760px] gap-y-8 px-5 pb-10 pt-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-x-10 lg:items-end xl:px-14 xl:pb-14 xl:pt-12 2xl:px-20">
@@ -397,11 +355,11 @@ export default function DoctorProfile() {
               {c.profile.anotherOpinion}
             </h2>
 
-            <div className="mt-9 grid gap-4 sm:grid-cols-2">
+            <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {others.map((o) => (
                 <Link
                   key={o.slug}
-                  to={`/team/${o.slug}`}
+                  to={path(`/team/${o.slug}`)}
                   className="group flex items-center gap-4 rounded-2xl border border-white/15 p-3 transition-colors hover:border-white/45 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
                 >
                   <DoctorPortrait
@@ -415,7 +373,7 @@ export default function DoctorProfile() {
                     <span className="block truncate text-[13px] font-semibold text-white">
                       {o.name}
                     </span>
-                    <span className="mt-1 block text-[11px] text-white/50">{o.role}</span>
+                    <span className="mt-1 block break-words text-[11px] text-white/50">{o.role}</span>
                   </span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors group-hover:bg-white group-hover:text-[#14120F]">
                     <ArrowUpRight className="h-3.5 w-3.5 rtl:-scale-x-100" />

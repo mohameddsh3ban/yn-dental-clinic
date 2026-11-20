@@ -1,6 +1,7 @@
 /**
  * Serves `dist/` the way Cloudflare Pages does — gzip on the wire, immutable
- * caching on hashed assets, SPA fallback — so a local Lighthouse run measures
+ * caching on hashed assets, `/about` answered by `about.html`, and a real 404
+ * from `404.html` for anything else — so a local Lighthouse run measures
  * something close to production instead of `vite preview`'s uncompressed,
  * no-cache defaults.
  *
@@ -41,10 +42,25 @@ createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost').pathname
   let file = path.join(ROOT, decodeURIComponent(url))
 
-  try {
-    if ((await stat(file)).isDirectory()) file = path.join(file, 'index.html')
-  } catch {
-    file = path.join(ROOT, 'index.html') // SPA fallback
+  // Resolution order, as on Pages: the exact file, then `<path>.html`, then
+  // `<path>/index.html`, then the 404 document with a 404 status.
+  let status = 200
+  const isFile = async (f) => {
+    try {
+      return (await stat(f)).isFile()
+    } catch {
+      return false
+    }
+  }
+  const clean = file.replace(/[\\/]+$/, '')
+  if (url === '/') file = path.join(ROOT, 'index.html')
+  else if (await isFile(file)) {
+    // served as is
+  } else if (await isFile(`${clean}.html`)) file = `${clean}.html`
+  else if (await isFile(path.join(clean, 'index.html'))) file = path.join(clean, 'index.html')
+  else {
+    file = path.join(ROOT, '404.html')
+    status = 404
   }
 
   const ext = path.extname(file).toLowerCase()
@@ -63,7 +79,7 @@ createServer(async (req, res) => {
       body = gzipSync(await readFile(file), { level: 9 })
       cache.set(key, body)
     }
-    res.writeHead(200, {
+    res.writeHead(status, {
       'Content-Type': type,
       'Content-Encoding': 'gzip',
       'Content-Length': body.length,
@@ -74,7 +90,7 @@ createServer(async (req, res) => {
     return
   }
 
-  res.writeHead(200, {
+  res.writeHead(status, {
     'Content-Type': type,
     'Cache-Control': cacheControl,
     'X-Content-Type-Options': 'nosniff',

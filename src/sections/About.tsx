@@ -4,14 +4,13 @@ import { reveal, snap, viewportOnce, wipe } from '@/lib/anim'
 import { ArrowUpRight } from 'lucide-react'
 import surgeryTeam from '@/assets/about/surgery-team.webp'
 import surgeryTheatre from '@/assets/about/surgery-theatre.webp'
-import { CountUp } from '@/components/CountUp'
 import { DoctorPortrait } from '@/components/DoctorPortrait'
 import { useDoctors } from '@/lib/team'
 import { useI18n } from '@/lib/i18n'
 import { PhotoStack } from '@/components/PhotoStack'
 
 export default function About() {
-  const { c, t } = useI18n()
+  const { c, t, path } = useI18n()
   const doctors = useDoctors()
 
   const photos = [surgeryTeam, surgeryTheatre].map((src, i) => ({
@@ -38,22 +37,6 @@ export default function About() {
           <PhotoStack
             photos={photos}
             dotAria={c.about.imageDotAria}
-            corner={
-              // The chip now sits on a photograph rather than on the
-              // section ground, so it needs a more opaque pane than the
-              // 55% white `.glass-chip` gives — the label is unreadable
-              // against scrubs at that strength.
-              <div className="glass-chip rounded-2xl bg-white/85 px-5 py-4">
-                <p
-                  dir="ltr"
-                  className="font-display text-[26px] font-medium leading-none text-[#14120F] rtl:text-end"
-                >
-                  {c.about.yearsValue}
-                  <span className="text-[#C0A578]">+</span>
-                </p>
-                <p className="mt-1.5 text-[11px] text-[#5f594f]">{c.about.yearsLabel}</p>
-              </div>
-            }
           />
         </motion.div>
 
@@ -141,7 +124,7 @@ export default function About() {
               {doctors.map((d) => (
                 <li key={d.slug} className="w-full min-w-0 sm:w-auto">
                   <Link
-                    to={`/team/${d.slug}`}
+                    to={path(`/team/${d.slug}`)}
                     aria-label={t(c.about.profileAria, { name: d.name, title: d.title })}
                     className="group flex w-full max-w-full items-center gap-3 rounded-full border border-[#14120F]/10 bg-white/55 py-1.5 ps-1.5 pe-4 backdrop-blur transition-[transform,background-color,border-color] hover:border-[#C0A578]/60 hover:bg-white/85 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#14120F]"
                   >
@@ -169,32 +152,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Stats. Each figure counts up from zero the first time it is seen;
-          CountUp renders the settled literal under reduced motion and ?snap=1. */}
-      <div className="mt-16 grid gap-8 border-t border-[#14120F]/10 pt-10 sm:grid-cols-3 xl:mt-20">
-        {c.about.stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            variants={reveal}
-            custom={i}
-            initial={snap ? false : 'hidden'}
-            whileInView="show"
-            viewport={{ once: true, margin: '-40px' }}
-            className="flex items-baseline gap-4 sm:flex-col sm:gap-2"
-          >
-            <p
-              dir="ltr"
-              className="font-display text-[clamp(2.6rem,4vw,3.6rem)] font-medium leading-none tracking-tight tabular-nums text-[#14120F] rtl:text-end"
-            >
-              <CountUp value={s.value} />
-              <span className="text-[#C0A578]">{s.suffix}</span>
-            </p>
-            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#6f685c]">
-              {s.label}
-            </p>
-          </motion.div>
-        ))}
-      </div>
     </section>
   )
 }

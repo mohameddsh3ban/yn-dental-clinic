@@ -1,58 +1,62 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { DIR, dictionaries, fill, type Lang } from '@/lib/copy'
+import { use, useCallback, useEffect, useMemo, type ReactNode } from 'react'
+import { useLocation, useNavigate } from 'react-router'
+import { DIR, fill, type Lang } from '@/lib/copy'
+import { loadBundle, peekBundle } from '@/lib/copy/bundle'
 import { I18nContext, type I18n } from '@/lib/i18n'
+import { inLang, langOf, localize } from '@/lib/paths'
 
-const STORAGE_KEY = 'ozea.lang'
-
-/** A stored choice wins; otherwise an Arabic browser gets Arabic. */
-function initialLang(): Lang {
-  if (typeof window === 'undefined') return 'en'
-
-  const stored = window.localStorage.getItem(STORAGE_KEY)
-  if (stored === 'en' || stored === 'ar') return stored
-
-  return navigator.language?.toLowerCase().startsWith('ar') ? 'ar' : 'en'
-}
-
+/**
+ * The language is the URL: `/…` is English, `/ar/…` is Arabic, and so on (see
+ * `lib/paths.ts`). It used to be a localStorage preference, which meant the
+ * Arabic site had no address — nothing could link to it and no search engine
+ * could index it. Reading it from the path also lets the build pre-render each
+ * language to its own HTML file.
+ *
+ * Has to sit inside the router, since it reads the location.
+ */
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(initialLang)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const lang = langOf(pathname)
   const dir = DIR[lang]
+
+  // Each language is its own chunk. `main.tsx` loads the one for the landing
+  // URL before the first render, so this is synchronous on arrival; switching
+  // language suspends for the moment it takes the next chunk to arrive (the
+  // language menu starts that download as soon as it is opened).
+  const bundle = peekBundle(lang) ?? use(loadBundle(lang))
 
   // `dir` on <html> is what flips every logical margin, padding and inset in
   // the stylesheet, so it has to be the single switch — no component sets its
   // own direction except the hero artwork, which is pinned to the drawing.
-  // `lang` drives the Arabic typography block in index.css.
+  // `lang` drives the Arabic typography block in index.css. The pre-rendered
+  // HTML already carries both; this keeps them right across client navigation.
   useEffect(() => {
     const root = document.documentElement
     root.lang = lang
     root.dir = dir
   }, [lang, dir])
 
-  // The title and the description are deliberately NOT set here: a provider's
-  // effect runs after its children's, so writing them from this level would
-  // overwrite whatever page had just set its own. Each page owns its own with
-  // `useDocumentMeta`, reading the same dictionary.
-
-  const setLang = useCallback((next: Lang) => {
-    setLangState(next)
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next)
-    } catch {
-      // Private mode or a blocked store: the choice still holds for this visit.
-    }
-  }, [])
+  const setLang = useCallback(
+    (next: Lang) => {
+      if (next !== lang) navigate(inLang(pathname, next))
+    },
+    [lang, pathname, navigate],
+  )
 
   const value = useMemo<I18n>(
     () => ({
       lang,
       dir,
       rtl: dir === 'rtl',
-      c: dictionaries[lang],
+      c: bundle.site,
+      p: bundle.pages,
       setLang,
-      toggle: () => setLang(lang === 'en' ? 'ar' : 'en'),
       t: (template, values) => (values ? fill(template, values) : template),
+      path: (to) => localize(to, lang),
+      pathIn: (next) => inLang(pathname, next),
     }),
-    [lang, dir, setLang],
+    [lang, dir, bundle, setLang, pathname],
   )
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>

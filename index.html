@@ -9,29 +9,33 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>Ozea Dental Clinic — Dr. Youssef Nasser</title>
-    <meta
-      name="description"
-      content="Ozea Dental Clinic — Dr. Youssef Nasser, dental implants and maxillofacial surgery in Nasr City, Cairo. Book on WhatsApp."
-    />
+    <!-- Everything between the seo markers is this page's identity: title,
+         description, canonical, hreflang, Open Graph and JSON-LD. At build
+         time scripts/prerender.mjs replaces the block for every page from
+         src/lib/seo.ts; what is written here is only the dev-server default. -->
+    <!--seo-->
+    <title>Ozea Dental Clinic — Implants &amp; Maxillofacial Surgery, Cairo</title>
+    <meta name="description" content="Explore dental implants, jaw surgery and TMJ care with Dr. Youssef Nasser at Ozea Dental Clinic in Nasr City, Cairo. Ask the clinic a question on WhatsApp." />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://ozeamaxillofacialclinic.com/" />
-    <meta name="theme-color" content="#14120F" />
-
-    <!-- The share card is the logo seal itself: the same drawing the hero and
-         the header badge are cut from. -->
+    <meta property="og:site_name" content="Ozea Dental Clinic" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ozeamaxillofacialclinic.com/" />
-    <meta property="og:title" content="Ozea Dental Clinic — Dr. Youssef Nasser" />
-    <meta
-      property="og:description"
-      content="Dental implants and maxillofacial surgery in Nasr City, Cairo."
-    />
+    <meta property="og:title" content="Ozea Dental Clinic — Implants &amp; Maxillofacial Surgery, Cairo" />
+    <meta property="og:description" content="Dental implants and maxillofacial surgery in Nasr City, Cairo." />
     <meta property="og:image" content="https://ozeamaxillofacialclinic.com/brand/ozea-share.jpg" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ozea Dental Clinic — Implants &amp; Maxillofacial Surgery, Cairo" />
+    <meta name="twitter:description" content="Dental implants and maxillofacial surgery in Nasr City, Cairo." />
+    <meta name="twitter:image" content="https://ozeamaxillofacialclinic.com/brand/ozea-share.jpg" />
+    <!--/seo-->
+    <meta name="theme-color" content="#14120F" />
 
     <!-- Fonts are self-hosted (public/fonts) so the first paint waits on no
          third-party origin. The two faces the hero sets are preloaded; the
          rest arrive with the stylesheet. -->
+    <!--fonts-->
     <link
       rel="preload"
       as="font"
@@ -40,18 +44,27 @@
       crossorigin
     />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-300-600.woff2" crossorigin />
+    <!--/fonts-->
 
-    <!-- The hero drawing is the LCP element. Preloading it here makes it
-         discoverable in the initial document instead of after the React
-         bundle has parsed. -->
+    <!--home-->
+    <!-- The planning-studio still is the homepage LCP. The actual interactive
+         model is intentionally not requested until its own route is opened. -->
     <link
       rel="preload"
       as="image"
-      href="/hero/hero-face-900.webp"
-      imagesrcset="/hero/hero-face-400.webp 400w, /hero/hero-face-600.webp 600w, /hero/hero-face-900.webp 900w"
-      imagesizes="(min-width: 1536px) 466px, (min-width: 768px) 395px, (min-width: 640px) 332px, 269px"
+      href="/hero/planning-studio-960.webp"
+      imagesrcset="/hero/planning-studio-400.webp 400w, /hero/planning-studio-640.webp 640w, /hero/planning-studio-960.webp 960w"
+      imagesizes="(min-width: 1536px) 680px, (min-width: 1024px) 52vw, (min-width: 640px) 78vw, 100vw"
       fetchpriority="high"
     />
+    <!--/home-->
+    <noscript>
+      <style>
+        #root [style*="opacity:0"][style*="transform"],
+        #root [style*="clip-path:inset"] { opacity: 1 !important; clip-path: none !important; transform: none !important; }
+        #planning-viewer, #root [aria-controls="planning-viewer"] { display: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

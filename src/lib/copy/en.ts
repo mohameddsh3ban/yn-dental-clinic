@@ -8,9 +8,9 @@
  */
 export const en = {
   meta: {
-    title: 'Ozea Dental Clinic — Dr. Youssef Nasser',
+    title: "Jaw Surgery & Dental Implants in Nasr City, Cairo | Ozea",
     description:
-      'Ozea Dental Clinic — Dr. Youssef Nasser, dental implants and maxillofacial surgery in Nasr City, Cairo. Book on WhatsApp.',
+      "See Dr. Youssef Nasser at Ozea Dental Clinic in Nasr City, Cairo, for jaw surgery, dental implants or a second opinion. Ask about consultation fees on WhatsApp.",
   },
 
   site: {
@@ -26,7 +26,7 @@ export const en = {
     },
     hours: { days: 'Every day', time: '24/7' },
     whatsappMessage:
-      "Hello Dr. Youssef Nasser, I'd like to book an appointment at Ozea Dental Clinic.",
+      "Hello Ozea, I have a question for the clinic.",
   },
 
   common: {
@@ -56,15 +56,15 @@ export const en = {
   },
 
   hero: {
-    eyebrow: 'Oral & Maxillofacial Surgery',
-    headlineTop: 'Restoring facial',
-    headlineOutlined: 'harmony',
+    eyebrow: "Ozea Dental Clinic · Nasr City, Cairo",
+    headlineTop: "Jaw surgery",
+    headlineOutlined: "& dental implants",
     lead:
-      'Jaw position, bite and profile are planned as one thing, because a face is read as one thing — never as parts. Every plan starts from imaging and measurement.',
-    book: 'Book appointment',
-    bookAria: 'Book appointment with {doctor} on WhatsApp',
-    railLabel: 'How a case proceeds',
-    rail: ['Consultation', 'Imaging', 'Written plan', 'Surgery'],
+      "Been told you need jaw surgery? Bring your scans or referral to Dr. Youssef Nasser. Talk through what the findings mean, which options fit your case and what each would involve.",
+    book: "Ask on WhatsApp",
+    bookAria: 'Ask on WhatsApp at the clinic of {doctor}',
+    railLabel: "Your consultation",
+    rail: ["Your concerns", "Examination", "Options", "Next steps"],
     figureAlt:
       'Line drawing of a face in profile with the skull, the jaws and both tooth rows shown through it, and a gold dental implant at a lower molar',
     annotations: { implant: 'Implant site', tmj: 'Jaw joint · TMJ' },
@@ -72,9 +72,17 @@ export const en = {
     open: 'Open',
     clinic: 'Clinic',
     metaBlurb:
-      'Implants, orthognathic and reconstructive surgery, planned from a CT scan and a written plan you keep.',
+      "A second opinion is welcome. If you already have a treatment plan, bring it along with the questions you want answered.",
     illustrationNote:
       'Illustration — schematic line drawing, not a patient image and not a predicted result.',
+    planningGateway: {
+      navLabel: '3D planning',
+      eyebrow: 'Interactive planning studio',
+      title: 'Explore your jaw in 3D',
+      description: 'Implant crown · jaw and chin repositioning · facial fracture repair · anatomy',
+      action: 'Enter the 3D studio',
+      figureAlt: 'Illustrated facial profile with the jaw anatomy visible, representing Ozea’s interactive 3D planning studio',
+    },
     stats: [
       { value: '170', unit: '+', label: 'Performed\nsurgeries' },
       { value: '85', unit: '%', label: 'Satisfied\nclients' },
@@ -83,11 +91,11 @@ export const en = {
 
   services: {
     eyebrow: 'Our Services',
-    headlineTop: 'Discover our signature',
-    headlineBottom: 'dental',
-    headlineOutlined: 'services',
+    headlineTop: "Explore treatment",
+    headlineBottom: "for teeth",
+    headlineOutlined: "and jaws",
     lead:
-      'Experience modern dental care delivered with comfort, precision, and attention to detail — in a calm, welcoming environment designed to make every visit stress-free.',
+      "Replacing a missing tooth, saving a damaged one and treating a jaw problem are different decisions. Explore the treatments below to find the one you want to discuss.",
     reviews: 'Reviews',
     reviewsBlurb:
       'Discover delighted patient reviews about their comforting and satisfying dental care experience.',
@@ -111,7 +119,7 @@ export const en = {
     headlineTop: 'Before and',
     headlineOutlined: 'after',
     lead:
-      'Photographs from cases treated at the clinic, as they were taken at the chair and on the bench. Each one names the procedure; none of them promises your result — that is decided at consultation, from your own imaging.',
+      "What does a crown look like before it is fitted? How do veneers change the front teeth? Explore photographs from Ozea’s cases, including work at the lab and at the chair.",
     compare: {
       label: 'Featured case',
       title: 'Ceramic veneers, upper front teeth',
@@ -178,11 +186,11 @@ export const en = {
 
   about: {
     eyebrow: 'About',
-    headlineTop: 'Excellence in dentistry with',
-    headlineOutlined: 'compassionate',
-    headlineTail: 'care',
+    headlineTop: "Who you’ll meet",
+    headlineOutlined: "at the",
+    headlineTail: "clinic",
     lead:
-      'Every treatment plan is built around you — your comfort, your schedule, your goals. Our clinicians combine leading technology with a genuinely gentle chairside manner.',
+      "If your dentist has referred you, bring their note. If you’re here for a second opinion, bring your existing plan. Both give the team a starting point for the conversation.",
     visitUs: 'Visit us',
     yearsValue: '15',
     yearsLabel: 'Years of gentle expertise',
@@ -224,7 +232,7 @@ export const en = {
     headlineTop: 'Smiles that',
     headlineOutlined: 'speak',
     lead:
-      "Real words from real patients — the reason 9 out of 10 new clients arrive on a friend's recommendation.",
+      "Patients describe their visits in their own words.",
     quotes: [
       {
         text: 'دخلت العيادة وأنا مرعوبة وخرجت مش مصدقة إن كل حاجة خلصت. الدكتور يوسف شرحلي كل خطوة قبل ما يبدأها، ومحستش بحاجة خالص.',
@@ -306,7 +314,7 @@ export const en = {
     headlineTop: 'Find us in',
     headlineOutlined: 'Nasr City',
     lead:
-      "Easy to reach from Al Golf and Heliopolis — message us on WhatsApp and we'll hold a slot that fits your day.",
+      "The clinic is at 6 Mahmoud Ammar in Al Golf, Nasr City. Open the map for directions or message the clinic to confirm a time before you travel.",
     addressLabel: 'Clinic address',
     hoursLabel: 'Opening hours',
     phoneLabel: 'Call the clinic',
@@ -319,14 +327,14 @@ export const en = {
   },
 
   footer: {
-    eyebrow: 'Ready when you are',
-    headlineTop: 'Your best smile starts with',
-    headlineAccent: 'one visit',
+    eyebrow: "Appointments",
+    headlineTop: "What brings you",
+    headlineAccent: "to Ozea?",
     lead:
-      'Same-week appointments, transparent pricing, and a team that treats you like a person — not a chart number.',
-    book: 'Book on WhatsApp',
+      "Tell us whether you’re asking about a missing tooth, a jaw problem or a second opinion. You can ask about the consultation fee and available times in the same message.",
+    book: "Message Ozea on WhatsApp",
     brandBlurb:
-      '{doctor} — {specialty}. Modern dentistry with gentle care, delivered calmly on every single visit.',
+      "{doctor} · {specialty}. Al Golf, Nasr City, Cairo.",
     explore: 'Explore',
     visitUs: 'Visit us',
     rights: '© 2026 {clinic}. All rights reserved.',
@@ -350,7 +358,7 @@ export const en = {
     anotherOpinion: 'Another opinion, same clinic',
     docTitle: '{name} — {title} | {clinic}',
     docDescription: '{name}, {title} at {clinic}. {lead}',
-    whatsappMessage: "Hello, I'd like to book a consultation with {name} at {clinic}.",
+    whatsappMessage: "Hello {clinic}, I have a question for {name}.",
   },
 
   team: {
